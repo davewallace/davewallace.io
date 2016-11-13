@@ -45,8 +45,8 @@ export default new VueRouter({
       ]
 */
     }, // Default
-    { path: '/createcharacter', component: load('layout/create-character') },
-    { path: '/styleguide', component: load('doc/style-guide') },
+    { path: '/contact', component: load('contact') },
+    { path: '/styleguide', component: load('style-guide') },
     { path: '*', component: load('error404') } // Not found
   ]
 })
