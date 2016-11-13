@@ -1,0 +1,15 @@
+div {
+  border:1px dotted cyan;
+}
+
+// responsive image tags
+img {
+  &.img-block {
+    display:block;
+  }
+
+  &.img-responsive {
+    max-width:100%;
+    border:1px solid yellow;
+  }
+}
