@@ -8,7 +8,7 @@
     -->
 
      <div class="layout-view">
-     INDEX CONTENT
+      <h1>Index</h1>
      </div>
 
   </div>

@@ -6,6 +6,12 @@
         codefinger.io
     </div>
 
+    <!--
+      This personalised website should showcase my work, my ideas, in some way
+      my personality, and it should be flexible for users, customisable. stick
+      a blog in here at some point perhaps.
+    -->
+
     <quasar-tabs slot="navigation">
       <quasar-tab route="/">
           Home
