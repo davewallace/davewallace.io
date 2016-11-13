@@ -14,7 +14,7 @@
 
     <quasar-tabs slot="navigation">
       <quasar-tab route="/">
-          Home
+          Portfolio
       </quasar-tab>
       <quasar-tab route="/contact">
           Contact
