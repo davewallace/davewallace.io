@@ -20,10 +20,6 @@
 
     <router-view class="layout-view"></router-view>
 
-    <p>
-      Built on Quasar v{{quasarVersion}}, the multi-platform Vue.js framework wrap.
-    </p>
-
   </div>
 </template>
 
