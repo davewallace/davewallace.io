@@ -1,6 +1,6 @@
 {
-  "name": "codeefinger.io",
-  "version": "0.0.1",
+  "name": "codefinger.io",
+  "version": "0.0.2",
   "description": "My portfolio.",
   "author": "David J Wallace",
   "license": {
@@ -20,12 +20,14 @@
     "fastclick": "^1.0.6",
     "material-design-icons": "^3.0.1",
     "moment": "^2.15.0",
-    "node-sass": "^3.11.3",
+    "node-sass": "^3.13.1",
+    "quasar-extras": "0.0.8",
     "quasar-framework": "0.x",
-    "roboto-fontface": "^0.6.0",
+    "rimraf": "^2.6.2",
+    "roboto-fontface": "^0.6.1",
     "velocity-animate": "^1.2.3",
     "vue": "^2.0.0",
-    "vue-router": "^2.0.0"
+    "vue-router": "^2.8.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
