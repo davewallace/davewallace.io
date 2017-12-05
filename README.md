@@ -1,6 +1,6 @@
-# Quasar App
+# A heading
 
-> A Quasar project
+> A description
 
 ## Build Setup
 
