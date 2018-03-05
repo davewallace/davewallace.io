@@ -28,3 +28,20 @@ Ordered by desired relevance:
 
 	*		_Social media_ - short on attention, diverse audience with potential for noted field expert exposure.
 	*		_3rd-party Discovery_ - short on attention, seeking immediate confirmation of relevance to discovery root query.
+
+
+## Persona-based functional requirements
+
+Set #1
+	*		Fast loading, accessible detail
+	*		Easy filtering of detail
+	*		Printing of relevant detail
+	*		Contactable
+
+Set #2
+	*		Thoughtful UX detail
+	*		Pragmatic, good looking design
+	*		Thoroughly produced output
+
+Set #3
+	*		Interactive; blog, shareable
