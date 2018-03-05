@@ -33,15 +33,18 @@ Ordered by desired relevance:
 ## Persona-based functional requirements
 
 Set #1
+
 	*		Fast loading, accessible detail
 	*		Easy filtering of detail
 	*		Printing of relevant detail
 	*		Contactable
 
 Set #2
+
 	*		Thoughtful UX detail
 	*		Pragmatic, good looking design
 	*		Thoroughly produced output
 
 Set #3
+
 	*		Interactive; blog, shareable
