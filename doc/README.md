@@ -48,3 +48,22 @@ Set #2
 Set #3
 
 	*		Interactive; blog, shareable
+
+## Design requirements
+
+	*		Dark colour palette, and print-worthy light alternative
+	*		Simple, beautiful typography
+	*		Succinct copy
+	*		Minimal graphics, vector where possible
+	*		Super easy to achieve all UX functional requirements
+	*		Curiosity-provoking SVG usages
+	*		Highly performant design elements
+	*		Bespoke case study of design system as an output
+
+## Design process
+
+Initial steps to functional design system setup involved:
+
+	*		Organise Sketch base symbols and color palette
+	*		Implement SASS CSS loader into build chain
+	*		
