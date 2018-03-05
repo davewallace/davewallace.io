@@ -1,4 +1,4 @@
-> A Vue.js project
+> Kicking the tyres on a Vue.js project
 
 ## Build Setup
 
