@@ -1,0 +1,11 @@
+/**
+ * Test values to confirm high-level compile functionality
+ */
+/* a .vue file correctly imports and compiles, in order, external .scss files */
+$test--inherited-value: lime;
+
+/**
+ * Color palette
+ */
+$color__base: black;
+$color__text-base: white;
