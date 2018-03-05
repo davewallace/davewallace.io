@@ -18,7 +18,8 @@
 </style>
 
 <template>
-  <div class="hello">
+  <div class="hello" id="test">
+
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -103,12 +104,30 @@
 </template>
 
 <script>
+import {TweenMax} from 'gsap'
+
+function init () {
+  let test = document.getElementById('test')
+
+  TweenMax.to(test, 10, {
+    opacity: 0.25
+  })
+}
+
 export default {
   name: 'HelloWorld',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created: function () {
+    // `this` points to the vm instance
+    console.log('created')
+  },
+  mounted: function () {
+    console.log('mounted')
+    init()
   }
 }
 </script>

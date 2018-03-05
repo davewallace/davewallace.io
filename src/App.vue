@@ -5,6 +5,13 @@
   </div>
 </template>
 
+<!-- JS animation 3rd-party dependency
+<script src="../static/gsap/src/uncompressed/TweenMax.js"></script>
+<script src="../static/gsap/src/uncompressed/TimelineMax.js"></script>
+<script src="../static/gsap/src/uncompressed/easing/EasePack.js"></script>
+ -->
+<!-- <script src="../static/gsap/src/uncompressed/plugins/DrawSVGPlugin.js"></script> -->
+
 <script>
 export default {
   name: 'App'
