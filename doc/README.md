@@ -34,7 +34,7 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 Ordered by desired relevance:
 
-	1		_Recruiter_ - short on time, looking for long and short-term workable hooks based on their experience and knowledge of me.
+	1		_Recruiter_ - short on time, looking for long and short-term workable hooks based on their experience and knowledge of me and current market needs.
 	2		_Employer_ - curious and seeking fast confirmation of relevance. Assumed critical of all aspects of product.
 	3		_Network Connection_ - potentially wide audience with good chance of tech savvy, may be critical of design and structure - but also may be curious.
 
