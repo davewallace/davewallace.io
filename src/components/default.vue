@@ -1,20 +1,20 @@
 <template>
   <div class="view">
     <DefaultGreeting />
-    <PortfolioGrid />
+    <SortableGrid />
   </div>
 </template>
 
 <script>
 
 import DefaultGreeting from '@/components/default/DefaultGreeting'
-import PortfolioGrid from '@/components/portfolio/PortfolioGrid'
+import SortableGrid from '@/components/SortableGrid/SortableGrid'
 
 export default {
   name: 'Default',
   components: {
     DefaultGreeting,
-    PortfolioGrid
+    SortableGrid
   },
   data () {
     return {

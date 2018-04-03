@@ -1,39 +1,56 @@
-<style>
-.portfolio__grid {
-  border: 1px dashed orange;
+<style lang="scss">
+
+@mixin list-reset() {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.sortable-grid {
+  &__root {
+    border: 1px dashed orange;
+  }
+
+  &__grid {
+    @include list-reset();
+  }
+    &__grid-item {
+      @include list-reset();
+      border: 1px dashed yellow;
+    }
 }
 </style>
 
 <template>
-  <div class="portfolio__grid-container">
+  <div class="sortable-grid__root">
 
     <!-- grid sorting -->
-    <PortfolioSortMenu v-on:test="updateSortPrefs" />
+    <SortableGridMenu v-on:test="updateSortPrefs" />
 
     <!-- grid contents -->
-    <ul class="portfolio__grid">
-      <li v-for="portfolioItem in allPortfolioItems" v-bind:key="portfolioItem.name">
-        <PortfolioItem
-          :title="portfolioItem.title"
-          :body="portfolioItem.body"
-          :date="portfolioItem.date"
-          :tags="portfolioItem.tags" />
+    <ul class="sortable-grid__grid">
+      <li class="sortable-grid__grid-item" v-for="sortableGridItem in allSortableGridItems" v-bind:key="sortableGridItem.name">
+        <SortableGridItem
+          :title="sortableGridItem.title"
+          :body="sortableGridItem.body"
+          :date="sortableGridItem.date"
+          :tags="sortableGridItem.tags" />
       </li>
     </ul>
 
-  </div> <!-- /.portfolio__grid-container -->
+  </div> <!-- /.sortable-grid__root -->
 </template>
 
 <script>
 
-import PortfolioSortMenu from '@/components/portfolio/PortfolioSortMenu'
-import PortfolioItem from '@/components/portfolio/PortfolioItem'
+import SortableGridMenu from '@/components/SortableGrid/SortableGridMenu'
+import SortableGridItem from '@/components/SortableGrid/SortableGridItem'
 
 export default {
-  name: 'PortfolioGrid',
+  name: 'SortableGrid',
   components: {
-    PortfolioSortMenu,
-    PortfolioItem
+    SortableGridMenu,
+    SortableGridItem
   },
 
   /**
@@ -67,7 +84,7 @@ export default {
      */
     sortPrefs: function (customTags = this.defaultTags) {
 
-      console.log('allPortfolioItems: ' + this.allPortfolioItems)
+      console.log('allSortableGridItems: ' + this.allSortableGridItems)
 
       return customTags
     },
@@ -75,7 +92,7 @@ export default {
     /**
      *
      **/
-    allPortfolioItems: function () {
+    allSortableGridItems: function () {
 
       let sortedList = [
         {

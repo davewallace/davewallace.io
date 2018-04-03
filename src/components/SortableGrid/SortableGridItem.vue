@@ -1,5 +1,5 @@
 <template>
-  <div class="portfolio__grid-item-content">
+  <div class="sortable-grid__grid-item-content">
     <slot>
       <h4>{{ title }}</h4>
       <p>{{ body }}</p>
@@ -12,7 +12,7 @@
 <script>
 
 export default {
-  name: 'PortfolioItem',
+  name: 'SortableGridItem',
   props: [
     'title',
     'body',

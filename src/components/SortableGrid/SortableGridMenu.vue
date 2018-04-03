@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <li v-for="portfolioSortOption in allPortfolioSortOptions" v-bind:key="portfolioSortOption.name">
-      <a href="javascript:;" @click="handle_optionClick('front-end-development')">{{ portfolioSortOption.name }}</a>
+    <li v-for="sortOption in allSortOptions" v-bind:key="sortOption.name">
+      <a href="javascript:;" @click="handle_optionClick( sortOption.tag )">{{ sortOption.name }}</a>
     </li>
   </ul>
 </template>
@@ -9,10 +9,10 @@
 <script>
 
 export default {
-  name: 'MenuPortfolioItems',
+  name: 'SortableGridMenu',
   data () {
     return {
-      allPortfolioSortOptions: [
+      allSortOptions: [
         {
           name: 'Front-end Development',
           tag: 'front-end-development'
