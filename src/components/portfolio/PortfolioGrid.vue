@@ -5,29 +5,79 @@
 </style>
 
 <template>
-  <ul class="portfolio__grid">
-    <li v-for="portfolioItem in allPortfolioItems" v-bind:key="portfolioItem.name">
-      <PortfolioItem
-        :title="portfolioItem.title"
-        :body="portfolioItem.body"
-        :date="portfolioItem.date"
-        :tags="portfolioItem.tags" />
-    </li>
-  </ul>
+  <div class="portfolio__grid-container">
+
+    <!-- grid sorting -->
+    <PortfolioSortMenu v-on:test="updateSortPrefs" />
+
+    <!-- grid contents -->
+    <ul class="portfolio__grid">
+      <li v-for="portfolioItem in allPortfolioItems" v-bind:key="portfolioItem.name">
+        <PortfolioItem
+          :title="portfolioItem.title"
+          :body="portfolioItem.body"
+          :date="portfolioItem.date"
+          :tags="portfolioItem.tags" />
+      </li>
+    </ul>
+
+  </div> <!-- /.portfolio__grid-container -->
 </template>
 
 <script>
 
+import PortfolioSortMenu from '@/components/portfolio/PortfolioSortMenu'
 import PortfolioItem from '@/components/portfolio/PortfolioItem'
 
 export default {
   name: 'PortfolioGrid',
   components: {
+    PortfolioSortMenu,
     PortfolioItem
   },
+
+  /**
+   * Simple props only
+   **/
   data () {
     return {
-      allPortfolioItems: [
+      defaultTags: ['front-end-development']
+    }
+  },
+
+  /**
+   * Watched props generally for expensive or async operations
+   **/
+  watch: {
+    /*
+    sortPrefs: function (newPrefs, oldPrefs) {
+
+    }
+    */
+  },
+
+  /**
+   * Computed props used for any props requiring processing or non-trivial logic,
+   * that may be cached for improved performance
+   **/
+  computed: {
+
+    /**
+     * Takes an Array of tags, defaulting to tags that make me look the best
+     */
+    sortPrefs: function (customTags = this.defaultTags) {
+
+      console.log('allPortfolioItems: ' + this.allPortfolioItems)
+
+      return customTags
+    },
+
+    /**
+     *
+     **/
+    allPortfolioItems: function () {
+
+      let sortedList = [
         {
           title: 'Lorem ipsum dolor sit amet, consectetur',
           body: 'Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.',
@@ -83,10 +133,25 @@ export default {
           date: 2015
         }
       ]
+
+      return sortedList
+    }
+  },
+
+  /**
+   * Props requiring processing or non-trivial logic that we don't want cached
+   */
+  methods: {
+    updateSortPrefs: function (sortOption) {
+      console.log('updated sort prefs: ' + sortOption)
     }
   },
   created: function () {
     // `this` points to the component instance
+
+    this.$on('handle_optionClick', function (msg) {
+      console.log('child event received by parent.')
+    })
   },
   mounted: function () {
   }

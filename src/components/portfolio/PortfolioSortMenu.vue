@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li v-for="portfolioSortOption in allPortfolioSortOptions" v-bind:key="portfolioSortOption.name">
-      <a href="javascript:;">{{ portfolioSortOption.name }}</a>
+      <a href="javascript:;" @click="handle_optionClick('front-end-development')">{{ portfolioSortOption.name }}</a>
     </li>
   </ul>
 </template>
@@ -42,6 +42,12 @@ export default {
           tag: 'technical-consultation'
         }
       ]
+    }
+  },
+  methods: {
+    handle_optionClick: function (sortOption) {
+      console.log('sort option clicked')
+      this.$emit('test', sortOption)
     }
   },
   created: function () {
