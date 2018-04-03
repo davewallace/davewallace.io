@@ -18,7 +18,7 @@ export default {
   },
   props: {
     selectable: false,
-    modifierClassNameBase: 'no-modifier-supplied'
+    modifierClassNameBase: ''
   },
   methods: {
     handle__click: function () {
