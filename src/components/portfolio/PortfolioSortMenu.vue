@@ -14,19 +14,32 @@ export default {
     return {
       allPortfolioSortOptions: [
         {
-          name: 'Front-end Development'
+          name: 'Front-end Development',
+          tag: 'front-end-development'
         },
         {
-          name: 'User Experience'
+          name: 'User Experience',
+          tag: 'user-experience'
         },
         {
-          name: 'User Interface Design'
+          name: 'User Interface Design',
+          tag: 'user-interface-design'
         },
         {
-          name: 'Team Leadership'
+          name: 'Team Leadership',
+          tag: 'team-leadership'
         },
         {
-          name: 'Production Management'
+          name: 'Production Management',
+          tag: 'production-management'
+        },
+        {
+          name: 'Client Relations',
+          tag: 'client-relations'
+        },
+        {
+          name: 'Technical Consultation',
+          tag: 'technical-consultation'
         }
       ]
     }

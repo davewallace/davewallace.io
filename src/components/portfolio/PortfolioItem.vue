@@ -3,6 +3,8 @@
     <slot>
       <h4>{{ title }}</h4>
       <p>{{ body }}</p>
+      <p>{{ date }}</p>
+      <p>{{ tags }}</p>
     </slot>
   </div>
 </template>
@@ -13,7 +15,9 @@ export default {
   name: 'PortfolioItem',
   props: [
     'title',
-    'body'
+    'body',
+    'date',
+    'tags'
   ],
   created: function () {
     // `this` points to the component instance
