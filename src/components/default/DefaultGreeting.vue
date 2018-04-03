@@ -18,7 +18,7 @@ export default {
     return {
       greeting_primary: 'Hello',
       greeting_secondary: ', and welcome.',
-      greeting_tertiary: 'You\'ve opened my portfolio, thanks - it\'s nice of you to have a look around.'
+      greeting_tertiary: 'You\'ve opened my portfolio, thanks, help yourself to a look around.'
     }
   },
   created: function () {
