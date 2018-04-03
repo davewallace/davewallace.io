@@ -1,3 +1,23 @@
+<template>
+  <div class="sortable-grid__root">
+
+    <!-- grid sorting -->
+    <SortableGridMenu v-on:test="updateSortPrefs" />
+
+    <!-- grid contents -->
+    <ul class="sortable-grid__grid">
+      <li class="sortable-grid__grid-item" v-for="sortableGridItem in allSortableGridItems" v-bind:key="sortableGridItem.name">
+        <SortableGridItem
+          :title="sortableGridItem.title"
+          :body="sortableGridItem.body"
+          :date="sortableGridItem.date"
+          :tags="sortableGridItem.tags" />
+      </li>
+    </ul>
+
+  </div> <!-- /.sortable-grid__root -->
+</template>
+
 <style lang="scss">
 
 @mixin list-reset() {
@@ -20,26 +40,6 @@
     }
 }
 </style>
-
-<template>
-  <div class="sortable-grid__root">
-
-    <!-- grid sorting -->
-    <SortableGridMenu v-on:test="updateSortPrefs" />
-
-    <!-- grid contents -->
-    <ul class="sortable-grid__grid">
-      <li class="sortable-grid__grid-item" v-for="sortableGridItem in allSortableGridItems" v-bind:key="sortableGridItem.name">
-        <SortableGridItem
-          :title="sortableGridItem.title"
-          :body="sortableGridItem.body"
-          :date="sortableGridItem.date"
-          :tags="sortableGridItem.tags" />
-      </li>
-    </ul>
-
-  </div> <!-- /.sortable-grid__root -->
-</template>
 
 <script>
 

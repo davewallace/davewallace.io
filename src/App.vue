@@ -1,9 +1,13 @@
-<style lang="scss">
+<template>
+  <div id="app">
+    <router-view/>
+  </div>
+</template>
 
+<style lang="scss">
   /**
    * All imports and contextual SCSS must be contained within this single style tag
    */
-
   @import "style/reset.scss";
   @import "style/variables.scss";
 
@@ -19,12 +23,6 @@
     color: $color__text-base;
   }
 </style>
-
-<template>
-  <div id="app">
-    <router-view/>
-  </div>
-</template>
 
 <script>
 export default {
