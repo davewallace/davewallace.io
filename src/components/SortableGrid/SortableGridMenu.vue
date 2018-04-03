@@ -1,15 +1,42 @@
 <template>
-  <ul>
-    <li v-for="sortOption in allSortOptions" v-bind:key="sortOption.name">
-      <a href="javascript:;" @click="handle_optionClick( sortOption.tag )">{{ sortOption.name }}</a>
+  <ul class="sortable-grid__menu">
+    <li class="sortable-grid__menu-item"
+        v-for="sortOption in allSortOptions"
+        v-bind:key="sortOption.name">
+
+          <!-- Button component handles its own toggling and assumes a BEM-style
+              className base has been supplied as a prop for it to append a modifier to -->
+          <Button
+            class="sortable-grid__menu-item-link"
+            modifierClassNameBase="sortable-grid__menu-item-link"
+            selectable="true"
+            @click="handle_menuItemClick( sortOption.tag )">
+              {{ sortOption.name }}
+          </Button>
+
     </li>
   </ul>
 </template>
 
+<style lang="scss">
+.sortable-grid__menu-item-link {
+
+  color: white;
+
+  &--selected {
+    font-weight: bold;
+  }
+}
+</style>
+
 <script>
+import Button from '@/components/Button'
 
 export default {
   name: 'SortableGridMenu',
+  components: {
+    Button
+  },
   data () {
     return {
       allSortOptions: [
@@ -45,8 +72,8 @@ export default {
     }
   },
   methods: {
-    handle_optionClick: function (sortOption) {
-      console.log('sort option clicked')
+    handle_menuItemClick: function (sortOption) {
+      console.log('menu item clicked')
       this.$emit('test', sortOption)
     }
   },
