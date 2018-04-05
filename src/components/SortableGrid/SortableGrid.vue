@@ -33,12 +33,57 @@
     border: 1px dashed orange;
   }
 
+  // We'll implement grid here because its cool. but we'll start with defaults for IE11 and
+  // older evergreen browsers
   &__grid {
     @include list-reset();
+
+    // default flex, IE11 & older evergreen browsers
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    // lets optimise for older, narrow width devices when content starts looking unreadable
+    @media (max-width: 320px) {
+      display: block;
+      padding: 0 1%;
+      max-width: initial;
+    }
+
+    // yaay, we got grid
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+
   }
+
+    // Again with child grid items, we'll default to older layouts and use @supports to then
+    // wipe out those defaults in grid-supporting browsers
     &__grid-item {
       @include list-reset();
       border: 1px dashed yellow;
+
+      // default flex, IE11 & older evergreen browsers
+      flex: 1 0 30%;
+      padding: 0 3%;
+      max-width: calc(30% + 3%);
+
+      // lets optimise for older, narrow width devices when content starts looking unreadable
+      @media (max-width: 640px) {
+        flex-basis: 47%;
+        padding: 0 3%;
+        max-width: calc(48% + 3%);
+      }
+      @media (max-width: 320px) {
+        padding: 0 1%;
+        max-width: initial;
+      }
+
+      // yaay, we got grid
+      @supports (display: grid) {
+        padding: 0;
+        max-width: initial;
+      }
     }
 }
 </style>
