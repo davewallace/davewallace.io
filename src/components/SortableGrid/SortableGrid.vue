@@ -178,10 +178,6 @@ export default {
       })
 
       this.sortedGridData = newlySortedData
-    },
-
-    sortArray: function (data, sortFunction) {
-      return sortFunction(data)
     }
   },
   created: function () {
