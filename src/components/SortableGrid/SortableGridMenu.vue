@@ -1,16 +1,25 @@
 <template>
-  <ul class="sortable-grid__menu">
+  <ul class="sortable-grid__menu" ref="sortable-grid__menu">
+
     <li class="sortable-grid__menu-item"
-        v-for="sortOption in allSortOptions"
+        v-for="(sortOption,i) of allSortOptions"
         v-bind:key="sortOption.name">
 
           <!-- Button component handles its own toggling and assumes a BEM-style
-              className base has been supplied as a prop for it to append a modifier to -->
+              className base has been supplied as a prop for it to append a modifier to
           <Button
-            class="sortable-grid__menu-item-link"
             modifierClassNameBase="sortable-grid__menu-item-link"
             selectable="true"
-            @click="handle_menuItemClick( sortOption.tag )">
+            @click="handle_sortOptionClick( sortOption.tag )"
+            class="sortable-grid__menu-item-link"
+          -->
+
+          <Button
+            :icon="sortOption.icon"
+            :class="sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link'"
+            @click="handle_sortOptionClick(allSortOptions[i])"
+          >
+
               {{ sortOption.name }}
           </Button>
 
@@ -42,39 +51,69 @@ export default {
       allSortOptions: [
         {
           name: 'Front-end Development',
-          tag: 'front-end-development'
+          icon: '',
+          tag: 'front-end-development',
+          selected: false
         },
         {
           name: 'User Experience',
-          tag: 'user-experience'
+          icon: '',
+          tag: 'user-experience',
+          selected: false
         },
         {
           name: 'User Interface Design',
-          tag: 'user-interface-design'
+          icon: '',
+          tag: 'user-interface-design',
+          selected: false
         },
         {
           name: 'Team Leadership',
-          tag: 'team-leadership'
+          icon: '',
+          tag: 'team-leadership',
+          selected: false
         },
         {
           name: 'Production Management',
-          tag: 'production-management'
-        },
-        {
-          name: 'Client Relations',
-          tag: 'client-relations'
+          icon: '',
+          tag: 'production-management',
+          selected: false
         },
         {
           name: 'Technical Consultation',
-          tag: 'technical-consultation'
+          icon: '',
+          tag: 'technical-consultation',
+          selected: false
         }
       ]
     }
   },
   methods: {
-    handle_menuItemClick: function (sortOption) {
-      console.log('menu item clicked')
-      this.$emit('test', sortOption)
+
+    /**
+     *
+     * @param currentTarget (Object) currently selected sort option's Object representation
+     **/
+    handle_sortOptionClick: function (currentTarget) {
+
+      currentTarget.selected = !currentTarget.selected
+
+      // harvest an Array of currently selected sort options (1 or many)
+      let selectedSortOptions = this.allSortOptions.filter(function (currentValue, idx) {
+        if (currentValue.selected) {
+          return currentValue.tag
+        }
+      })
+
+      // force the selected option to the start of the Array, we will assume this is the currently
+      // most desired option. this may incorrectly assume that users aren't trying to narrow
+      // down sorting by adding more tags, where this solution widens sorting by accumulating more
+      // results, while also placing the most recently selected option first.
+      if (currentTarget.selected) {
+        selectedSortOptions.unshift(currentTarget)
+      }
+
+      this.$emit('handle_sortOptionClick', selectedSortOptions)
     }
   },
   created: function () {

@@ -1,19 +1,21 @@
 <template>
   <div class="sortable-grid__root">
 
-    <!-- grid sorting -->
-    <SortableGridMenu v-on:test="updateSortPrefs" />
+    <!-- grid sorting - listens to the specified event and responds to it with the associated method
+     -->
+    <SortableGridMenu v-on:handle_sortOptionClick="sortGridData" />
 
-    <!-- grid contents -->
+    <!-- grid contents - displays a collection of components based on this components' computed data supply -->
     <ul class="sortable-grid__grid">
-      <li class="sortable-grid__grid-item" v-for="sortableGridItem in allSortableGridItems" v-bind:key="sortableGridItem.name">
+      <li class="sortable-grid__grid-item" v-for="sortedGridDataItem in sortedGridData" v-bind:key="sortedGridDataItem.name">
         <SortableGridItem
-          :title="sortableGridItem.title"
-          :body="sortableGridItem.body"
-          :date="sortableGridItem.date"
-          :tags="sortableGridItem.tags" />
+          :title="sortedGridDataItem.title"
+          :body="sortedGridDataItem.body"
+          :date="sortedGridDataItem.date"
+          :tags="sortedGridDataItem.tags" />
       </li>
     </ul>
+    <p v-if="zeroSortedItemsMessage">Select items.</p>
 
   </div> <!-- /.sortable-grid__root -->
 </template>
@@ -42,7 +44,6 @@
 </style>
 
 <script>
-
 import SortableGridMenu from '@/components/SortableGrid/SortableGridMenu'
 import SortableGridItem from '@/components/SortableGrid/SortableGridItem'
 
@@ -58,43 +59,8 @@ export default {
    **/
   data () {
     return {
-      defaultTags: ['front-end-development']
-    }
-  },
-
-  /**
-   * Watched props generally for expensive or async operations
-   **/
-  watch: {
-    /*
-    sortPrefs: function (newPrefs, oldPrefs) {
-
-    }
-    */
-  },
-
-  /**
-   * Computed props used for any props requiring processing or non-trivial logic,
-   * that may be cached for improved performance
-   **/
-  computed: {
-
-    /**
-     * Takes an Array of tags, defaulting to tags that make me look the best
-     */
-    sortPrefs: function (customTags = this.defaultTags) {
-
-      console.log('allSortableGridItems: ' + this.allSortableGridItems)
-
-      return customTags
-    },
-
-    /**
-     *
-     **/
-    allSortableGridItems: function () {
-
-      let sortedList = [
+      defaultTags: ['front-end-development'],
+      gridData: [
         {
           title: 'Lorem ipsum dolor sit amet, consectetur',
           body: 'Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.',
@@ -128,7 +94,7 @@ export default {
         {
           title: 'Sit amet libero Suspendisse vitae dolor',
           body: 'Curabitur at sodales lectus, sit amet sodales ex. , mattis commodo faucibus non, pretium non purus.',
-          tags: ['user-experience', 'front-end-development'],
+          tags: ['production-management'],
           date: 2014
         },
         {
@@ -146,29 +112,79 @@ export default {
         {
           title: 'Suspendisse sit amet libero vitae dolor',
           body: 'Lectus, sit amet sodales ex. Nunc auctor condimentum ex, sed laoreet tortor.',
-          tags: ['user-experience', 'front-end-development'],
+          tags: ['team-leadership', 'front-end-development'],
           date: 2015
         }
-      ]
-
-      return sortedList
+      ],
+      sortedGridData: [],
+      zeroSortedItemsMessage: true
     }
+  },
+
+  /**
+   * Watched props generally for expensive or async operations
+   **/
+  watch: {
+    sortedGridData: function (newlySortedGridData, oldSortedGridData) {
+
+      // When there is no selected data, display an appropriate message.
+      this.zeroSortedItemsMessage = (newlySortedGridData.length === 0) ? true : false // eslint-disable-line no-unneeded-ternary
+    }
+  },
+
+  /**
+   * Computed props used for any props requiring processing or non-trivial logic, that may be cached for
+   * improved performance
+   **/
+  computed: {
   },
 
   /**
    * Props requiring processing or non-trivial logic that we don't want cached
    */
   methods: {
-    updateSortPrefs: function (sortOption) {
-      console.log('updated sort prefs: ' + sortOption)
+
+    /**
+     *
+     * @param selectedSortOptions (Array) Array of Objects containing sort data e.g.; tags
+     **/
+    sortGridData: function (selectedSortOptions) {
+
+      const self = this
+
+      // Iterate through currently selected sort options. scan through all component gridData objects,
+      // and each of those gridData objects tags. Where a grid data item's tags matches a currently
+      // selected sort option, add it to a newly sorted Array. When finished iterating, set gridData
+      // to the newly sorted value.
+      let newlySortedData = []
+      let uniqueSelectedSortOptions = [...(new Set(selectedSortOptions))]
+
+      uniqueSelectedSortOptions.forEach(function (option) {
+
+        self.gridData.forEach(function (gridDataItem) {
+
+          // If a given gridData item has tags which match a selected tag, add it to the new Array
+          gridDataItem.tags.forEach(function (tag) {
+
+            if (option.tag === tag) {
+              // The given gridData item's set of tags contains a selected sort option's tag, so add
+              // it to our newly sorted Array
+              newlySortedData.push(gridDataItem)
+            }
+
+          })
+        })
+
+      })
+
+      this.sortedGridData = newlySortedData
+    },
+
+    sortArray: function (data, sortFunction) {
+      return sortFunction(data)
     }
   },
   created: function () {
-    // `this` points to the component instance
-
-    this.$on('handle_optionClick', function (msg) {
-      console.log('child event received by parent.')
-    })
   },
   mounted: function () {
   }

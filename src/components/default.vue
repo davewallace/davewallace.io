@@ -22,10 +22,8 @@ export default {
   },
   created: function () {
     // `this` points to the component instance
-    console.log('created')
   },
   mounted: function () {
-    console.log('mounted')
   }
 }
 </script>
