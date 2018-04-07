@@ -1,30 +1,32 @@
 <template>
-  <ul class="sortable-grid__menu" ref="sortable-grid__menu">
+  <div class="sortable-grid__menu-root">
+    <ul class="sortable-grid__menu" ref="sortable-grid__menu">
 
-    <li class="sortable-grid__menu-item"
-        v-for="(sortOption,i) of allSortOptions"
-        v-bind:key="sortOption.name">
+      <li v-for="(sortOption,i) of allSortOptions"
+          v-bind:key="sortOption.name"
+          :class="'sortable-grid__menu-item sortable-grid__menu-item--' + sortOption.tag">
 
-          <!-- Button component handles its own toggling and assumes a BEM-style
-              className base has been supplied as a prop for it to append a modifier to
-          <Button
-            modifierClassNameBase="sortable-grid__menu-item-link"
-            selectable="true"
-            @click="handle_sortOptionClick( sortOption.tag )"
-            class="sortable-grid__menu-item-link"
-          -->
+            <!-- Button component handles its own toggling and assumes a BEM-style
+                className base has been supplied as a prop for it to append a modifier to
+            <Button
+              modifierClassNameBase="sortable-grid__menu-item-link"
+              selectable="true"
+              @click="handle_sortOptionClick( sortOption.tag )"
+              class="sortable-grid__menu-item-link"
+            -->
 
-          <Button
-            :icon="sortOption.icon"
-            :class="sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link'"
-            @click="handle_sortOptionClick(allSortOptions[i])"
-          >
+            <Button
+              :icon="sortOption.icon"
+              :class="sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link'"
+              @click="handle_sortOptionClick(allSortOptions[i])"
+            >
 
-              {{ sortOption.name }}
-          </Button>
+                {{ sortOption.name }}
+            </Button>
 
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style lang="scss">
@@ -56,15 +58,21 @@ export default {
           selected: false
         },
         {
+          name: 'User Interface Design',
+          icon: '',
+          tag: 'user-interface-design',
+          selected: false
+        },
+        {
           name: 'User Experience',
           icon: '',
           tag: 'user-experience',
           selected: false
         },
         {
-          name: 'User Interface Design',
+          name: 'Accessibility',
           icon: '',
-          tag: 'user-interface-design',
+          tag: 'accessibility',
           selected: false
         },
         {
@@ -85,7 +93,8 @@ export default {
           tag: 'technical-consultation',
           selected: false
         }
-      ]
+      ],
+      selectedSortOptions: []
     }
   },
   methods: {
@@ -98,22 +107,26 @@ export default {
 
       currentTarget.selected = !currentTarget.selected
 
-      // harvest an Array of currently selected sort options (1 or many)
+      // Harvest an Array of currently selected sort options (1 or many)
       let selectedSortOptions = this.allSortOptions.filter(function (currentValue, idx) {
         if (currentValue.selected) {
           return currentValue.tag
         }
       })
 
-      // force the selected option to the start of the Array, we will assume this is the currently
+      // Force the selected option to the start of the Array, we will assume this is the currently
       // most desired option. this may incorrectly assume that users aren't trying to narrow
       // down sorting by adding more tags, where this solution widens sorting by accumulating more
       // results, while also placing the most recently selected option first.
       if (currentTarget.selected) {
         selectedSortOptions.unshift(currentTarget)
       }
+      let uniqueSelectedSortOptions = [...(new Set(selectedSortOptions))]
+      this.selectedSortOptions = uniqueSelectedSortOptions
 
-      this.$emit('handle_sortOptionClick', selectedSortOptions)
+      // Emit the event for parent component to observe, ensuring a unique Array of selected options
+      // is supplied
+      this.$emit('handle_sortOptionClick', uniqueSelectedSortOptions)
     }
   },
   created: function () {
