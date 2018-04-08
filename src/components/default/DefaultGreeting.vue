@@ -1,6 +1,13 @@
-<style scoped>
-h1 span {
-  font-size: 1.2rem;
+<style scoped lang="scss">
+h1 {
+  font-size: 2.4rem;
+
+  span {
+    font-size: 1.4rem;
+  }
+}
+h2 {
+  font-size: 1.3rem;
 }
 </style>
 
@@ -18,7 +25,7 @@ export default {
     return {
       greeting_primary: 'Hello',
       greeting_secondary: ', and welcome.',
-      greeting_tertiary: 'You\'ve opened my portfolio, thanks, help yourself to a look around.'
+      greeting_tertiary: 'You\'ve opened my portfolio, thanks. Select the work you\'d like to see...'
     }
   },
   created: function () {

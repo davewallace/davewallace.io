@@ -1,0 +1,53 @@
+/**
+ * Clear floated layouts.
+ **/
+@mixin clearfix() {
+  &:after {
+	  content: '';
+	  display: table;
+	  clear: both;
+	}
+}
+
+/**
+ * Inaccessible element hiding, will not be read out by assisstive technology
+ **/
+.display-none {
+	display: none;
+}
+
+/**
+ * Accessible element or text node hiding, will be read out by assisstive technology
+ * in most situations.
+ **/
+@mixin visually-hidden() {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+.visually-hidden {
+	@include visually-hidden()
+}
+
+@mixin visually-hidden-text() {
+	display: block;
+	overflow: hidden;
+	text-indent: -999em;
+}
+.visually-hidden-text {
+	@include visually-hidden-text()
+}
+
+/**
+ * Icons
+ **/
+@mixin icon($width, $height, $name) {
+	display: block;
+	width: $width;
+	height: $height;
+	//background-image: url('someUrl' + $name);
+}

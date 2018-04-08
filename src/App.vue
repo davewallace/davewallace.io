@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="layout-root">
     <router-view/>
   </div>
 </template>
@@ -12,7 +12,6 @@
   @import "style/variables.scss";
 
   body {
-    background: $test--inherited-value;
     background: $color__base;
   }
 
@@ -21,6 +20,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: $color__text-base;
+  }
+
+  .layout-root {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: $pad__body--desktop;
   }
 </style>
 

@@ -1,6 +1,7 @@
 <template>
   <a  @click.prevent
-      @click="handle__click()">
+      @click="handle__click()"
+      href="">
 
         <span></span>
         <slot>Button</slot>

@@ -1,11 +1,37 @@
 /**
  * Test values to confirm high-level compile functionality
  */
-/* a .vue file correctly imports and compiles, in order, external .scss files */
+/* a .vue file correctly imports and compiles, in order, external .scss files
 $test--inherited-value: lime;
+*/
 
 /**
  * Color palette
  */
-$color__base: black;
+$color__base: #0d070e;
+$color__base--reverse: white;
 $color__text-base: white;
+$color__text-base--reverse: #0d070e;
+
+$color__base--green: #AED581;
+$color__base--red: #dc4946;
+$color__base--blue: #31b9f7;
+$color__base--yellow: #fff176;
+
+/**
+ * Consistent padding
+ **/
+$pad__body--desktop: 10px 20px;
+
+/**
+ * Fonts
+ **/
+$font__size--smallest: 0.6em;
+$font__size--small: 0.7em;
+$font__size--medium: 0.9em;
+$font__size--large: 1.1em;
+
+/**
+ * Debugging
+ **/
+$debug_border--layout: #777;

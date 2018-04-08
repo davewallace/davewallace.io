@@ -1,22 +1,3 @@
-<style lang="scss">
-
-  /**
-   * All imports and contextual SCSS must be contained within this single style tag
-   */
-
-  @import "../style/reset.scss";
-  @import "../style/variables.scss";
-
-  body {
-    background: $test--inherited-value;
-    background: $color__base;
-  }
-</style>
-
-<style scoped>
-
-</style>
-
 <template>
   <div>
     <h1 id="test">{{ msg }}</h1>

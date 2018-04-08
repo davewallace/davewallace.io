@@ -21,7 +21,6 @@ export default {
     }
   },
   created: function () {
-    // `this` points to the component instance
   },
   mounted: function () {
   }
