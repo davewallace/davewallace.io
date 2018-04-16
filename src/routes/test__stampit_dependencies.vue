@@ -7,6 +7,11 @@
 <script>
 
 import stampit from 'stampit'
+//import Hideable from '@/behaviours/hideable'
+//import Editable from '@/behaviours/editable'
+
+//let he = stampit({}, Hideable, Editable)
+//console.log(he)
 
 const Character = stampit({
   props: {
@@ -27,7 +32,7 @@ const Fighter = stampit(Character, { // inheriting
   },
   methods: {
     fight () {
-      console.log(`${this.name} takes a mighty swing!`)
+      // console.log(`${this.name} takes a mighty swing!`)
       this.stamina--
     }
   }
@@ -42,7 +47,7 @@ const Mage = stampit(Character, { // inheriting
   },
   methods: {
     cast () {
-      console.log(`${this.name} casts a fireball!`)
+      // console.log(`${this.name} casts a fireball!`)
       this.mana--
     }
   }
@@ -58,8 +63,10 @@ const paladin = Paladin({ name: 'Roland', stamina: 50, mana: 50 })
 paladin.fight()
 paladin.cast()
 
-console.log(Paladin.compose.properties) // { name: null, health: 100, stamina: 100, mana: 100 }
-console.log(Paladin.compose.methods) // { fight: [Function: fight], cast: [Function: cast] }
+//console.log(Paladin.compose.properties) // { name: null, health: 100, stamina: 100, mana: 100 }
+//console.log(Paladin.compose.methods) // { fight: [Function: fight], cast: [Function: cast] }
+
+console.warn('test__stampit_dependencies.vue loaded. Why? Because its registered in `src/router/index.js`?')
 
 export default {
   name: 'HelloWorld',

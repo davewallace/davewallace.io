@@ -8,6 +8,8 @@
 
 import {TweenMax} from 'gsap'
 
+console.warn('test__GSAP_dependencies.vue loaded. Why? Because its registered in `src/router/index.js`?')
+
 function initGSAPTest () {
   let test = document.getElementById('test')
 

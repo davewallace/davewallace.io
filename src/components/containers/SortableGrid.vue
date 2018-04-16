@@ -252,6 +252,7 @@ export default {
           selected: false
         }
       ],
+      selectedGridItem: null,
       sortedGridDataPrimary: [],
       sortedGridDataSecondary: [],
       zeroSortedItemsMessage: true
@@ -262,6 +263,10 @@ export default {
    * Watched props generally for expensive or async operations
    **/
   watch: {
+    selectedGridItem: function (oldValue, newValue) {
+      console.log(oldValue)
+      console.log(newValue)
+    }
   },
 
   /**
@@ -355,15 +360,13 @@ export default {
       // isn't technically incorrect though it may exhibit side-effects - so leaving
       // this as the case for now).
       selectedGridItem.selected = true
+      this.selectedGridItem = selectedGridItem
 
-      this.openModal(selectedGridItem)
-    },
-
-    /**
-     *
-     **/
-    openModal: function (selectedGridItem) {
-      //
+      this.$emit('gridItemSelected', {
+        event,
+        selectedGridItem,
+        currentGrid
+      })
     }
   },
   created: function () {

@@ -3,7 +3,7 @@
       @click="handle__click()"
       href="">
 
-        <span></span>
+        <span :class="this.visuallyHiddenText ? 'visually-hidden-text' : ''"></span>
         <slot>Button</slot>
   </a>
 </template>
@@ -26,10 +26,12 @@ export default {
     return {
     }
   },
-  props: {
-  },
+  props: [
+    'visuallyHiddenText'
+  ],
   methods: {
     handle__click: function () {
+
       if (this.selectable) {
         this.selected = !this.selected
       }
@@ -39,12 +41,6 @@ export default {
       // this behaviour appears to be non-standard.
       this.$emit('click')
     }
-  },
-  created: function () {
-    this.$emit('Button::created')
-  },
-  mounted: function () {
-    this.$emit('Button::mounted')
   }
 }
 </script>

@@ -1,38 +1,24 @@
 <template>
-  <div class="modal-root">
-<!--
-  <a  @click.prevent
-      @click="handle__click()"
-      href="">
+  <div class="modal-root"
+       :class="visible ? 'modal-root--visible' : 'modal-root--invisible' ">
 
-        <span></span>
-        <slot>Close</slot>
-  </a>
--->
-<!--
-        <a href=""
-         class="sortable-grid__grid-item__button-close"
-         :class="isOpen ? '' : 'display-none' ">
+    <Button @click="handle__click_close"
+            visuallyHiddenText="true">
+      <Icon type="close" />
+    </Button>
 
-         <span class="visually-hidden-text">(close)</span>
-      </a>
--->
-
-  <Button>Close me!</Button>
-
-  <slot name="header">
-      <h4>Header.</h4>
-    </slot>
-    <slot name="body">
-      <p>Body.</p>
-    </slot>
-    <slot name="footer">
-      <p>Footer.</p>
-    </slot>
+    <slot>
+        <p>Content.</p>
+      </slot>
   </div>
 </template>
 
 <style scoped lang="scss">
+
+@import "../../style/reset.scss";
+@import "../../style/variables.scss";
+@import "../../style/utility.scss";
+
 a {
   // Vue's @click.prevent removes the default pointer
   cursor: pointer;
@@ -41,36 +27,51 @@ a {
   }
 }
 .modal-root {
-  border: 4px dashed red;
+
+  &--visible {
+    border: 4px dashed red;
+  }
+  &--invisible {
+    @include visually-hidden()
+  }
 }
 </style>
 
 <script>
 
 import Button from '@/components/ui/Button'
+import Icon from '@/components/ui/Icon'
 
 export default {
   name: 'Modal',
+  components: {
+    Button,
+    Icon
+  },
+  props: [
+    'visible'
+  ],
   data () {
     return {
+      visible: this.visible
     }
   },
-  components: {
-    Button
-  },
-  props: {
-  },
   methods: {
-  },
-  created: function () {
+    handle__click_close: function (button) {
+      console.log('Modal close button clicked: ')
+      console.log(this.visible)
 
-    this.$on('Button::created', function (button) {
-      console.log('new Button created: ')
-      console.log(button)
-    })
-
-  },
-  mounted: function () {
+      this.visible = !this.visible
+    },
+    open: function () {
+      this.visible = true
+    },
+    close: function () {
+      this.visible = false
+    }
   }
+  // mounted: function () {
+  //   this.
+  // }
 }
 </script>
