@@ -7,7 +7,8 @@
 <template>
   <div class="view">
     <DefaultGreeting />
-    <Modal :visible="modal_visible">
+    <Modal  :visible="this.modal_visible"
+            v-on:modalClose="modal_visible = false">
       {{ this.modal_content }}
     </Modal>
     <SortableGrid v-on:gridItemSelected="handle__gridItemSelected" />
@@ -43,8 +44,11 @@ export default {
      * }
      **/
     handle__gridItemSelected: function (args) {
-      console.log('handling selection..')
+
+      // Update the modal content
       this.modal_content = args.selectedGridItem
+
+      // Show the modal
       this.modal_visible = true
     }
   },

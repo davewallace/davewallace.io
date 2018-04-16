@@ -51,9 +51,16 @@ export default {
   props: [
     'visible'
   ],
+  watch: {
+    visible: function (oldValue, newValue) {
+      this.$emit('changeVisible', {
+        oldValue: oldValue,
+        newValue: newValue
+      })
+    }
+  },
   data () {
     return {
-      visible: this.visible
     }
   },
   methods: {
@@ -61,7 +68,7 @@ export default {
       console.log('Modal close button clicked: ')
       console.log(this.visible)
 
-      this.visible = !this.visible
+      this.$emit('modalClose')
     },
     open: function () {
       this.visible = true
