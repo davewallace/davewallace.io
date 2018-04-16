@@ -1,12 +1,6 @@
 <template>
   <div class="sortable-grid__grid-item__content">
     <slot>
-      <a href=""
-         class="sortable-grid__grid-item__button-close"
-         :class="isOpen ? '' : 'display-none' ">
-
-         <span class="visually-hidden-text">(close)</span>
-      </a>
       <div class="sortable-grid__grid-item__title-wrap">
         <h4 class="sortable-grid__grid-item__title">{{ title }}</h4>
       </div>

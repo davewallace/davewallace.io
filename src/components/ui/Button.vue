@@ -41,8 +41,10 @@ export default {
     }
   },
   created: function () {
+    this.$emit('Button::created')
   },
   mounted: function () {
+    this.$emit('Button::mounted')
   }
 }
 </script>
