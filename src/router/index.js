@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // default View for application
-import Default from '@/components/default'
+import Default from '@/routes/default'
 
 // test views for convenience
-import test__GSAP_dependencies from '@/components/test__GSAP_dependencies'
+import test__GSAP_dependencies from '@/routes/test__GSAP_dependencies'
 
 Vue.use(Router)
 

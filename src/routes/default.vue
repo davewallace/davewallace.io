@@ -7,8 +7,8 @@
 
 <script>
 
-import DefaultGreeting from '@/components/default/DefaultGreeting'
-import SortableGrid from '@/components/SortableGrid/SortableGrid'
+import DefaultGreeting from '@/components/DefaultGreeting'
+import SortableGrid from '@/components/containers/SortableGrid'
 
 export default {
   name: 'Default',

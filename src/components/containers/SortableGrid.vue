@@ -125,8 +125,8 @@
 </style>
 
 <script>
-import SortableGridMenu from '@/components/SortableGrid/SortableGridMenu'
-import SortableGridItem from '@/components/SortableGrid/SortableGridItem'
+import SortableGridMenu from './SortableGridMenu'
+import SortableGridItem from './SortableGridItem'
 
 export default {
   name: 'SortableGrid',

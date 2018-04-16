@@ -93,7 +93,7 @@
 </style>
 
 <script>
-import Button from '@/components/Button'
+import Button from '@/components/ui/Button'
 
 export default {
   name: 'SortableGridMenu',
