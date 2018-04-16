@@ -32,6 +32,11 @@ $font__size--medium: 0.9em;
 $font__size--large: 1.1em;
 
 /**
+ * z-index management
+ **/
+$z-index--modal: 1000;
+
+/**
  * Debugging
  **/
 $debug_border--layout: #777;

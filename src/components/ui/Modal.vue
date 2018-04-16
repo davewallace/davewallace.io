@@ -1,8 +1,9 @@
 <template>
-  <div class="modal-root"
-       :class="visible ? 'modal-root--visible' : 'modal-root--invisible' ">
+  <div class="modal_root"
+       :class="visible ? 'modal--visible' : 'modal--invisible' ">
 
-    <Button @click="handle__click_close"
+    <Button class="modal_button-close"
+            @click="handle__click_close"
             visuallyHiddenText="true">
       <Icon type="close" />
     </Button>
@@ -26,13 +27,31 @@ a {
     cursor: not-allowed;
   }
 }
-.modal-root {
 
+.modal {
+
+  &_root {
+    padding: 40px;
+  }
   &--visible {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $z-index--modal;
+
+    background: rgba(0, 0, 0, 0.8);
     border: 4px dashed red;
   }
   &--invisible {
     @include visually-hidden()
+  }
+
+  &_button-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
 }
 </style>
@@ -53,6 +72,7 @@ export default {
   ],
   watch: {
     visible: function (oldValue, newValue) {
+      // Notify any parent components wanting to update this component's state
       this.$emit('changeVisible', {
         oldValue: oldValue,
         newValue: newValue
@@ -65,9 +85,7 @@ export default {
   },
   methods: {
     handle__click_close: function (button) {
-      console.log('Modal close button clicked: ')
-      console.log(this.visible)
-
+      // Notify any subscribers about the close action, the parent will then manipulate the visible state
       this.$emit('modalClose')
     },
     open: function () {
@@ -77,8 +95,5 @@ export default {
       this.visible = false
     }
   }
-  // mounted: function () {
-  //   this.
-  // }
 }
 </script>
