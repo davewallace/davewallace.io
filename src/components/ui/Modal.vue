@@ -48,7 +48,7 @@ a {
     left: 0;
     z-index: $z-index--modal;
 
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.92);
     border: 4px dashed red;
   }
   &--invisible {
