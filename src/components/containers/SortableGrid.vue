@@ -264,8 +264,6 @@ export default {
    **/
   watch: {
     selectedGridItem: function (oldValue, newValue) {
-      console.log(oldValue)
-      console.log(newValue)
     }
   },
 

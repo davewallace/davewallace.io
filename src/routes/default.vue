@@ -9,7 +9,8 @@
     <DefaultGreeting />
     <Modal  :visible="this.modal_visible"
             v-on:modalClose="modal_visible = false">
-      {{ this.modal_content }}
+      <template slot="title">{{ this.modal_title }}</template>
+      <template slot="body">{{ this.modal_body }}</template>
     </Modal>
     <SortableGrid v-on:gridItemSelected="handle__gridItemSelected" />
   </div>
@@ -30,7 +31,8 @@ export default {
   },
   data () {
     return {
-      modal_content: '',
+      modal_title: 'Empty title',
+      modal_body: 'Empty body',
       modal_visible: false
     }
   },
@@ -45,8 +47,11 @@ export default {
      **/
     handle__gridItemSelected: function (args) {
 
+      let item = args.selectedGridItem
+
       // Update the modal content
-      this.modal_content = args.selectedGridItem
+      this.modal_title = item.title
+      this.modal_body = item.body
 
       // Show the modal
       this.modal_visible = true

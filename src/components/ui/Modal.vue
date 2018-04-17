@@ -8,9 +8,16 @@
       <Icon type="close" />
     </Button>
 
-    <slot>
-        <p>Content.</p>
+    <h2 class="modal_title">
+      <slot name="title">Slot title</slot>
+    </h2>
+
+    <div class="modal_body">
+      <slot name="body">
+        <p>Slot body.</p>
       </slot>
+    </div>
+
   </div>
 </template>
 
@@ -68,7 +75,9 @@ export default {
     Icon
   },
   props: [
-    'visible'
+    'visible',
+    'modal_title',
+    'modal_body'
   ],
   watch: {
     visible: function (oldValue, newValue) {
