@@ -141,122 +141,18 @@ export default {
   data () {
     return {
       defaultTags: ['front-end-development'],
-      gridData: [
-        {
-          title: 'Lorem ipsum dolor sit amet, consectetur',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.',
-          tags: [
-            {tag: 'user-experience', name: 'User Experience'}
-          ],
-          date: 2018,
-          selected: false
-        },
-        {
-          title: 'Convallis dictum faucibus sed',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.',
-          tags: [
-            {tag: 'accessibility', name: 'Accessibility'}
-          ],
-          date: 2017,
-          selected: false
-        },
-        {
-          title: 'Duis libero mi, tempor nec tempor',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Quisque augue nulla, convallis dictum faucibus sed, pulvinar sed purus. Donec sed risus in augue fermentum eleifend.',
-          tags: [
-            {tag: 'user-experience', name: 'User Experience'}
-          ],
-          date: 2017,
-          selected: false
-        },
-        {
-          title: 'Ministry of Foreign Affairs & Trade',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Aliquam luctus posuere facilisis. Nunc auctor condimentum ex, sed laoreet tortor facilisis eu.',
-          tags: [
-            {tag: 'user-experience', name: 'User Experience'},
-            {tag: 'user-interface-design', name: 'User Interface Design'},
-            {tag: 'front-end-development', name: 'Front End Development'},
-            {tag: 'production-management', name: 'Production Management'},
-            {tag: 'technical-consultation', name: 'Technical Consultation'}
-          ],
-          date: 2017,
-          selected: false
-        },
-        {
-          title: 'Sed rutrum purus eros, eu pretium',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Donec vel ipsum sed urna eleifend iaculis. Sed et tincidunt justo. Vivamus tempor viverra rutrum.',
-          tags: [
-            {tag: 'user-interface-design', name: 'User Interface Design'},
-            {tag: 'front-end-development', name: 'Front End Development'}
-          ],
-          date: 2016,
-          selected: false
-        },
-        {
-          title: 'Suspendisse sit amet libero vitae dolor',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
-          tags: [
-            {tag: 'front-end-development', name: 'Front End Development'}
-          ],
-          date: 2015,
-          selected: false
-        },
-        {
-          title: 'Sit amet libero Suspendisse vitae dolor',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Curabitur at sodales lectus, sit amet sodales ex. , mattis commodo faucibus non, pretium non purus.',
-          tags: [
-            {tag: 'production-management', name: 'Production Management'}
-          ],
-          date: 2014,
-          selected: false
-        },
-        {
-          title: 'Praesent elit mauris libero vitae dolor',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Urna eleifend iaculis. Sed et tincidunt Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
-          tags: [
-            {tag: 'technical-consultation', name: 'Technical Consultation'},
-            {tag: 'user-interface-design', name: 'User Interface Design'},
-            {tag: 'production-management', name: 'Production Management'}
-          ],
-          date: 2013,
-          selected: false
-        },
-        {
-          title: 'Bibendum et ex eget, sodales tincidunt leo',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Praesent elit mauris, mattis commodo faucibus non, pretium non purus. Curabitur at sodales lectus, sit amet sodales ex. ',
-          tags: [
-            {tag: 'user-experience', name: 'User Experience'},
-            {tag: 'front-end-development', name: 'Front End Development'}
-          ],
-          date: 2018,
-          selected: false
-        },
-        {
-          title: 'Suspendisse sit amet libero vitae dolor',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Lectus, sit amet sodales ex. Nunc auctor condimentum ex, sed laoreet tortor.',
-          tags: [
-            {tag: 'team-leadership', name: 'Team Leadership'},
-            {tag: 'production-management', name: 'Production Management'}
-          ],
-          date: 2015,
-          selected: false
-        }
-      ],
       selectedGridItem: null,
       sortedGridDataPrimary: [],
       sortedGridDataSecondary: [],
       zeroSortedItemsMessage: true
     }
+  },
+
+  /**
+   *
+   **/
+  props: {
+    gridData: null
   },
 
   /**
