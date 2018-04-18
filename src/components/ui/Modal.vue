@@ -8,6 +8,12 @@
       <Icon type="close" />
     </Button>
 
+    <h3 class="modal_title">
+      <slot name="modal_title">
+        Slot header
+      </slot>
+    </h3>
+
     <div class="modal_content">
       <slot name="modal_content">
         <p>Slot content.</p>
@@ -71,7 +77,8 @@ export default {
   },
   props: [
     'visible',
-    'modal_content'
+    'modal_content',
+    'modal_title'
   ],
   watch: {
     visible: function (oldValue, newValue) {

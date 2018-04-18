@@ -10,6 +10,10 @@
     <Modal  :visible="this.modal_visible"
             v-on:modalClose="modal_visible = false">
 
+      <template slot="modal_title">
+        {{ this.modal_title }}
+      </template>
+
       <template slot="modal_content">
         <Layout :data="this.modal_content" />
       </template>
@@ -41,6 +45,7 @@ export default {
   data () {
     return {
       // Modal state
+      modal_title: null,
       modal_content: null,
       modal_visible: false,
 
@@ -49,10 +54,6 @@ export default {
       // here is that the content is pretty simple markup.
       gridData: [
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Lorem ipsum dolor sit amet, consectetur',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: 'Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.',
@@ -63,10 +64,6 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Convallis dictum faucibus sed',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: 'Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.',
@@ -77,10 +74,6 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Duis libero mi, tempor nec tempor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: 'Quisque augue nulla, convallis dictum faucibus sed, pulvinar sed purus. Donec sed risus in augue fermentum eleifend.',
@@ -91,10 +84,6 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Ministry of Foreign Affairs & Trade',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: 'Aliquam luctus posuere facilisis. Nunc auctor condimentum ex, sed laoreet tortor facilisis eu.',
@@ -109,13 +98,11 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Sed rutrum purus eros, eu pretium',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Donec vel ipsum sed urna eleifend iaculis. Sed et tincidunt justo. Vivamus tempor viverra rutrum.',
+          body: `
+Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
+          `,
           tags: [
             {tag: 'user-interface-design', name: 'User Interface Design'},
             {tag: 'front-end-development', name: 'Front End Development'}
@@ -124,13 +111,11 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Suspendisse sit amet libero vitae dolor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
+          body: `
+Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
+          `,
           tags: [
             {tag: 'front-end-development', name: 'Front End Development'}
           ],
@@ -138,13 +123,11 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Sit amet libero Suspendisse vitae dolor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Curabitur at sodales lectus, sit amet sodales ex. , mattis commodo faucibus non, pretium non purus.',
+          body: `
+Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
+          `,
           tags: [
             {tag: 'production-management', name: 'Production Management'}
           ],
@@ -152,13 +135,11 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Praesent elit mauris libero vitae dolor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Urna eleifend iaculis. Sed et tincidunt Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
+          body: `
+Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
+          `,
           tags: [
             {tag: 'technical-consultation', name: 'Technical Consultation'},
             {tag: 'user-interface-design', name: 'User Interface Design'},
@@ -168,13 +149,11 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Bibendum et ex eget, sodales tincidunt leo',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Praesent elit mauris, mattis commodo faucibus non, pretium non purus. Curabitur at sodales lectus, sit amet sodales ex. ',
+          body: `
+Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
+          `,
           tags: [
             {tag: 'user-experience', name: 'User Experience'},
             {tag: 'front-end-development', name: 'Front End Development'}
@@ -183,13 +162,11 @@ export default {
           selected: false
         },
         {
-          content: '# Lorem ipsum dolor sit amet, consectetur   ' +
-                   '## Quisque orci nisi, bibendum et ex eget.  ' +
-                   'This is some body text.',
-
           title: 'Suspendisse sit amet libero vitae dolor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Lectus, sit amet sodales ex. Nunc auctor condimentum ex, sed laoreet tortor.',
+          body: `
+Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
+          `,
           tags: [
             {tag: 'team-leadership', name: 'Team Leadership'},
             {tag: 'production-management', name: 'Production Management'}
@@ -208,18 +185,19 @@ export default {
      *  currentGrid,
      *  selectedGridItem: {
      *    content: {}
-     *.   schema: {}
+     *    title: {}
      *  }
      * }
      **/
     handle__gridItemSelected: function (args) {
 
       // Update the modal with HTML-ready content
+      this.modal_title = args.selectedGridItem.title
+
       let converter = new Showdown.Converter({
         noHeaderId: true
       })
-      let html = converter.makeHtml(args.selectedGridItem.content)
-
+      let html = converter.makeHtml(args.selectedGridItem.body)
       this.modal_content = html
 
       // Show the modal
