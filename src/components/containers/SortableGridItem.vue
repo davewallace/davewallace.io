@@ -169,6 +169,7 @@
 
 export default {
   name: 'SortableGridItem',
+  // TODO: obviously abstract this to simply content
   props: [
     'title',
     'blurb',
