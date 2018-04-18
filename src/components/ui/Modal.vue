@@ -1,5 +1,5 @@
 <template>
-  <div class="modal_root"
+  <div class="modal"
        :class="visible ? 'modal--visible' : 'modal--invisible' ">
 
     <Button class="modal_button-close"
@@ -33,9 +33,8 @@ a {
 
 .modal {
 
-  &_root {
-    padding: 40px;
-  }
+  padding: 40px;
+
   &--visible {
     position: fixed;
     top: 0;
