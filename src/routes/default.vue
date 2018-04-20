@@ -8,14 +8,15 @@
   <div class="view">
     <DefaultGreeting />
     <Modal  :visible="this.modal_visible"
-            v-on:modalClose="modal_visible = false">
+            v-on:modalClose="modal_visible = false"
+            v-on:modalNavigate="handle__modalNavigate">
 
       <template slot="modal_title">
         {{ this.modal_title }}
       </template>
 
       <template slot="modal_content">
-        <Layout :data="this.modal_content" />
+        <Layout v-bind:data="this.modal_content" />
       </template>
 
     </Modal>
@@ -178,6 +179,10 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
     }
   },
   methods: {
+
+    handle__modalNavigate: function (direction) {
+      console.log('handle__modalNavigate direction: ' + direction)
+    },
 
     /**
      * {

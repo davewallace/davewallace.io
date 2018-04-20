@@ -20,6 +20,19 @@
       </slot>
     </div>
 
+    <div class="modal_navigation">
+      <Button class="modal_button-previous"
+              @click="handle__click_navigate('previous')"
+              visuallyHiddenText="true">
+        <Icon type="previous" />
+      </Button>
+      <Button class="modal_button-next"
+              @click="handle__click_navigate('next')"
+              visuallyHiddenText="true">
+        <Icon type="next" />
+      </Button>
+    </div>
+
   </div>
 </template>
 
@@ -94,10 +107,16 @@ export default {
     }
   },
   methods: {
+
+    // Notify any subscribers about button actions, the parent will then manipulate the state
     handle__click_close: function (button) {
-      // Notify any subscribers about the close action, the parent will then manipulate the visible state
       this.$emit('modalClose')
     },
+    handle__click_navigate: function (direction) {
+      this.$emit('modalNavigate', direction)
+    },
+
+    // Simple API, should we need it
     open: function () {
       this.visible = true
     },
