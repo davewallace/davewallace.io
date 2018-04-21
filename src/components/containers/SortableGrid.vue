@@ -3,25 +3,25 @@
 
     <!-- grid sorting - listens to the specified event and responds to it with the associated method
      -->
-    <SortableGridMenu v-on:handle_sortOptionClick="sortGridData" />
+    <SortableGridMenu v-on:handle__sortOptionClick="sortGridData" />
 
     <!-- grid contents, sorted by user preference and date. conditionally rendered. -->
-    <div v-if="sortedGridDataPrimary.length">
+    <div v-if="grid_sortedDataPrimary.length">
 
       <h3 class="sortable-grid__selection-notice">My work, sorted by your selections and by date...</h3>
       <ul class="sortable-grid__grid sortable-grid__grid--primary">
         <li class="sortable-grid__grid-item"
-            v-for="sortedGridDataPrimaryItem in sortedGridDataPrimary"
-            v-bind:key="sortedGridDataPrimaryItem.name">
+            v-for="grid_sortedDataPrimaryItem in grid_sortedDataPrimary"
+            v-bind:key="grid_sortedDataPrimaryItem.name">
 
           <SortableGridItem
-            :title="sortedGridDataPrimaryItem.title"
-            :blurb="sortedGridDataPrimaryItem.blurb"
-            :tags="sortedGridDataPrimaryItem.tags"
-            :date="sortedGridDataPrimaryItem.date"
-            :isOpen="sortedGridDataPrimaryItem.selected ? true : false"
-            :class="sortedGridDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
-            v-on:handle__gridItemSelected="handle__gridItemSelected($event, sortedGridDataPrimaryItem, sortedGridDataPrimary)" />
+            :title="grid_sortedDataPrimaryItem.title"
+            :blurb="grid_sortedDataPrimaryItem.blurb"
+            :tags="grid_sortedDataPrimaryItem.tags"
+            :date="grid_sortedDataPrimaryItem.date"
+            :isOpen="grid_sortedDataPrimaryItem.selected ? true : false"
+            :class="grid_sortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
+            v-on:handle__gridItemSelected="handle__gridItemSelected($event, grid_sortedDataPrimaryItem, grid_sortedDataPrimary)" />
         </li>
       </ul>
     </div>
@@ -30,16 +30,16 @@
     <h3 class="sortable-grid__selection-notice">All of my work, sorted by date...</h3>
     <ul class="sortable-grid__grid sortable-grid__grid--secondary">
       <li class="sortable-grid__grid-item"
-          v-for="sortedGridDataSecondaryItem in sortedGridDataSecondary"
-          v-bind:key="sortedGridDataSecondaryItem.name">
+          v-for="grid_sortedDataSecondaryItem in grid_sortedDataSecondary"
+          v-bind:key="grid_sortedDataSecondaryItem.name">
 
         <SortableGridItem
-          :title="sortedGridDataSecondaryItem.title"
-          :tags="sortedGridDataSecondaryItem.tags"
-          :date="sortedGridDataSecondaryItem.date"
-          :isOpen="sortedGridDataSecondaryItem.selected ? true : false"
-          :class="sortedGridDataSecondaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
-          v-on:handle__gridItemSelected="handle__gridItemSelected($event, sortedGridDataSecondaryItem, sortedGridDataSecondary)" />
+          :title="grid_sortedDataSecondaryItem.title"
+          :tags="grid_sortedDataSecondaryItem.tags"
+          :date="grid_sortedDataSecondaryItem.date"
+          :isOpen="grid_sortedDataSecondaryItem.selected ? true : false"
+          :class="grid_sortedDataSecondaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
+          v-on:handle__gridItemSelected="handle__gridItemSelected($event, grid_sortedDataSecondaryItem, grid_sortedDataSecondary)" />
       </li>
     </ul>
 
@@ -149,25 +149,25 @@ export default {
    *
    **/
   props: {
-    selectedGridItem: {
+    grid_selectedItem: {
       type: Object,
       default: function () {
         return null
       }
     },
-    gridData: {
+    grid_data: {
       type: Array,
       default: function () {
         return []
       }
     },
-    sortedGridDataPrimary: {
+    grid_sortedDataPrimary: {
       type: Array,
       default: function () {
         return []
       }
     },
-    sortedGridDataSecondary: {
+    grid_sortedDataSecondary: {
       type: Array,
       default: function () {
         return []
@@ -179,7 +179,7 @@ export default {
    * Watched props generally for expensive or async operations
    **/
   watch: {
-    selectedGridItem: function (oldValue, newValue) {
+    grid_selectedItem: function (oldValue, newValue) {
       this.updateGridSelectedState()
     }
   },
@@ -215,7 +215,7 @@ export default {
       let primarySortStructures = []
       selectedSortOptions.forEach(function (option, sortOptionsIndex) {
 
-        self.gridData.forEach(function (dataItem, dataItemIndex) {
+        self.grid_data.forEach(function (dataItem, dataItemIndex) {
 
           dataItem.tags.forEach(function (tagObj) {
 
@@ -244,14 +244,14 @@ export default {
       })
 
       // Sort remaining data by date, then set
-      let secondarySortData = [...(new Set(this.gridData))].sort(function (b, a) {
+      let secondarySortData = [...(new Set(this.grid_data))].sort(function (b, a) {
         return parseFloat(a.date) - parseFloat(b.date)
       })
 
       // emit data back to parent which will mutate this components' state props
       this.$emit('gridDataSorted', {
-        sortedGridDataPrimary: [...(new Set(primarySortData))],
-        sortedGridDataSecondary: secondarySortData
+        grid_sortedDataPrimary: [...(new Set(primarySortData))],
+        grid_sortedDataSecondary: secondarySortData
       })
 
       return this
@@ -260,12 +260,12 @@ export default {
     /**
      *
      **/
-    handle__gridItemSelected: function (event, selectedGridItem, currentGrid) {
+    handle__gridItemSelected: function (event, grid_selectedItem, grid_current) {
 
       this.$emit('gridItemSelected', {
         event,
-        selectedGridItem,
-        currentGrid
+        grid_selectedItem,
+        grid_current
       })
     },
 
@@ -275,15 +275,15 @@ export default {
     updateGridSelectedState: function () {
 
       // Switch all previous dataItem to unselected state
-      this.gridData.forEach(function (dataItem) {
+      this.grid_data.forEach(function (dataItem) {
         dataItem.selected = false
       })
 
       // Set the current dataItem to selected state (note: because we have two subsets
-      // of gridData that gets sorted, we will potentially have two dataItems. This
+      // of grid_data that gets sorted, we will potentially have two dataItems. This
       // isn't technically incorrect though it may exhibit side-effects - so leaving
       // this as the case for now).
-      this.selectedGridItem.selected = true
+      this.grid_selectedItem.selected = true
     }
   },
   created: function () {

@@ -22,10 +22,10 @@
     </Modal>
     <SortableGrid v-on:gridItemSelected="handle__gridItemSelected"
                   v-on:gridDataSorted="handle__gridDataSorted"
-                  v-bind:gridData="this.gridData"
-                  v-bind:sortedGridDataPrimary="this.sortedGridDataPrimary"
-                  v-bind:sortedGridDataSecondary="this.sortedGridDataSecondary"
-                  v-bind:selectedGridItem="this.selectedGridItem"/>
+                  v-bind:grid_data="this.grid_data"
+                  v-bind:grid_sortedDataPrimary="this.grid_sortedDataPrimary"
+                  v-bind:grid_sortedDataSecondary="this.grid_sortedDataSecondary"
+                  v-bind:grid_selectedItem="this.grid_selectedItem"/>
   </div>
 </template>
 
@@ -50,19 +50,15 @@ export default {
   data () {
     return {
 
-      selectedGridItem: null,
-      sortedGridDataPrimary: [],
-      sortedGridDataSecondary: [],
-
       // Modal state
       modal_title: null,
       modal_content: null,
       modal_visible: false,
 
       // Feeds our main display of default content, to note the 'content' property of a
-      // gridData item is written in markdown, for conversion into HTML. My assumption
+      // grid_data item is written in markdown, for conversion into HTML. My assumption
       // here is that the content is pretty simple markup.
-      gridData: [
+      grid_data: [
         {
           title: '1. Lorem ipsum dolor sit amet, consectetur',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
@@ -190,44 +186,48 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
           date: 2015,
           selected: false
         }
-      ]
+      ],
+
+      grid_selectedItem: null,
+      grid_sortedDataPrimary: [],
+      grid_sortedDataSecondary: []
     }
   },
   methods: {
 
     /**
-     * Using the currently selected gridData item, traverse the gridData Array
-     * for the next appropriate gridData item. Traversal is bidirectional and
+     * Using the currently selected grid_data item, traverse the grid_data Array
+     * for the next appropriate grid_data item. Traversal is bidirectional and
      * doubly linked.
      *
      * direction: 'next', 'previous'
      **/
     handle__modalNavigate: function (direction) {
 
-      let currentIndex = this.gridData.indexOf(this.selectedGridItem)
+      let currentIndex = this.grid_data.indexOf(this.grid_selectedItem)
       let newIndex
 
       if (direction === 'next') {
-        newIndex = (currentIndex === this.gridData.length - 1) ? 0 : currentIndex + 1
+        newIndex = (currentIndex === this.grid_data.length - 1) ? 0 : currentIndex + 1
       } else {
-        newIndex = (currentIndex === 0) ? this.gridData.length - 1 : currentIndex - 1
+        newIndex = (currentIndex === 0) ? this.grid_data.length - 1 : currentIndex - 1
       }
 
-      // Update our selected gridData state
-      this.selectedGridItem = this.gridData[newIndex]
+      // Update our selected grid_data state
+      this.grid_selectedItem = this.grid_data[newIndex]
 
-      // Update our modal with new gridData props
+      // Update our modal with new grid_data props
       this.updateModal({
-        title: this.selectedGridItem.title,
-        content: this.formatHTML(this.selectedGridItem.body)
+        title: this.grid_selectedItem.title,
+        content: this.formatHTML(this.grid_selectedItem.body)
       })
     },
 
     /**
      * {
      *  event,
-     *  currentGrid,
-     *  selectedGridItem: {
+     *  grid_current,
+     *  grid_selectedItem: {
      *    content: {}
      *    title: {}
      *  }
@@ -235,14 +235,14 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
      **/
     handle__gridItemSelected: function (args) {
 
-      // Update the currently selected gridData item
-      this.selectedGridItem = args.selectedGridItem
+      // Update the currently selected grid_data item
+      this.grid_selectedItem = args.grid_selectedItem
 
-      let modalContent = this.formatHTML(args.selectedGridItem.body)
+      let modalContent = this.formatHTML(args.grid_selectedItem.body)
 
       // Update modal contents
       this.updateModal({
-        title: args.selectedGridItem.title,
+        title: args.grid_selectedItem.title,
         content: modalContent
       })
 
@@ -251,8 +251,8 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
     },
 
     handle__gridDataSorted: function (data) {
-      this.sortedGridDataPrimary = data.sortedGridDataPrimary
-      this.sortedGridDataSecondary = data.sortedGridDataSecondary
+      this.grid_sortedDataPrimary = data.grid_sortedDataPrimary
+      this.grid_sortedDataSecondary = data.grid_sortedDataSecondary
     },
 
     /**

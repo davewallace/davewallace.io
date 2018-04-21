@@ -10,7 +10,7 @@
           <Button
             modifierClassNameBase="sortable-grid__menu-item-link"
             selectable="true"
-            @click="handle_sortOptionClick( sortOption.tag )"
+            @click="handle__sortOptionClick( sortOption.tag )"
             class="sortable-grid__menu-item-link"
           -->
 
@@ -18,7 +18,7 @@
             :icon="sortOption.icon"
             :class="[sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link',
                     sortOption.current ? 'sortable-grid__menu-item-link--current' : '']"
-            @click="handle_sortOptionClick(allSortOptions[i], allSortOptions)"
+            @click="handle__sortOptionClick(allSortOptions[i], allSortOptions)"
           >
 
               {{ sortOption.name }}
@@ -155,7 +155,7 @@ export default {
      *
      * @param currentTarget (Object) currently selected sort option's Object representation
      **/
-    handle_sortOptionClick: function (currentTarget, allTargets) {
+    handle__sortOptionClick: function (currentTarget, allTargets) {
 
       allTargets.forEach(function (target) {
         target.current = false
@@ -183,7 +183,7 @@ export default {
 
       // Emit the event for parent component to observe, ensuring a unique Array of selected options
       // is supplied
-      this.$emit('handle_sortOptionClick', uniqueSelectedSortOptions)
+      this.$emit('handle__sortOptionClick', uniqueSelectedSortOptions)
     }
   },
   created: function () {
