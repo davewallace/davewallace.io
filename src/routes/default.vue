@@ -276,8 +276,6 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
       return converter.makeHtml(markdownString)
     }
   },
-  created: function () {
-  },
   mounted: function () {
     console.log('default route view has mounted.')
   }
