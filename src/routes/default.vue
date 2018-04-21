@@ -21,7 +21,11 @@
 
     </Modal>
     <SortableGrid v-on:gridItemSelected="handle__gridItemSelected"
-                  v-bind:gridData="this.gridData"/>
+                  v-on:gridDataSorted="handle__gridDataSorted"
+                  v-bind:gridData="this.gridData"
+                  v-bind:sortedGridDataPrimary="this.sortedGridDataPrimary"
+                  v-bind:sortedGridDataSecondary="this.sortedGridDataSecondary"
+                  v-bind:selectedGridItem="this.selectedGridItem"/>
   </div>
 </template>
 
@@ -32,7 +36,7 @@ import SortableGrid from '@/components/containers/SortableGrid'
 import Modal from '@/components/ui/Modal'
 import Layout from '@/components/ui/Layout'
 
-// markdown to HTML converter, for handling predictable but onerous user-facing content
+// markdown to HTML converter, for handling predictable user-facing text content
 import Showdown from 'Showdown'
 
 export default {
@@ -45,6 +49,11 @@ export default {
   },
   data () {
     return {
+
+      selectedGridItem: null,
+      sortedGridDataPrimary: [],
+      sortedGridDataSecondary: [],
+
       // Modal state
       modal_title: null,
       modal_content: null,
@@ -55,9 +64,11 @@ export default {
       // here is that the content is pretty simple markup.
       gridData: [
         {
-          title: 'Lorem ipsum dolor sit amet, consectetur',
+          title: '1. Lorem ipsum dolor sit amet, consectetur',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.',
+          body: `
+Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.
+          `,
           tags: [
             {tag: 'user-experience', name: 'User Experience'}
           ],
@@ -65,9 +76,11 @@ export default {
           selected: false
         },
         {
-          title: 'Convallis dictum faucibus sed',
+          title: '2. Convallis dictum faucibus sed',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.',
+          body: `
+Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.
+          `,
           tags: [
             {tag: 'accessibility', name: 'Accessibility'}
           ],
@@ -75,9 +88,11 @@ export default {
           selected: false
         },
         {
-          title: 'Duis libero mi, tempor nec tempor',
+          title: '3. Duis libero mi, tempor nec tempor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: 'Quisque augue nulla, convallis dictum faucibus sed, pulvinar sed purus. Donec sed risus in augue fermentum eleifend.',
+          body: `
+Quisque augue nulla, convallis dictum faucibus sed, pulvinar sed purus. Donec sed risus in augue fermentum eleifend.
+          `,
           tags: [
             {tag: 'user-experience', name: 'User Experience'}
           ],
@@ -85,7 +100,7 @@ export default {
           selected: false
         },
         {
-          title: 'Ministry of Foreign Affairs & Trade',
+          title: '4. Ministry of Foreign Affairs & Trade',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: 'Aliquam luctus posuere facilisis. Nunc auctor condimentum ex, sed laoreet tortor facilisis eu.',
           tags: [
@@ -99,7 +114,7 @@ export default {
           selected: false
         },
         {
-          title: 'Sed rutrum purus eros, eu pretium',
+          title: '5. Sed rutrum purus eros, eu pretium',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: `
 Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
@@ -112,7 +127,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
           selected: false
         },
         {
-          title: 'Suspendisse sit amet libero vitae dolor',
+          title: '6. Suspendisse sit amet libero vitae dolor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: `
 Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
@@ -124,7 +139,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
           selected: false
         },
         {
-          title: 'Sit amet libero Suspendisse vitae dolor',
+          title: '7. Sit amet libero Suspendisse vitae dolor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: `
 Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
@@ -136,7 +151,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
           selected: false
         },
         {
-          title: 'Praesent elit mauris libero vitae dolor',
+          title: '8. Praesent elit mauris libero vitae dolor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: `
 Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
@@ -150,7 +165,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
           selected: false
         },
         {
-          title: 'Bibendum et ex eget, sodales tincidunt leo',
+          title: '9. Bibendum et ex eget, sodales tincidunt leo',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: `
 Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
@@ -163,7 +178,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
           selected: false
         },
         {
-          title: 'Suspendisse sit amet libero vitae dolor',
+          title: '10. Suspendisse sit amet libero vitae dolor',
           blurb: 'Quisque orci nisi, bibendum et ex eget...',
           body: `
 Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.
@@ -180,8 +195,32 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
   },
   methods: {
 
+    /**
+     * Using the currently selected gridData item, traverse the gridData Array
+     * for the next appropriate gridData item. Traversal is bidirectional and
+     * doubly linked.
+     *
+     * direction: 'next', 'previous'
+     **/
     handle__modalNavigate: function (direction) {
-      console.log('handle__modalNavigate direction: ' + direction)
+
+      let currentIndex = this.gridData.indexOf(this.selectedGridItem)
+      let newIndex
+
+      if (direction === 'next') {
+        newIndex = (currentIndex === this.gridData.length - 1) ? 0 : currentIndex + 1
+      } else {
+        newIndex = (currentIndex === 0) ? this.gridData.length - 1 : currentIndex - 1
+      }
+
+      // Update our selected gridData state
+      this.selectedGridItem = this.gridData[newIndex]
+
+      // Update our modal with new gridData props
+      this.updateModal({
+        title: this.selectedGridItem.title,
+        content: this.formatHTML(this.selectedGridItem.body)
+      })
     },
 
     /**
@@ -196,17 +235,45 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
      **/
     handle__gridItemSelected: function (args) {
 
-      // Update the modal with HTML-ready content
-      this.modal_title = args.selectedGridItem.title
+      // Update the currently selected gridData item
+      this.selectedGridItem = args.selectedGridItem
 
-      let converter = new Showdown.Converter({
-        noHeaderId: true
+      let modalContent = this.formatHTML(args.selectedGridItem.body)
+
+      // Update modal contents
+      this.updateModal({
+        title: args.selectedGridItem.title,
+        content: modalContent
       })
-      let html = converter.makeHtml(args.selectedGridItem.body)
-      this.modal_content = html
 
       // Show the modal
       this.modal_visible = true
+    },
+
+    handle__gridDataSorted: function (data) {
+      this.sortedGridDataPrimary = data.sortedGridDataPrimary
+      this.sortedGridDataSecondary = data.sortedGridDataSecondary
+    },
+
+    /**
+     * data: {
+     *   title: String,
+     *   content: String
+     * }
+     **/
+    updateModal: function (data) {
+      this.modal_title = data.title
+      this.modal_content = data.content
+    },
+
+    /**
+     *
+     **/
+    formatHTML: function (markdownString) {
+      let converter = new Showdown.Converter({
+        noHeaderId: true
+      })
+      return converter.makeHtml(markdownString)
     }
   },
   created: function () {

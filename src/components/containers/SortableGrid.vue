@@ -141,9 +141,6 @@ export default {
   data () {
     return {
       defaultTags: ['front-end-development'],
-      selectedGridItem: null,
-      sortedGridDataPrimary: [],
-      sortedGridDataSecondary: [],
       zeroSortedItemsMessage: true
     }
   },
@@ -152,7 +149,30 @@ export default {
    *
    **/
   props: {
-    gridData: null
+    selectedGridItem: {
+      type: Object,
+      default: function () {
+        return null
+      }
+    },
+    gridData: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    sortedGridDataPrimary: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    sortedGridDataSecondary: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
   },
 
   /**
@@ -160,14 +180,8 @@ export default {
    **/
   watch: {
     selectedGridItem: function (oldValue, newValue) {
+      this.updateGridSelectedState()
     }
-  },
-
-  /**
-   * Computed props used for any props requiring processing or non-trivial logic, that may be cached for
-   * improved performance
-   **/
-  computed: {
   },
 
   /**
@@ -228,13 +242,17 @@ export default {
         })
         primarySortData = primarySortData.concat(sortedByDate)
       })
-      this.sortedGridDataPrimary = [...(new Set(primarySortData))]
 
       // Sort remaining data by date, then set
       let secondarySortData = [...(new Set(this.gridData))].sort(function (b, a) {
         return parseFloat(a.date) - parseFloat(b.date)
       })
-      this.sortedGridDataSecondary = secondarySortData
+
+      // emit data back to parent which will mutate this components' state props
+      this.$emit('gridDataSorted', {
+        sortedGridDataPrimary: [...(new Set(primarySortData))],
+        sortedGridDataSecondary: secondarySortData
+      })
 
       return this
     },
@@ -243,6 +261,18 @@ export default {
      *
      **/
     handle__gridItemSelected: function (event, selectedGridItem, currentGrid) {
+
+      this.$emit('gridItemSelected', {
+        event,
+        selectedGridItem,
+        currentGrid
+      })
+    },
+
+    /**
+     *
+     **/
+    updateGridSelectedState: function () {
 
       // Switch all previous dataItem to unselected state
       this.gridData.forEach(function (dataItem) {
@@ -253,14 +283,7 @@ export default {
       // of gridData that gets sorted, we will potentially have two dataItems. This
       // isn't technically incorrect though it may exhibit side-effects - so leaving
       // this as the case for now).
-      selectedGridItem.selected = true
-      this.selectedGridItem = selectedGridItem
-
-      this.$emit('gridItemSelected', {
-        event,
-        selectedGridItem,
-        currentGrid
-      })
+      this.selectedGridItem.selected = true
     }
   },
   created: function () {
