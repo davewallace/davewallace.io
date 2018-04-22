@@ -13,10 +13,18 @@ html * {
 	box-sizing: border-box;
 }
 
-/* I follow a bottom-only margin policy where possible */
+// I follow a bottom-only margin policy where possible
 h1, h2, h3, h4, h5, h6,
 p {
 	margin: 0 0 15px 0;
+}
+
+// Vue's @click.prevent removes the default pointer
+a {
+  cursor: pointer;
+  &[disabled=true] {
+    cursor: not-allowed;
+  }
 }
 
 @mixin reset-list() {

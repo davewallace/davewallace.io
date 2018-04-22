@@ -260,12 +260,12 @@ export default {
     /**
      *
      **/
-    handle__gridItemSelected: function (event, grid_selectedItem, grid_current) {
+    handle__gridItemSelected: function (event, grid_selectedItem, grid_dataSource) {
 
       this.$emit('gridItemSelected', {
         event,
         grid_selectedItem,
-        grid_current
+        grid_dataSource
       })
     },
 

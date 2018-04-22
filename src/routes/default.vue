@@ -6,10 +6,14 @@
 
 <template>
   <div class="view">
+
     <DefaultGreeting />
-    <Modal  :visible="this.modal_visible"
-            v-on:modalClose="modal_visible = false"
-            v-on:modalNavigate="handle__modalNavigate">
+
+    <Modal  v-on:modalClose="modal_visible = false"
+            v-on:modalNavigate="handle__modalNavigate"
+            :visible="this.modal_visible"
+            :grid_mostRecentlyInteractedGridData="this.grid_mostRecentlyInteractedGridData"
+            :notification_visible="this.notification_visible">
 
       <template slot="modal_title">
         {{ this.modal_title }}
@@ -20,12 +24,13 @@
       </template>
 
     </Modal>
+
     <SortableGrid v-on:gridItemSelected="handle__gridItemSelected"
                   v-on:gridDataSorted="handle__gridDataSorted"
-                  v-bind:grid_data="this.grid_data"
-                  v-bind:grid_sortedDataPrimary="this.grid_sortedDataPrimary"
-                  v-bind:grid_sortedDataSecondary="this.grid_sortedDataSecondary"
-                  v-bind:grid_selectedItem="this.grid_selectedItem"/>
+                  :grid_data="this.grid_data"
+                  :grid_sortedDataPrimary="this.grid_sortedDataPrimary"
+                  :grid_sortedDataSecondary="this.grid_sortedDataSecondary"
+                  :grid_selectedItem="this.grid_selectedItem"/>
   </div>
 </template>
 
@@ -54,7 +59,12 @@ export default {
       modal_title: null,
       modal_content: null,
       modal_visible: false,
+      notification_visible: false,
 
+      grid_selectedItem: null,
+      grid_sortedDataPrimary: [],
+      grid_sortedDataSecondary: [],
+      grid_mostRecentlyInteractedGridData: null,
       // Feeds our main display of default content, to note the 'content' property of a
       // grid_data item is written in markdown, for conversion into HTML. My assumption
       // here is that the content is pretty simple markup.
@@ -186,35 +196,43 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
           date: 2015,
           selected: false
         }
-      ],
-
-      grid_selectedItem: null,
-      grid_sortedDataPrimary: [],
-      grid_sortedDataSecondary: []
+      ]
     }
   },
   methods: {
 
     /**
-     * Using the currently selected grid_data item, traverse the grid_data Array
-     * for the next appropriate grid_data item. Traversal is bidirectional and
+     * Using the currently selected grid item, traverse the most recently
+     * interacted data Array for the next appropriate data item. Traversal is
+     * bidirectional within the most recently interacted data Array, and
      * doubly linked.
      *
      * direction: 'next', 'previous'
      **/
     handle__modalNavigate: function (direction) {
 
-      let currentIndex = this.grid_data.indexOf(this.grid_selectedItem)
+      let gridData = this.grid_mostRecentlyInteractedGridData
+      let currentIndex = gridData.indexOf(this.grid_selectedItem)
       let newIndex
 
+      // Determine the next viable modal data index
       if (direction === 'next') {
-        newIndex = (currentIndex === this.grid_data.length - 1) ? 0 : currentIndex + 1
+        newIndex = (currentIndex === gridData.length - 1) ? 0 : currentIndex + 1
       } else {
-        newIndex = (currentIndex === 0) ? this.grid_data.length - 1 : currentIndex - 1
+        newIndex = (currentIndex === 0) ? gridData.length - 1 : currentIndex - 1
+      }
+
+      // toggle the modal notification to provide user feedback if we've hiy
+      // the end of a content queue
+      console.log(newIndex + '/' + (gridData.length - 1))
+      if (newIndex === gridData.length - 1) {
+        this.notification_visible = true
+      } else {
+        this.notification_visible = false
       }
 
       // Update our selected grid_data state
-      this.grid_selectedItem = this.grid_data[newIndex]
+      this.grid_selectedItem = gridData[newIndex]
 
       // Update our modal with new grid_data props
       this.updateModal({
@@ -226,7 +244,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
     /**
      * {
      *  event,
-     *  grid_current,
+     *  grid_dataSource,
      *  grid_selectedItem: {
      *    content: {}
      *    title: {}
@@ -234,13 +252,15 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
      * }
      **/
     handle__gridItemSelected: function (args) {
-
+      console.log(this)
       // Update the currently selected grid_data item
       this.grid_selectedItem = args.grid_selectedItem
 
-      let modalContent = this.formatHTML(args.grid_selectedItem.body)
+      // Update the most recently interacted grid
+      this.grid_mostRecentlyInteractedGridData = args.grid_dataSource
 
       // Update modal contents
+      let modalContent = this.formatHTML(args.grid_selectedItem.body)
       this.updateModal({
         title: args.grid_selectedItem.title,
         content: modalContent

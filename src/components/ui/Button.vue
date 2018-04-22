@@ -1,7 +1,8 @@
 <template>
   <a  @click.prevent
       @click="handle__click()"
-      href="">
+      href=""
+      class="button button--generic">
 
         <span :class="this.visuallyHiddenText ? 'visually-hidden-text' : ''"></span>
         <slot>Button</slot>
@@ -9,11 +10,43 @@
 </template>
 
 <style scoped lang="scss">
-a {
-  // Vue's @click.prevent removes the default pointer
-  cursor: pointer;
-  &[disabled=true] {
-    cursor: not-allowed;
+
+@import "../../style/reset.scss";
+@import "../../style/variables.scss";
+@import "../../style/utility.scss";
+
+.button {
+  display: inline-block;
+  padding: 3px 8px;
+  text-decoration: none;
+  color: $color__base;
+}
+.button--primary {
+  background-color: $color__base--green;
+
+  &:hover {
+    background-color: darken($color__base--green, 20);
+  }
+}
+.button--secondary {
+  background-color: $color__base--yellow;
+
+  &:hover {
+    background-color: darken($color__base--yellow, 20);
+  }
+}
+.button--tertiary {
+  background-color: $color__base--blue;
+
+  &:hover {
+    background-color: darken($color__base--blue, 20);
+  }
+}
+.button--warning {
+  background-color: $color__base--red;
+
+  &:hover {
+    background-color: darken($color__base--red, 20);
   }
 }
 </style>
