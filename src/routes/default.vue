@@ -23,6 +23,19 @@
         <Layout v-bind:data="this.modal_content" />
       </template>
 
+      <template slot="modal_notification">
+        <Notification type="info">
+          <p>You've reached the end of this selection, you can continue or would you like to...</p>
+
+          <Button class="button--primary">
+            <template slot="button_label">X</template>
+          </Button>
+          <Button class="button--secondary">
+            <template slot="button_label">Y</template>
+          </Button>
+        </Notification>
+      </template>
+
     </Modal>
 
     <SortableGrid v-on:gridItemSelected="handle__gridItemSelected"
@@ -41,6 +54,8 @@ import DefaultGreeting from '@/components/DefaultGreeting'
 import SortableGrid from '@/components/containers/SortableGrid'
 import Modal from '@/components/ui/Modal'
 import Layout from '@/components/ui/Layout'
+import Notification from '@/components/ui/Notification'
+import Button from '@/components/ui/Button'
 
 // markdown to HTML converter, for handling predictable user-facing text content
 import Showdown from 'Showdown'
@@ -51,7 +66,9 @@ export default {
     DefaultGreeting,
     SortableGrid,
     Modal,
-    Layout
+    Layout,
+    Notification,
+    Button
   },
   data () {
     return {

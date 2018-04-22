@@ -4,8 +4,11 @@
       href=""
       class="button button--generic">
 
-        <span :class="this.visuallyHiddenText ? 'visually-hidden-text' : ''"></span>
-        <slot>Button</slot>
+    <slot name="button_icon" />
+
+    <span :class="this.visuallyHiddenText ? 'visually-hidden' : ''">
+      <slot name="button_label">Button</slot>
+    </span>
   </a>
 </template>
 

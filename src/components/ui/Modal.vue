@@ -5,7 +5,10 @@
     <Button class="modal_button-close"
             @click="handle__click_close"
             visuallyHiddenText="true">
-      <Icon type="close" />
+      <template slot="button_label">Close</template>
+      <template slot="button_icon">
+        <Icon type="close" />
+      </template>
     </Button>
 
     <h3 class="modal_title">
@@ -24,23 +27,23 @@
       <Button class="modal_button-next button--primary"
               @click="handle__click_navigate('next')"
               visuallyHiddenText="true">
-        <Icon type="next" />
+
+        <template slot="button_label">Next</template>
+        <template slot="button_icon">
+          <Icon type="next" />
+        </template>
       </Button>
       <Button class="modal_button-previous button--tertiary"
               @click="handle__click_navigate('previous')"
               visuallyHiddenText="true">
-        <Icon type="previous" />
+
+        <template slot="button_label">Previous</template>
+        <template slot="button_icon">
+          <Icon type="previous" />
+        </template>
       </Button>
 
-      <Notification v-if="this.notification_visible">
-        <p>You've reached the end of this selection, you can continue or would you like to...</p>
-        <Button class="button--primary">
-          X
-        </Button>
-        <Button class="button--secondary">
-          Y
-        </Button>
-      </Notification>
+      <slot name="modal_notification" v-if="this.notification_visible" />
 
     </div>
 
