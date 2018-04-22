@@ -30,7 +30,8 @@
                   :grid_data="this.grid_data"
                   :grid_sortedDataPrimary="this.grid_sortedDataPrimary"
                   :grid_sortedDataSecondary="this.grid_sortedDataSecondary"
-                  :grid_selectedItem="this.grid_selectedItem"/>
+                  :grid_selectedItem="this.grid_selectedItem"
+                  :grid_allSortOptions="this.grid_allSortOptions" />
   </div>
 </template>
 
@@ -194,6 +195,52 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
             {tag: 'production-management', name: 'Production Management'}
           ],
           date: 2015,
+          selected: false
+        }
+      ],
+
+      // menu data
+      grid_allSortOptions: [
+        {
+          name: 'Technical Consultation',
+          icon: '',
+          tag: 'technical-consultation',
+          selected: false
+        },
+        {
+          name: 'Team Leadership',
+          icon: '',
+          tag: 'team-leadership',
+          selected: false
+        },
+        {
+          name: 'Production Management',
+          icon: '',
+          tag: 'production-management',
+          selected: false
+        },
+        {
+          name: 'Accessibility',
+          icon: '',
+          tag: 'accessibility',
+          selected: false
+        },
+        {
+          name: 'User Experience',
+          icon: '',
+          tag: 'user-experience',
+          selected: false
+        },
+        {
+          name: 'User Interface Design',
+          icon: '',
+          tag: 'user-interface-design',
+          selected: false
+        },
+        {
+          name: 'Front-end Development',
+          icon: '',
+          tag: 'front-end-development',
           selected: false
         }
       ]

@@ -1,29 +1,18 @@
 <template>
   <ul class="sortable-grid__menu" ref="sortable-grid__menu">
 
-    <li v-for="(sortOption,i) of allSortOptions"
+    <li v-for="(sortOption,i) of grid_allSortOptions"
         v-bind:key="sortOption.name"
         :class="'sortable-grid__menu-item sortable-grid__menu-item--' + sortOption.tag">
 
-          <!-- Button component handles its own toggling and assumes a BEM-style
-              className base has been supplied as a prop for it to append a modifier to
-          <Button
-            modifierClassNameBase="sortable-grid__menu-item-link"
-            selectable="true"
-            @click="handle__sortOptionClick( sortOption.tag )"
-            class="sortable-grid__menu-item-link"
-          -->
+      <Button
+        :icon="sortOption.icon"
+        :class="[sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link',
+                      sortOption.current ? 'sortable-grid__menu-item-link--current' : '']"
+        @click="handle__sortOptionClick(grid_allSortOptions[i], grid_allSortOptions)">
 
-          <Button
-            :icon="sortOption.icon"
-            :class="[sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link',
-                    sortOption.current ? 'sortable-grid__menu-item-link--current' : '']"
-            @click="handle__sortOptionClick(allSortOptions[i], allSortOptions)"
-          >
-
-              {{ sortOption.name }}
-          </Button>
-
+        <template slot="button_label">{{ sortOption.name }}</template>
+      </Button>
     </li>
   </ul>
 </template>
@@ -100,52 +89,11 @@ export default {
   components: {
     Button
   },
+  props: [
+    'grid_allSortOptions'
+  ],
   data () {
     return {
-      allSortOptions: [
-        {
-          name: 'Technical Consultation',
-          icon: '',
-          tag: 'technical-consultation',
-          selected: false
-        },
-        {
-          name: 'Team Leadership',
-          icon: '',
-          tag: 'team-leadership',
-          selected: false
-        },
-        {
-          name: 'Production Management',
-          icon: '',
-          tag: 'production-management',
-          selected: false
-        },
-        {
-          name: 'Accessibility',
-          icon: '',
-          tag: 'accessibility',
-          selected: false
-        },
-        {
-          name: 'User Experience',
-          icon: '',
-          tag: 'user-experience',
-          selected: false
-        },
-        {
-          name: 'User Interface Design',
-          icon: '',
-          tag: 'user-interface-design',
-          selected: false
-        },
-        {
-          name: 'Front-end Development',
-          icon: '',
-          tag: 'front-end-development',
-          selected: false
-        }
-      ],
       selectedSortOptions: []
     }
   },
@@ -165,7 +113,7 @@ export default {
       currentTarget.current = true
 
       // Harvest an Array of currently selected sort options (1 or many)
-      let selectedSortOptions = this.allSortOptions.filter(function (currentValue, idx) {
+      let selectedSortOptions = this.grid_allSortOptions.filter(function (currentValue, idx) {
         if (currentValue.selected) {
           return currentValue.tag
         }

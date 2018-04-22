@@ -3,7 +3,9 @@
 
     <!-- grid sorting - listens to the specified event and responds to it with the associated method
      -->
-    <SortableGridMenu v-on:handle__sortOptionClick="sortGridData" />
+    <SortableGridMenu
+      v-on:handle__sortOptionClick="sortGridData"
+      :grid_allSortOptions="this.grid_allSortOptions" />
 
     <!-- grid contents, sorted by user preference and date. conditionally rendered. -->
     <div v-if="grid_sortedDataPrimary.length">
@@ -149,6 +151,12 @@ export default {
    *
    **/
   props: {
+    grid_allSortOptions: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
     grid_selectedItem: {
       type: Object,
       default: function () {

@@ -65,6 +65,11 @@
     border: 2px dashed purple;
   }
 
+  // title content
+  &_title {
+    flex-basis: 15%;
+  }
+
   // navigation controls for collections of modal content
   &_navigation {
   }
@@ -81,9 +86,9 @@
       right: 10px;
     }
 
-  // modal content
+  // main content
   &_content {
-    flex-basis: 80%;
+    flex-basis: 70%;
   }
 
   // modal close control
@@ -115,14 +120,12 @@
 
 import Button from '@/components/ui/Button'
 import Icon from '@/components/ui/Icon'
-import Notification from '@/components/ui/Notification'
 
 export default {
   name: 'Modal',
   components: {
     Button,
-    Icon,
-    Notification
+    Icon
   },
   props: [
     'visible',
