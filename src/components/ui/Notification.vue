@@ -1,5 +1,6 @@
 <template>
-  <div class="notification">
+  <div  class="notification"
+        :class="this.type ? 'notification--' + this.type : ''">
     <slot>Notification</slot>
   </div>
 </template>
@@ -10,7 +11,11 @@
 @import "../../style/variables.scss";
 
 .notification {
-  border: 1px dashed red;
+  border: 2px dashed green;
+
+  &--info {
+    border-color: cyan;
+  }
 }
 </style>
 
@@ -23,6 +28,7 @@ export default {
     }
   },
   props: [
+    'type'
   ]
 }
 </script>
