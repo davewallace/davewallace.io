@@ -316,7 +316,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
      * }
      **/
     handle__gridItemSelected: function (args) {
-      console.log(this)
+
       // Update the currently selected grid_data item
       this.grid_selectedItem = args.grid_selectedItem
 
