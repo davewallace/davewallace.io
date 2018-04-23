@@ -286,14 +286,10 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
         newIndex = (currentIndex === 0) ? gridData.length - 1 : currentIndex - 1
       }
 
-      // toggle the modal notification to provide user feedback if we've hiy
+      // Toggle the modal notification to provide user feedback if we've hiy
       // the end of a content queue
+      this.modal_notification_visible = (newIndex === gridData.length - 1)
       console.log(newIndex + '/' + (gridData.length - 1))
-      if (newIndex === gridData.length - 1) {
-        this.notification_visible = true
-      } else {
-        this.notification_visible = false
-      }
 
       // Update our selected grid_data state
       this.grid_selectedItem = gridData[newIndex]
