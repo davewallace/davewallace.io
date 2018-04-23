@@ -24,22 +24,22 @@
     </div>
 
     <div class="modal_navigation">
-      <Button class="modal_button-next button--primary"
-              @click="handle__click_navigate('next')"
+      <Button class="modal_button-forward button--primary"
+              @click="handle__click_navigate('forward')"
               visuallyHiddenText="true">
 
-        <template slot="button_label">Next</template>
+        <template slot="button_label">Forward</template>
         <template slot="button_icon">
-          <Icon type="next" />
+          <Icon type="forward" />
         </template>
       </Button>
-      <Button class="modal_button-previous button--tertiary"
-              @click="handle__click_navigate('previous')"
+      <Button class="modal_button-backward button--tertiary"
+              @click="handle__click_navigate('backward')"
               visuallyHiddenText="true">
 
-        <template slot="button_label">Previous</template>
+        <template slot="button_label">Backward</template>
         <template slot="button_icon">
-          <Icon type="previous" />
+          <Icon type="backward" />
         </template>
       </Button>
 
@@ -83,15 +83,15 @@
   // navigation controls for collections of modal content
   &_navigation {
   }
-    &_button-next,
-    &_button-previous {
+    &_button-forward,
+    &_button-backward {
       position: absolute;
     }
-    &_button-previous {
+    &_button-backward {
       top: 50%;
       left: 10px;
     }
-    &_button-next {
+    &_button-forward {
       top: 50%;
       right: 10px;
     }

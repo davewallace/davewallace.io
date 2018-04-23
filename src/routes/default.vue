@@ -271,7 +271,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
      * bidirectional within the most recently interacted data Array, and
      * doubly linked.
      *
-     * direction: 'next', 'previous'
+     * direction: 'forward', 'backward'
      **/
     handle__modalNavigate: function (direction) {
 
@@ -280,9 +280,11 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
       let newIndex
 
       // Determine the next viable modal data index
-      if (direction === 'next') {
+      if (direction === 'forward') {
+        // Advance by 1 or start at beginning of list again
         newIndex = (currentIndex === gridData.length - 1) ? 0 : currentIndex + 1
       } else {
+        // Go back by 1 or move to end of list
         newIndex = (currentIndex === 0) ? gridData.length - 1 : currentIndex - 1
       }
 

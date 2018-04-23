@@ -26,8 +26,8 @@ export default {
       types: {
         'default': '?',
         'close': 'X',
-        'previous': '<',
-        'next': '>'
+        'backward': '<',
+        'forward': '>'
       }
     }
   },
