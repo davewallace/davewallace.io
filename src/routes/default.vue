@@ -12,8 +12,7 @@
     <Modal  v-on:modalClose="modal_visible = false"
             v-on:modalNavigate="handle__modalNavigate"
             :visible="this.modal_visible"
-            :grid_mostRecentlyInteractedGridData="this.grid_mostRecentlyInteractedGridData"
-            :notification_visible="this.notification_visible">
+            :grid_mostRecentlyInteractedGridData="this.grid_mostRecentlyInteractedGridData">
 
       <template slot="modal_title">
         {{ this.modal_title }}
@@ -24,7 +23,7 @@
       </template>
 
       <template slot="modal_notification">
-        <Notification type="info">
+        <Notification type="info" v-if="modal_notification_visible">
           <p>You've reached the end of this selection, you can continue or would you like to...</p>
 
           <Button class="button--primary">
@@ -77,7 +76,7 @@ export default {
       modal_title: null,
       modal_content: null,
       modal_visible: false,
-      notification_visible: false,
+      modal_notification_visible: false,
 
       grid_selectedItem: null,
       grid_sortedDataPrimary: [],
@@ -263,6 +262,19 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
       ]
     }
   },
+  watch: {
+    grid_selectedItem: function (newValue, oldValue) {
+
+      // Toggle the modal notification to provide user feedback if we've hiy
+      // the end of a content queue
+      let gridData = this.grid_mostRecentlyInteractedGridData
+      if (gridData.indexOf(this.grid_selectedItem) === gridData.length - 1) {
+        this.modal_notification_visible = true
+      } else {
+        this.modal_notification_visible = false
+      }
+    }
+  },
   methods: {
 
     /**
@@ -288,9 +300,6 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
         newIndex = (currentIndex === 0) ? gridData.length - 1 : currentIndex - 1
       }
 
-      // Toggle the modal notification to provide user feedback if we've hiy
-      // the end of a content queue
-      this.modal_notification_visible = (newIndex === gridData.length - 1)
       console.log(newIndex + '/' + (gridData.length - 1))
 
       // Update our selected grid_data state

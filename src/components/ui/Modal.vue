@@ -43,7 +43,7 @@
         </template>
       </Button>
 
-      <slot name="modal_notification" v-if="this.notification_visible" />
+      <slot name="modal_notification" />
 
     </div>
 
@@ -140,8 +140,7 @@ export default {
   props: [
     'visible',
     'modal_content',
-    'modal_title',
-    'notification_visible'
+    'modal_title'
   ],
   watch: {
     visible: function (newValue, oldValue) {
