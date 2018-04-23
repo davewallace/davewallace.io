@@ -187,7 +187,7 @@ export default {
    * Watched props generally for expensive or async operations
    **/
   watch: {
-    grid_selectedItem: function (oldValue, newValue) {
+    grid_selectedItem: function (newValue, oldValue) {
       this.updateGridSelectedState()
     }
   },

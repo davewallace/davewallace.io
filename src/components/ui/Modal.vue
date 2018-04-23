@@ -137,7 +137,7 @@ export default {
     'notification_visible'
   ],
   watch: {
-    visible: function (oldValue, newValue) {
+    visible: function (newValue, oldValue) {
       // Notify any parent components wanting to update this component's state
       this.$emit('changeVisible', {
         oldValue: oldValue,
