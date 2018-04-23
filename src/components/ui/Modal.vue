@@ -56,6 +56,13 @@
 @import "../../style/variables.scss";
 @import "../../style/utility.scss";
 
+// applied to body element
+.modal_body-scroll-prevent {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
 .modal {
   display: flex;
   flex-direction: column;
@@ -143,6 +150,12 @@ export default {
         oldValue: oldValue,
         newValue: newValue
       })
+
+      // Toggle body element state to provide viewport scroll helpers.
+      // Exception to rules: manipulate the DOM's body element since there are
+      // currently caveats around mounting the body element with a Vue instance.
+      let method = (newValue === true) ? 'add' : 'remove'
+      window.document.getElementsByTagName('body')[0].classList[method]('modal_body-scroll-prevent')
     }
   },
   data () {
