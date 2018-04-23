@@ -56,7 +56,7 @@
 @import "../../style/variables.scss";
 @import "../../style/utility.scss";
 
-// applied to body element
+// applied to body element in response to modal component's visible state
 .modal_body-scroll-prevent {
   height: 100vh;
   max-height: 100vh;
@@ -78,6 +78,7 @@
   // title content
   &_title {
     flex-basis: 15%;
+    line-height: $font__line-height--h3;
   }
 
   // navigation controls for collections of modal content

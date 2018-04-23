@@ -24,12 +24,30 @@ $color__base--yellow: #fff176;
 $pad__body--desktop: 10px 20px;
 
 /**
- * Fonts
+ * Typography
  **/
+$font__size--h1: 2em;
+$font__size--h2: 1.8em;
+$font__size--h3: 1.5em;
+$font__size--h4: 1.4em;
+$font__size--h5: 1.2em;
+$font__size--h6: 1.0em;
 $font__size--smallest: 0.6em;
 $font__size--small: 0.7em;
 $font__size--medium: 0.9em;
 $font__size--large: 1.1em;
+
+$font__line-height--smallest: $font__size--smallest * 1.5;
+$font__line-height--small: $font__size--small * 1.5;
+$font__line-height--medium: $font__size--medium * 1.5;
+$font__line-height--large: $font__size--large * 1.5;
+
+$font__line-height--h1: $font__size--h1 * 1.5;
+$font__line-height--h2: $font__size--h2 * 1.5;
+$font__line-height--h3: $font__size--h3 * 1.5;
+$font__line-height--h4: $font__size--h4 * 1.5;
+$font__line-height--h5: $font__size--h5 * 1.5;
+$font__line-height--h6: $font__size--h6 * 1.5;
 
 /**
  * z-index management
