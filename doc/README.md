@@ -78,4 +78,4 @@ Initial steps to functional design system setup involved:
 
 	*		Organise Sketch base symbols and color palette
 	*		Implement SASS CSS loader into build chain
-	*		
+	*		Create base structure for component style composition
