@@ -52,8 +52,8 @@
 
 <style lang="scss">
 
-@import "../../style/reset.scss";
 @import "../../style/variables.scss";
+@import "../../style/reset.scss";
 @import "../../style/utility.scss";
 
 // applied to body element in response to modal component's visible state

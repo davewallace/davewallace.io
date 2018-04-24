@@ -7,8 +7,8 @@
 
 <style scoped lang="scss">
 
-@import "../../style/reset.scss";
 @import "../../style/variables.scss";
+@import "../../style/reset.scss";
 
 .notification {
   border: 2px dashed green;

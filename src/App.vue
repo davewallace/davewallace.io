@@ -5,11 +5,8 @@
 </template>
 
 <style lang="scss">
-  /**
-   * All imports and contextual SCSS must be contained within this single style tag
-   */
-  @import "style/reset.scss";
   @import "style/variables.scss";
+  @import "style/reset.scss";
 
   body {
     background: $color__base;
