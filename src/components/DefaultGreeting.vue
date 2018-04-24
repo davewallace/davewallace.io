@@ -1,5 +1,6 @@
 <style scoped lang="scss">
 h1 {
+  padding-top: 2em;
   font-size: 2.4em;
   span {
     font-size: 1.4rem;
