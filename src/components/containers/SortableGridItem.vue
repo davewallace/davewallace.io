@@ -65,7 +65,7 @@
       left: -8px;
       display: inline;
       padding: 2px 12px;
-      line-height: 21px;
+      font-size: 1.1em;
       background: $color__base;
       color: $color__text-base;
 

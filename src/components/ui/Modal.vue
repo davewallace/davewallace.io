@@ -77,16 +77,19 @@
 
   // title content
   &_title {
-    flex-basis: 15%;
-    line-height: $font__line-height--h3;
+    flex-basis: $font__line-height--h3; // assumes maximum 2 lines
   }
 
   // navigation controls for collections of modal content
   &_navigation {
+    flex-basis: 10%;
   }
     &_button-forward,
     &_button-backward {
       position: absolute;
+      @media (max-width: 480px) {
+        position: relative;
+      }
     }
     &_button-backward {
       top: 50%;
@@ -99,7 +102,7 @@
 
   // main content
   &_content {
-    flex-basis: 70%;
+    flex-basis: 65%;
   }
 
   // modal close control
