@@ -35,10 +35,10 @@ $font__size--medium: 0.9em;
 $font__size--large: 1.1em;
 $font__size--largest: 1.4em;
 
-$font__line-height--smallest: $font__size--smallest - 0.4em;
-$font__line-height--small: $font__size--small - 0.4em;
-$font__line-height--medium: $font__size--medium - 0.4em;
-$font__line-height--large: $font__size--large - 0.4em;
+$font__line-height--smallest: $font__size--smallest + 0.4em;
+$font__line-height--small: $font__size--small + 0.4em;
+$font__line-height--medium: $font__size--medium + 0.4em;
+$font__line-height--large: $font__size--large + 0.4em;
 
 $font__line-height--h1: $font__size--h1 - 0.4em;
 $font__line-height--h2: $font__size--h2 - 0.4em;
