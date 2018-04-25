@@ -1,13 +1,17 @@
 <style scoped lang="scss">
 h1 {
+  margin-bottom: 0;
   padding-top: 2em;
   font-size: 2.4em;
+
   span {
     font-size: 1.4rem;
   }
 }
 h2 {
-  font-size: 1.3rem;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+  line-height: 1.2rem;
 }
 </style>
 
