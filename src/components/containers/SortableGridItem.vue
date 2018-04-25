@@ -60,7 +60,7 @@
     flex-direction: column;
     justify-content: stretch;
 
-    min-height: 200px;
+    min-height:150px;
     padding: 5px 7px 20px 5px;
 
     // perspective based for transformed children
@@ -189,6 +189,7 @@
         bottom: -3px;
         right: -3px;
         display: inline-block;
+        margin: 0;
         padding: 3px 5px;
         font-size: $font__size--smallest;
         font-weight: bold;
