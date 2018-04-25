@@ -46,6 +46,10 @@ h6 {
   line-height: $font__line-height--h6;
 }
 
+p {
+  line-height: $font__line-height--medium;
+}
+
 // Vue's @click.prevent removes the default pointer
 a {
   cursor: pointer;
