@@ -3,7 +3,10 @@
         :class="this.type ? 'notification--' + this.type : ''">
 
       <slot name="notification_body">Notification body</slot>
-      <slot name="notification_controls">Notification controls</slot>
+
+      <div class="notification_controls">
+        <slot name="notification_controls">Notification controls</slot>
+      </div>
   </div>
 </template>
 
@@ -16,7 +19,18 @@
   padding: $pad__box--desktop;
   background: $color__base--blue;
 
+  /**
+   * States & modifiers
+   **/
   &--info {
+  }
+
+  /**
+   * Action controls provided to this component
+   **/
+  &_controls {
+    margin-top: -15px;
+    text-align: right;
   }
 }
 </style>
