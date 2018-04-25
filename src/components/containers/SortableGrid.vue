@@ -71,13 +71,13 @@
 
     // yaay, we got grid
     display: grid;
-    grid-gap: 30px;
+    grid-gap: $pad__grid-gap--desktop;
 
     // lets optimise for older, narrow width devices when content starts looking unreadable
     @media (max-width: 320px) {
       display: block;
       max-width: initial;
-      margin-bottom: 20px;
+      margin-bottom: $pad__grid-gap--device;
       padding: 0 1%;
     }
 
