@@ -134,10 +134,11 @@ export default {
       this.$emit('handle__sortOptionClick', uniqueSelectedSortOptions)
     }
   },
+
+  /**
+   * Lifecycle methods
+   **/
   created: function () {
-    // `this` points to the component instance
-  },
-  mounted: function () {
   }
 }
 </script>

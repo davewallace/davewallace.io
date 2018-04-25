@@ -297,8 +297,10 @@ export default {
       this.grid_selectedItem.selected = true
     }
   },
-  created: function () {
-  },
+
+  /**
+   * Lifecycle methods
+   **/
   mounted: function () {
 
     // Start with a date-sorted list of data

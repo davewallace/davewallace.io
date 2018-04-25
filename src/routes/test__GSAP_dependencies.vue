@@ -25,8 +25,11 @@ export default {
       msg: 'This title will fade out successfully if Greensock Animation dependencies have successfully been imported.'
     }
   },
+
+  /**
+   * Lifecycle methods
+   **/
   created: function () {
-    // `this` points to the vm instance
     console.log('created')
   },
   mounted: function () {

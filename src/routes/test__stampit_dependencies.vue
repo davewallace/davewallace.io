@@ -75,8 +75,11 @@ export default {
       msg: 'Check the console for successful usage of stampit API.'
     }
   },
+
+  /**
+   * Lifecycle methods
+   **/
   created: function () {
-    // `this` points to the vm instance
     console.log('created')
   },
   mounted: function () {

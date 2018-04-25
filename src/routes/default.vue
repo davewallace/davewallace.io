@@ -367,6 +367,10 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
       return converter.makeHtml(markdownString)
     }
   },
+
+  /**
+   * Lifecycle methods
+   **/
   mounted: function () {
     console.log('default route view has mounted.')
   }

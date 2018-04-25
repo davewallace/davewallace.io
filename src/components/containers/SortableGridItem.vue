@@ -247,9 +247,11 @@ export default {
       this.$emit('handle__gridItemSelected', event)
     }
   },
+
+  /**
+   * Lifecycle methods
+   **/
   created: function () {
-  },
-  mounted: function () {
   }
 }
 </script>

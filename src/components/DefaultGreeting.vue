@@ -32,10 +32,11 @@ export default {
       greeting_tertiary: 'You\'ve opened my portfolio, thanks. Select the work you\'d like to see...'
     }
   },
+
+  /**
+   * Lifecycle methods
+   **/
   created: function () {
-    // `this` points to the vm instance
-  },
-  mounted: function () {
   }
 }
 </script>
