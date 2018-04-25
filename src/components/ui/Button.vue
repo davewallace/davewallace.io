@@ -66,6 +66,11 @@ export default {
     'visuallyHiddenText'
   ],
   methods: {
+
+    /**
+     * Event handlers
+     **/
+
     handle__click: function () {
 
       if (this.selectable) {

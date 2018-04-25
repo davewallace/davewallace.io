@@ -8,7 +8,7 @@
       <Button
         :icon="sortOption.icon"
         :class="[sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link',
-                      sortOption.current ? 'sortable-grid__menu-item-link--current' : '']"
+                      (currentMenuItem === sortOption) ? 'sortable-grid__menu-item-link--current' : '']"
         @click="handle__sortOptionClick(grid_allSortOptions[i], grid_allSortOptions)">
 
         <template slot="button_label">{{ sortOption.name }}</template>
@@ -94,10 +94,15 @@ export default {
   ],
   data () {
     return {
-      selectedSortOptions: []
+      selectedSortOptions: [],
+      currentMenuItem: null
     }
   },
   methods: {
+
+    /**
+     * Event handlers
+     **/
 
     /**
      *
@@ -105,12 +110,10 @@ export default {
      **/
     handle__sortOptionClick: function (currentTarget, allTargets) {
 
-      allTargets.forEach(function (target) {
-        target.current = false
-      })
-
+      // The selection status on the current target is a toggle, allowing deselection of
+      // previously selected options
       currentTarget.selected = !currentTarget.selected
-      currentTarget.current = true
+      this.currentMenuItem = currentTarget
 
       // Harvest an Array of currently selected sort options (1 or many)
       let selectedSortOptions = this.grid_allSortOptions.filter(function (currentValue, idx) {

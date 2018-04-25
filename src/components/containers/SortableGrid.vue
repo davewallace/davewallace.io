@@ -201,6 +201,26 @@ export default {
   methods: {
 
     /**
+     * Event handlers
+     **/
+
+    /**
+     *
+     **/
+    handle__gridItemSelected: function (event, grid_selectedItem, grid_dataSource) {
+
+      this.$emit('gridItemSelected', {
+        event,
+        grid_selectedItem,
+        grid_dataSource
+      })
+    },
+
+    /**
+     * Public methods
+     **/
+
+    /**
      * Sorts grid data into two data sets: data sorted by user preference, and everything.
      * Both sets of data are then independently sorted by date.
      *
@@ -266,18 +286,6 @@ export default {
       })
 
       return this
-    },
-
-    /**
-     *
-     **/
-    handle__gridItemSelected: function (event, grid_selectedItem, grid_dataSource) {
-
-      this.$emit('gridItemSelected', {
-        event,
-        grid_selectedItem,
-        grid_dataSource
-      })
     },
 
     /**

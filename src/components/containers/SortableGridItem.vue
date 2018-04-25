@@ -242,6 +242,11 @@ export default {
     'isOpen'
   ],
   methods: {
+
+    /**
+     * Event handlers
+     **/
+
     handle__click: function (event) {
       //this.$emit('handle__gridItemSelected', event, this)
       this.$emit('handle__gridItemSelected', event)

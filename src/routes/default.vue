@@ -278,6 +278,10 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
   methods: {
 
     /**
+     * Event handlers
+     **/
+
+    /**
      * Using the currently selected grid item, traverse the most recently
      * interacted data Array for the next appropriate data item. Traversal is
      * bidirectional within the most recently interacted data Array, and
@@ -345,6 +349,10 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
       this.grid_sortedDataPrimary = data.grid_sortedDataPrimary
       this.grid_sortedDataSecondary = data.grid_sortedDataSecondary
     },
+
+    /**
+     * Public methods
+     **/
 
     /**
      * data: {

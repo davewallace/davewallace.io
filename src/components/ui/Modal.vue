@@ -167,6 +167,10 @@ export default {
   },
   methods: {
 
+    /**
+     * Event handlers
+     **/
+
     // Notify any subscribers about button actions, the parent will then manipulate the state
     handle__click_close: function (button) {
       this.$emit('modalClose')
@@ -175,7 +179,10 @@ export default {
       this.$emit('modalNavigate', direction)
     },
 
-    // Simple API, should we need it
+    /**
+     * Public methods
+     **/
+
     open: function () {
       this.visible = true
     },
