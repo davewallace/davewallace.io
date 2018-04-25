@@ -18,8 +18,8 @@
         {{ this.modal_title }}
       </template>
 
-      <template slot="modal_content">
-        <Layout v-bind:data="this.modal_content" />
+      <template slot="modal_body">
+        <Layout v-bind:data="this.modal_body" />
       </template>
 
       <template slot="modal_notification">
@@ -33,6 +33,7 @@
             <Button class="button--primary">
               <template slot="button_label">X</template>
             </Button>
+            <span class="notification_control-seperator">or...</span>
             <Button class="button--secondary">
               <template slot="button_label">Y</template>
             </Button>
@@ -80,7 +81,7 @@ export default {
 
       // Modal state
       modal_title: null,
-      modal_content: null,
+      modal_body: null,
       modal_visible: false,
       modal_notification_visible: false,
 
@@ -368,7 +369,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
      **/
     updateModal: function (data) {
       this.modal_title = data.title
-      this.modal_content = data.content
+      this.modal_body = data.content
     },
 
     /**

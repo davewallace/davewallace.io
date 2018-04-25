@@ -29,9 +29,12 @@
    * Action controls provided to this component
    **/
   &_controls {
-    margin-top: -15px;
-    text-align: right;
+    margin-top: -10px;
+    text-align: center;
   }
+    &_control-seperator {
+      padding: 0 5px;
+    }
 }
 </style>
 

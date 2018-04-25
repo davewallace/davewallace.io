@@ -11,41 +11,43 @@
       </template>
     </Button>
 
-    <h3 class="modal_title">
-      <slot name="modal_title">
-        Slot header
-      </slot>
-    </h3>
-
     <div class="modal_content">
-      <slot name="modal_content">
-        <p>Slot content.</p>
-      </slot>
-    </div>
+      <h3 class="modal_title">
+        <slot name="modal_title">
+          Slot header
+        </slot>
+      </h3>
 
-    <div class="modal_navigation">
-      <Button class="modal_button-forward button--primary"
-              @click="handle__click_navigate('forward')"
-              visuallyHiddenText="true">
+      <div class="modal_body">
+        <slot name="modal_body">
+          <p>Slot content.</p>
+        </slot>
+      </div>
 
-        <template slot="button_label">Forward</template>
-        <template slot="button_icon">
-          <Icon type="forward" />
-        </template>
-      </Button>
-      <Button class="modal_button-backward button--tertiary"
-              @click="handle__click_navigate('backward')"
-              visuallyHiddenText="true">
+      <div class="modal_navigation">
+        <Button class="modal_button-backward button--tertiary"
+                @click="handle__click_navigate('backward')"
+                visuallyHiddenText="true">
 
-        <template slot="button_label">Backward</template>
-        <template slot="button_icon">
-          <Icon type="backward" />
-        </template>
-      </Button>
+          <template slot="button_label">Backward</template>
+          <template slot="button_icon">
+            <Icon type="backward" />
+          </template>
+        </Button>
+        <Button class="modal_button-forward button--primary"
+                @click="handle__click_navigate('forward')"
+                visuallyHiddenText="true">
 
-      <slot name="modal_notification" />
+          <template slot="button_label">Forward</template>
+          <template slot="button_icon">
+            <Icon type="forward" />
+          </template>
+        </Button>
 
-    </div>
+        <slot name="modal_notification" />
+
+      </div>
+    </div><!-- /.modal_content -->
 
   </div>
 </template>
@@ -64,19 +66,34 @@
 }
 
 .modal {
-  display: flex;
-  flex-direction: column;
-  padding: 60px 60px 0px 60px;
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 60px 60px 0px 60px;
+
+    @media (min-width: 600px) {
+      margin: 0 auto;
+      max-width: 80vw;
+    }
+    @media (min-width: 1200px) {
+      margin: 0 auto;
+      max-width: 60vw;
+    }
+  }
 
   &_title,
-  &_content,
+  &_body,
   &_navigation {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
+
+    border: 1px dotted red;
   }
 
   // title content
   &_title {
-    flex-basis: $font__line-height--h3;
+    flex-basis: $font__line-height--h3 * 2.5;
   }
 
   // navigation controls for collections of modal content
@@ -87,23 +104,32 @@
     &_button-forward,
     &_button-backward {
       position: absolute;
-      @media (max-width: 480px) {
-        position: relative;
-      }
       font-size: $font__size--largest;
+
+      @media (max-width: 480px) {
+        position: static;
+      }
     }
     &_button-backward {
-      top: 50%;
+      top: 45vh;
       left: 10px;
+
+      @media (min-width: 600px) {
+        left: 10vw;
+      }
     }
     &_button-forward {
-      top: 50%;
+      top: 45vh;
       right: 10px;
+
+      @media (min-width: 600px) {
+        right: 10vw;
+      }
     }
 
   // main content
-  &_content {
-    flex-basis: 65%;
+  &_body {
+    flex-grow: 1;
   }
 
   // modal close control
@@ -148,7 +174,7 @@ export default {
   },
   props: [
     'visible',
-    'modal_content',
+    'modal_body',
     'modal_title'
   ],
   watch: {
