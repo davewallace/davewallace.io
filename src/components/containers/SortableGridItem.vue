@@ -60,6 +60,7 @@
     flex-direction: column;
     justify-content: stretch;
 
+    height: 100%;
     min-height:150px;
     padding: 5px 7px 20px 5px;
 
