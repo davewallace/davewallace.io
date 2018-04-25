@@ -12,6 +12,8 @@
 
       <h3 class="sortable-grid__selection-notice">My work, sorted by your selections and by date...</h3>
       <ul class="sortable-grid__grid sortable-grid__grid--primary">
+        <!-- TODO: abstract this element into <SortableGridItem /> so it renders an <li> or
+            other element as its root node -->
         <li class="sortable-grid__grid-item"
             v-for="grid_sortedDataPrimaryItem in grid_sortedDataPrimary"
             v-bind:key="grid_sortedDataPrimaryItem.name">
@@ -73,30 +75,22 @@
 
     // yaay, we got grid
     display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 320px) {
+      display: block;
+    }
 
     &--primary {
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-gap: 30px;
       margin-bottom: 40px;
-
-      @media (max-width: 640px) {
-        grid-template-columns: 1fr 1fr;
-      }
-      @media (max-width: 320px) {
-        display: block;
-      }
     }
     &--secondary {
-      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      grid-gap: 30px;
-
-      @media (max-width: 640px) {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-      @media (max-width: 320px) {
-        display: block;
-      }
+      grid-template-columns: 1fr 1fr 1fr 1fr;
     }
+
   } // &__grid
 
     // Again with child grid items, we'll default to older layouts and use @supports to then
