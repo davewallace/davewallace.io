@@ -113,7 +113,9 @@
     right: 10px;
   }
 
-  // states
+  /**
+   * States
+   **/
   &--visible {
     position: fixed;
     top: 0;
