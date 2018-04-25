@@ -17,6 +17,7 @@
 
 .notification {
   padding: $pad__box--desktop;
+  text-align: left;
   background: $color__base--blue;
 
   /**

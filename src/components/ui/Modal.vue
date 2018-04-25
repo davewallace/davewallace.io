@@ -100,6 +100,7 @@
   &_navigation {
     flex-basis: 10%;
     margin-top: $pad__grid-gap--desktop;
+    text-align: center;
   }
     &_button-forward,
     &_button-backward {
@@ -108,6 +109,7 @@
 
       @media (max-width: 480px) {
         position: static;
+        margin: -$pad__grid-gap--device*2 10px $pad__grid-gap--device 10px;
       }
     }
     &_button-backward {
