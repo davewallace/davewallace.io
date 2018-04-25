@@ -111,7 +111,7 @@
         left: -8px;
         display: inline;
         padding: 2px 12px;
-        font-size: 1.1em;
+        font-size: 1.0em;
         background: $color__base;
         color: $color__text-base;
 
