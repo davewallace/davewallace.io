@@ -84,9 +84,8 @@
     &--primary {
       grid-template-columns: 1fr 1fr 1fr;
       margin-bottom: 40px;
-    }
-    @media (max-width: 760px) {
-      &--primary {
+
+      @media (max-width: 760px) {
         grid-template-columns: 1fr 1fr;
       }
     }
@@ -96,14 +95,11 @@
      **/
     &--secondary {
       grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-    @media (max-width: 760px) {
-      &--secondary {
+
+      @media (max-width: 760px) {
         grid-template-columns: 1fr 1fr 1fr;
       }
-    }
-    @media (max-width: 480px) {
-      &--secondary {
+      @media (max-width: 480px) {
         grid-template-columns: 1fr 1fr;
       }
     }
