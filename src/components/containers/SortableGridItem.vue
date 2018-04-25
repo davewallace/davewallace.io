@@ -73,6 +73,7 @@
      * Modifiers
      **/
     .sortable-grid__grid--primary & {
+      min-height: 200px;
       color: $color__text-base--reverse;
       background: $color__base--green;
     }
