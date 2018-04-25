@@ -1,7 +1,9 @@
 <template>
   <div  class="notification"
         :class="this.type ? 'notification--' + this.type : ''">
-    <slot>Notification</slot>
+
+      <slot name="notification_body">Notification body</slot>
+      <slot name="notification_controls">Notification controls</slot>
   </div>
 </template>
 

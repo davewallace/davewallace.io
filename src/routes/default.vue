@@ -24,14 +24,20 @@
 
       <template slot="modal_notification">
         <Notification type="info" v-if="modal_notification_visible">
-          <p>You've reached the end of this selection, you can continue or would you like to...</p>
 
-          <Button class="button--primary">
-            <template slot="button_label">X</template>
-          </Button>
-          <Button class="button--secondary">
-            <template slot="button_label">Y</template>
-          </Button>
+          <template slot="notification_body">
+            <p>You've reached the end of this selection, you can continue or would you like to...</p>
+          </template>
+
+          <template slot="notification_controls">
+            <Button class="button--primary">
+              <template slot="button_label">X</template>
+            </Button>
+            <Button class="button--secondary">
+              <template slot="button_label">Y</template>
+            </Button>
+          </template>
+
         </Notification>
       </template>
 
