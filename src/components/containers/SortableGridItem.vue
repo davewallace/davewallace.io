@@ -58,11 +58,10 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: stretch;
 
     height: 100%;
-    min-height:150px;
-    padding: 5px 7px 20px 5px;
+    min-height: 150px;
+    padding: 5px 7px 10px 5px;
 
     // perspective based for transformed children
     perspective: 1000px;
@@ -213,6 +212,13 @@
 
         @include visually-hidden-text()
       }
+
+    /**
+     * Footer contents
+     **/
+    &__grid-item__footer {
+      padding-right: 25px;
+    }
 
   /**
    * States
