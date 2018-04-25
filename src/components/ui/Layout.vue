@@ -14,7 +14,6 @@
 @import "../../style/utility.scss";
 
 .layout-item {
-  border: 3px dashed pink;
 }
 </style>
 

@@ -11,10 +11,10 @@
 @import "../../style/reset.scss";
 
 .notification {
-  border: 2px dashed green;
+  padding: $pad__box--desktop;
+  background: $color__base--blue;
 
   &--info {
-    border-color: cyan;
   }
 }
 </style>

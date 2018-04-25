@@ -66,23 +66,23 @@
 .modal {
   display: flex;
   flex-direction: column;
-  padding: 40px 60px;
+  padding: 60px 60px 0px 60px;
 
   &_title,
   &_content,
   &_navigation {
     flex: 1 1 auto;
-    border: 2px dashed purple;
   }
 
   // title content
   &_title {
-    flex-basis: $font__line-height--h3; // assumes maximum 2 lines
+    flex-basis: $font__line-height--h3;
   }
 
   // navigation controls for collections of modal content
   &_navigation {
     flex-basis: 10%;
+    margin-top: $pad__grid-gap--desktop;
   }
     &_button-forward,
     &_button-backward {
@@ -121,9 +121,11 @@
     bottom: 0;
     left: 0;
     z-index: $z-index--modal;
-
-    background: rgba(0, 0, 0, 0.92);
-    border: 4px dashed red;
+    background-image:
+      radial-gradient(
+        rgba($color__base, 0.98),
+        rgba($color__base, 0.92)
+      );
   }
   &--invisible {
     @include visually-hidden()
