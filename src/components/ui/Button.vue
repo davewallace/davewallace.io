@@ -18,40 +18,70 @@
 @import "../../style/reset.scss";
 @import "../../style/utility.scss";
 
+// State mixins
+@mixin state-transition--hover($transform) {
+  transform: $transform;
+  transition: transform 250ms cubic-bezier(0.175, 0.885, 0.12, 1.275);
+}
+@mixin state-transition--unhover($transform) {
+  transform: $transform;
+  transition: transform 300ms cubic-bezier(0.175, 0.730, 0.22, 1.875);
+}
+@mixin state-transition--selected() {
+}
+
+// Component
 .button {
   display: inline-block;
   padding: 3px 8px;
   text-decoration: none;
   color: $color__base;
-}
-.button--primary {
-  background-color: $color__base--green;
 
-  &:hover {
-    background-color: darken($color__base--green, 20);
-  }
-}
-.button--secondary {
-  background-color: $color__base--yellow;
+  &--primary {
+    background-color: $color__base--green;
+    @include state-transition--unhover(scale(1) rotate(-6deg));
 
-  &:hover {
-    background-color: darken($color__base--yellow, 20);
+    // Darken, enlarge and rotate forwards a bit
+    &:hover {
+      background-color: darken($color__base--green, 20);
+      @include state-transition--hover(scale(1.2) rotate(6deg));
+    }
   }
-}
-.button--tertiary {
-  background-color: $color__base--blue;
 
-  &:hover {
-    background-color: darken($color__base--blue, 20);
-  }
-}
-.button--warning {
-  background-color: $color__base--red;
+  &--secondary {
+    background-color: $color__base--yellow;
+    @include state-transition--unhover(scale(1) rotate(3deg));
 
-  &:hover {
-    background-color: darken($color__base--red, 20);
+    // Darken, enlarge and rotate backwards a bit
+    &:hover {
+      background-color: darken($color__base--yellow, 20);
+      @include state-transition--hover(scale(1.2) rotate(-2deg));
+    }
   }
-}
+
+  &--tertiary {
+    background-color: $color__base--blue;
+    @include state-transition--unhover(scale(1) rotate(3deg));
+
+    // Darken, enlarge and rotate backwards a bit
+    &:hover {
+      background-color: darken($color__base--blue, 20);
+      @include state-transition--hover(scale(1.2) rotate(-2deg));
+    }
+  }
+
+  &--warning {
+    background-color: $color__base--red;
+    @include state-transition--unhover(scale(1) rotate(3deg));
+
+    // Darken, enlarge and rotate backwards a bit
+    &:hover {
+      background-color: darken($color__base--red, 20);
+      @include state-transition--hover(scale(1.2));
+    }
+  }
+
+} // /.button
 </style>
 
 <script>

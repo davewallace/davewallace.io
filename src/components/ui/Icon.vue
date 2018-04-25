@@ -11,7 +11,6 @@ i {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 1px dashed red;
   color: white;
   font-weight: bold;
 }

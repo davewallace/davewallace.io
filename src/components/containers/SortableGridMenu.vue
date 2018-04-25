@@ -25,6 +25,19 @@
 @import "../../style/utility.scss";
 @import "../../style/variables.scss";
 
+// State mixins
+@mixin state-transition--hover($transform) {
+  transform: $transform;
+  transition: transform 250ms cubic-bezier(0.175, 0.885, 0.12, 1.275);
+}
+@mixin state-transition--unhover($transform) {
+  transform: $transform;
+  transition: transform 300ms cubic-bezier(0.175, 0.730, 0.22, 1.875);
+}
+@mixin state-transition--selected() {
+}
+
+// Component
 .sortable-grid__menu {
 
   @include reset-list()
@@ -58,7 +71,6 @@
     &--current {
       display: inline-block;
       margin: 0 5px 10px 0;
-      padding: 3px 5px;
       text-decoration: none;
       color: $color__text-base--reverse;
       background: $color__base--reverse;
@@ -72,9 +84,15 @@
       background: $color__base--green;
     }
 
+    &:link {
+      @include state-transition--unhover(scale(1) rotate(0deg));
+    }
     &:hover,
     &--selected:hover {
       background: $color__base--red;
+
+      // Enlarge and rotate forwards a bit
+      @include state-transition--hover(scale(1.04) rotate(0.5deg));
     }
   }
 

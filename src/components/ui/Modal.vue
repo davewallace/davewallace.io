@@ -2,7 +2,7 @@
   <div class="modal"
        :class="visible ? 'modal--visible' : 'modal--invisible' ">
 
-    <Button class="modal_button-close"
+    <Button class="modal_button-close button--warning"
             @click="handle__click_close"
             visuallyHiddenText="true">
       <template slot="button_label">Close</template>
@@ -90,6 +90,7 @@
       @media (max-width: 480px) {
         position: relative;
       }
+      font-size: $font__size--largest;
     }
     &_button-backward {
       top: 50%;
