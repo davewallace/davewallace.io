@@ -66,7 +66,7 @@
     perspective: 1000px;
 
     // generic transition setting
-    transition: 100ms linear;
+    transition: 120ms ease-out;
 
     /**
      * Modifiers
@@ -80,8 +80,12 @@
       color: $color__text-base--reverse;
       background: $color__base--blue;
     }
+    .sortable-grid__grid-item--selected & {
+      box-shadow: 0px 1px 20px 2px rgba($color__base--blue, 0.9);
+    }
     &:hover {
-      transform: scale(1.05, 1.05);
+      transform: scale(1.03, 1.03);
+      box-shadow: 0px 1px 5px 2px rgba($color__base--blue, 0.4);
     }
   }
 
@@ -235,13 +239,6 @@
     &__grid-item__footer {
       padding-right: 25px;
     }
-
-  /**
-   * States
-   **/
-  &__grid-item--selected {
-    border: 2px dashed $color__base--yellow;
-  }
 }
 </style>
 <script>

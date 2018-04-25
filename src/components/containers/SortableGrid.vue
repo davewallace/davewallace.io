@@ -15,6 +15,7 @@
         <!-- TODO: abstract this element into <SortableGridItem /> so it renders an <li> or
             other element as its root node -->
         <li class="sortable-grid__grid-item"
+            :class="grid_sortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
             v-for="grid_sortedDataPrimaryItem in grid_sortedDataPrimary"
             v-bind:key="grid_sortedDataPrimaryItem.name">
 
@@ -25,7 +26,6 @@
             :tags="grid_sortedDataPrimaryItem.tags"
             :date="grid_sortedDataPrimaryItem.date"
             :isOpen="grid_sortedDataPrimaryItem.selected ? true : false"
-            :class="grid_sortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
             v-on:handle__gridItemSelected="handle__gridItemSelected($event, grid_sortedDataPrimaryItem, grid_sortedDataPrimary)" />
         </li>
       </ul>
@@ -35,6 +35,7 @@
     <h3 class="sortable-grid__selection-notice">All of my work, sorted by date...</h3>
     <ul class="sortable-grid__grid sortable-grid__grid--secondary">
       <li class="sortable-grid__grid-item"
+          :class="grid_sortedDataSecondaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
           v-for="grid_sortedDataSecondaryItem in grid_sortedDataSecondary"
           v-bind:key="grid_sortedDataSecondaryItem.name">
 
@@ -44,7 +45,6 @@
           :tags="grid_sortedDataSecondaryItem.tags"
           :date="grid_sortedDataSecondaryItem.date"
           :isOpen="grid_sortedDataSecondaryItem.selected ? true : false"
-          :class="grid_sortedDataSecondaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
           v-on:handle__gridItemSelected="handle__gridItemSelected($event, grid_sortedDataSecondaryItem, grid_sortedDataSecondary)" />
       </li>
     </ul>
