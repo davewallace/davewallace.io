@@ -66,31 +66,47 @@
     flex-direction: row;
     flex-wrap: wrap;
 
+    // yaay, we got grid
+    display: grid;
+    grid-gap: 30px;
+
     // lets optimise for older, narrow width devices when content starts looking unreadable
     @media (max-width: 320px) {
       display: block;
-      padding: 0 1%;
       max-width: initial;
+      margin-bottom: 20px;
+      padding: 0 1%;
     }
 
-    // yaay, we got grid
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 30px;
-    @media (max-width: 640px) {
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 320px) {
-      display: block;
-    }
-
+    /**
+     * Our top grid will contain larger, more prominent children
+     **/
     &--primary {
+      grid-template-columns: 1fr 1fr 1fr;
       margin-bottom: 40px;
     }
+    @media (max-width: 760px) {
+      &--primary {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /**
+     * Our bottom grid will contain smaller, less prominent children
+     **/
     &--secondary {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
-
+    @media (max-width: 760px) {
+      &--secondary {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+    @media (max-width: 480px) {
+      &--secondary {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
   } // &__grid
 
     // Again with child grid items, we'll default to older layouts and use @supports to then
