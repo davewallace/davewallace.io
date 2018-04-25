@@ -21,6 +21,7 @@
 
         <ul class="sortable-grid__grid-item__tags">
           <li class="sortable-grid__grid-item__tag"
+              :class="(grid_currentMenuItem && grid_currentMenuItem.tag === tag.tag) ? 'sortable-grid__grid-item__tag--current' : ''"
               v-bind:key="tag.name"
               v-for="tag in tags">
             {{ tag.name }}
@@ -39,9 +40,7 @@
 </template>
 
 <style lang="scss">
-/**
- * All imports and contextual SCSS must be contained within this single style tag
- */
+
 @import "../../style/reset.scss";
 @import "../../style/variables.scss";
 @import "../../style/utility.scss";
@@ -173,6 +172,7 @@
           font-size: $font__size--smallest;
           font-style: italic;
 
+          // TODO: refactor this ancestor selector and following --current modifier mess
           .sortable-grid__grid--primary & {
             color: darken($color__base--green, 50);
             background: darken($color__base--green, 10)
@@ -180,6 +180,21 @@
           .sortable-grid__grid--secondary & {
             color: darken($color__base--blue, 50);
             background: darken($color__base--blue, 10)
+          }
+
+          /**
+           * States
+           **/
+          &--current[class] {
+            // slightly higher specificity than the ancestor selectors above
+            color: $color__base;
+
+            .sortable-grid__grid--primary & {
+              background: darken($color__base--green, 20)
+            }
+            .sortable-grid__grid--secondary & {
+              background: darken($color__base--blue, 15)
+            }
           }
         }
 
@@ -234,14 +249,50 @@
 export default {
   name: 'SortableGridItem',
   // TODO: obviously abstract this to simply content
-  props: [
-    'title',
-    'blurb',
-    'body',
-    'date',
-    'tags',
-    'isOpen'
-  ],
+  props: {
+    title: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    blurb: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    body: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    date: {
+      type: Number,
+      default: function () {
+        return 2018
+      }
+    },
+    tags: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    isOpen: {
+      type: Boolean,
+      default: function () {
+        return false
+      }
+    },
+    grid_currentMenuItem: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
+  },
   methods: {
 
     /**
@@ -249,7 +300,6 @@ export default {
      **/
 
     handle__click: function (event) {
-      //this.$emit('handle__gridItemSelected', event, this)
       this.$emit('handle__gridItemSelected', event)
     }
   },

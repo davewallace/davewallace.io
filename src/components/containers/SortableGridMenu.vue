@@ -7,8 +7,7 @@
 
       <Button
         :icon="sortOption.icon"
-        :class="[sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link',
-                      (currentMenuItem === sortOption) ? 'sortable-grid__menu-item-link--current' : '']"
+        :class="[sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link']"
         @click="handle__sortOptionClick(grid_allSortOptions[i], grid_allSortOptions)">
 
         <template slot="button_label">{{ sortOption.name }}</template>
@@ -18,9 +17,7 @@
 </template>
 
 <style lang="scss">
-/**
- * All imports and contextual SCSS must be contained within this single style tag
- */
+
 @import "../../style/reset.scss";
 @import "../../style/utility.scss";
 @import "../../style/variables.scss";
@@ -108,12 +105,12 @@ export default {
     Button
   },
   props: [
-    'grid_allSortOptions'
+    'grid_allSortOptions',
+    'currentMenuItem'
   ],
   data () {
     return {
-      selectedSortOptions: [],
-      currentMenuItem: null
+      selectedSortOptions: []
     }
   },
   methods: {
@@ -131,7 +128,6 @@ export default {
       // The selection status on the current target is a toggle, allowing deselection of
       // previously selected options
       currentTarget.selected = !currentTarget.selected
-      this.currentMenuItem = currentTarget
 
       // Harvest an Array of currently selected sort options (1 or many)
       let selectedSortOptions = this.grid_allSortOptions.filter(function (currentValue, idx) {
@@ -152,7 +148,10 @@ export default {
 
       // Emit the event for parent component to observe, ensuring a unique Array of selected options
       // is supplied
-      this.$emit('handle__sortOptionClick', uniqueSelectedSortOptions)
+      this.$emit('handle__sortOptionClick', {
+        uniqueSelectedSortOptions: uniqueSelectedSortOptions,
+        currentTarget: currentTarget
+      })
     }
   },
 

@@ -4,7 +4,7 @@
     <!-- grid sorting - listens to the specified event and responds to it with the associated method
      -->
     <SortableGridMenu
-      v-on:handle__sortOptionClick="sortGridData"
+      v-on:handle__sortOptionClick="this.handle__sortOptionClick"
       :grid_allSortOptions="this.grid_allSortOptions" />
 
     <!-- grid contents, sorted by user preference and date. conditionally rendered. -->
@@ -19,6 +19,7 @@
             v-bind:key="grid_sortedDataPrimaryItem.name">
 
           <SortableGridItem
+            :grid_currentMenuItem="grid_currentMenuItem"
             :title="grid_sortedDataPrimaryItem.title"
             :blurb="grid_sortedDataPrimaryItem.blurb"
             :tags="grid_sortedDataPrimaryItem.tags"
@@ -38,6 +39,7 @@
           v-bind:key="grid_sortedDataSecondaryItem.name">
 
         <SortableGridItem
+          :grid_currentMenuItem="grid_currentMenuItem"
           :title="grid_sortedDataSecondaryItem.title"
           :tags="grid_sortedDataSecondaryItem.tags"
           :date="grid_sortedDataSecondaryItem.date"
@@ -51,6 +53,7 @@
 </template>
 
 <style lang="scss">
+
 @import "../../style/variables.scss";
 @import "../../style/reset.scss";
 
@@ -146,7 +149,8 @@ export default {
   data () {
     return {
       defaultTags: ['front-end-development'],
-      zeroSortedItemsMessage: true
+      zeroSortedItemsMessage: true,
+      grid_currentMenuItem: null
     }
   },
 
@@ -214,6 +218,21 @@ export default {
         grid_selectedItem,
         grid_dataSource
       })
+    },
+
+    /**
+     * data: {
+     *   uniqueSelectedSortOptions,
+     *   currentTarget
+     * }
+     **/
+    handle__sortOptionClick: function (data) {
+
+      // Sort our grid data based on the received user selections
+      this.sortGridData(data.uniqueSelectedSortOptions)
+
+      // Update the most recently selected menu item
+      this.grid_currentMenuItem = data.currentTarget
     },
 
     /**
