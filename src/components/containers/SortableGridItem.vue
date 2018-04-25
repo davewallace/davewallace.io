@@ -152,7 +152,6 @@
      * Body contents
      **/
     &__grid-item__body {
-
     }
       &__grid-item__blurb-text {
         margin-top: 15px;
