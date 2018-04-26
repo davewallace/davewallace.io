@@ -59,7 +59,7 @@
 import DefaultGreeting from '@/components/DefaultGreeting'
 import SortableGrid from '@/components/containers/SortableGrid'
 import Modal from '@/components/ui/Modal'
-import Layout from '@/components/ui/Layout'
+import Layout from '@/components/containers/Layout'
 import Notification from '@/components/ui/Notification'
 import Button from '@/components/ui/Button'
 
