@@ -1,19 +1,19 @@
 <template>
   <div class="sortable-grid">
 
-    <!-- grid sorting - listens to the specified event and responds to it with the associated method
-     -->
+    <!-- Grid sorting - listens to the specified event and responds to it with
+      the associated method -->
     <SortableGridMenu
       v-on:handle__sortOptionClick="this.handle__sortOptionClick"
       :grid_allSortOptions="this.grid_allSortOptions" />
 
-    <!-- grid contents, sorted by user preference and date. conditionally rendered. -->
+    <!-- Grid contents sorted by user prefs & date. Conditionally rendered. -->
     <div v-if="grid_sortedDataPrimary.length">
 
       <h3 class="sortable-grid__selection-notice">My work, sorted by your selections and by date...</h3>
       <ul class="sortable-grid__grid sortable-grid__grid--primary">
-        <!-- TODO: abstract this element into <SortableGridItem /> so it renders an <li> or
-            other element as its root node -->
+        <!-- TODO: abstract this element into <SortableGridItem /> so it renders
+            an <li> or other element as its root node -->
         <li class="sortable-grid__grid-item"
             :class="grid_sortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
             v-for="grid_sortedDataPrimaryItem in grid_sortedDataPrimary"
@@ -59,8 +59,8 @@
 
 .sortable-grid {
 
-  // We'll implement grid here because its cool. but we'll start with defaults for IE11 and
-  // older evergreen browsers
+  // We'll implement grid here because its cool. but we'll start with defaults
+  // for IE11 and older evergreen browsers
   &__grid {
     @include reset-list();
 
@@ -73,7 +73,8 @@
     display: grid;
     grid-gap: $pad__grid-gap--desktop;
 
-    // lets optimise for older, narrow width devices when content starts looking unreadable
+    // lets optimise for older, narrow width devices when content starts looking
+    // unreadable
     @media (max-width: 320px) {
       display: block;
       max-width: initial;
@@ -82,8 +83,9 @@
     }
 
     /**
-     * Our top grid will contain larger, more prominent children
+     * States & modifiers
      **/
+    // Our top grid will contain larger, more prominent children
     &--primary {
       grid-template-columns: 1fr 1fr 1fr;
       margin-bottom: 40px;
@@ -93,9 +95,7 @@
       }
     }
 
-    /**
-     * Our bottom grid will contain smaller, less prominent children
-     **/
+    // Our bottom grid will contain smaller, less prominent children
     &--secondary {
       grid-template-columns: 1fr 1fr 1fr 1fr;
 
@@ -108,8 +108,8 @@
     }
   } // &__grid
 
-    // Again with child grid items, we'll default to older layouts and use @supports to then
-    // wipe out those defaults in grid-supporting browsers
+    // Again with child grid items, we'll default to older layouts and use
+    // @supports to then wipe out those defaults in grid-supporting browsers
     &__grid-item {
       @include reset-list();
 
@@ -144,7 +144,7 @@ export default {
   },
 
   /**
-   * Simple props only
+   *
    **/
   data () {
     return {
@@ -240,27 +240,30 @@ export default {
      **/
 
     /**
-     * Sorts grid data into two data sets: data sorted by user preference, and everything.
-     * Both sets of data are then independently sorted by date.
+     * Sorts grid data into two data sets: data sorted by user preference, and
+     * everything. Both sets of data are then independently sorted by date.
      *
-     * TODO: Didn't use a simpler sort function here because we're sorting by an object's
-     * key whose value is an Array that needs iterating to find matches, and we also want
-     * to work on subsets of data. Still room for improvement though, like taking functions
-     * as args to use supplied sort functions rather than assumed ones.
+     * TODO: Didn't use a simpler sort function here because we're sorting by an
+     * object's key whose value is an Array that needs iterating to find
+     * matches, and we also want to work on subsets of data. Still room for
+     * improvement though, like taking functions as args to use supplied sort
+     * functions rather than assumed ones.
      *
-     * @param selectedSortOptions (Array) Array of Objects containing tag(s) for sort matching
+     * @param selectedSortOptions (Array) Array of Objects containing tag(s) for
+     *                                    sort matching.
      * @return this (SortableGrid)
      **/
     sortGridData: function (selectedSortOptions = []) {
 
       const self = this
 
-      // Iterate supplied sort options to apply tag-based matching to our data. We will
-      // split out preferred data into subsets by tag so those subsets can then again
-      // be individually sorted by date. Once all subsets are sorted by date we will
-      // concatenate them back into one, fully sorted structure. This way, the most
-      // recently selected sort option items are most prominent - even if they are older
-      // than previously selected options.
+      // Iterate supplied sort options to apply tag-based matching to our data.
+      // We will split out preferred data into subsets by tag so those subsets
+      // can then again be individually sorted by date. Once all subsets are
+      // sorted by date we will concatenate them back into one, fully sorted
+      // structure. This way, the most recently selected sort option items are
+      // most prominent - even if they are older than previously selected
+      // options.
       let primarySortData = []
       let primarySortStructures = []
       selectedSortOptions.forEach(function (option, sortOptionsIndex) {
@@ -269,11 +272,12 @@ export default {
 
           dataItem.tags.forEach(function (tagObj) {
 
-            // If a given item has tags which match a selected tag, add it to the new Array.
+            // If a given item has tags which match a selected tag, add it to
+            // the new Array.
             if (option.tag === tagObj.tag) {
 
-              // Create a new data structure for the current user-selected tag, if one does
-              // not already exist.
+              // Create a new data structure for the current user-selected tag,
+              // if one does not already exist.
               if (typeof primarySortStructures[sortOptionsIndex] === 'undefined') {
                 primarySortStructures[sortOptionsIndex] = []
               }
@@ -317,10 +321,10 @@ export default {
         dataItem.selected = false
       })
 
-      // Set the current dataItem to selected state (note: because we have two subsets
-      // of grid_data that gets sorted, we will potentially have two dataItems. This
-      // isn't technically incorrect though it may exhibit side-effects - so leaving
-      // this as the case for now).
+      // Set the current dataItem to selected state (note: because we have two
+      // subsets of grid_data that gets sorted, we will potentially have two
+      // dataItems. This isn't technically incorrect though it may exhibit
+      // side-effects - so leaving this as the case for now).
       this.grid_selectedItem.selected = true
     }
   },

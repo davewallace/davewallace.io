@@ -1,7 +1,7 @@
 <!--
-  We're going to dislpay a data structure defaulting to a grid format, with a sorting
-  menu to filter the data by user-preferred order and/or recency also by default. This
-  provides for our major user personas 1 and 2.
+  We're going to dislpay a data structure defaulting to a grid format, with a
+  sorting menu to filter the data by user-preferred order and/or recency also by
+  default. This provides for our major user personas 1 and 2.
 -->
 
 <template>
@@ -85,13 +85,15 @@ export default {
       modal_visible: false,
       modal_notification_visible: false,
 
+      // Sortable grid state
       grid_selectedItem: null,
       grid_sortedDataPrimary: [],
       grid_sortedDataSecondary: [],
       grid_mostRecentlyInteractedGridData: null,
-      // Feeds our main display of default content, to note the 'content' property of a
-      // grid_data item is written in markdown, for conversion into HTML. My assumption
-      // here is that the content is pretty simple markup.
+      // Feeds our main display of default content, to note the 'content'
+      // property of a grid_data item is written in markdown, for conversion
+      // into HTML. My assumption here is that the content is pretty simple
+      // markup.
       grid_data: [
         {
           title: '1. Lorem ipsum dolor sit amet, consectetur',
@@ -291,8 +293,8 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
     /**
      * Using the currently selected grid item, traverse the most recently
      * interacted data Array for the next appropriate data item. Traversal is
-     * bidirectional within the most recently interacted data Array, and
-     * doubly linked.
+     * bidirectional within the most recently interacted data Array, and doubly
+     * linked.
      *
      * direction: 'forward', 'backward'
      **/
@@ -324,7 +326,7 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
     },
 
     /**
-     * {
+     * args: {
      *  event,
      *  grid_dataSource,
      *  grid_selectedItem: {
@@ -362,6 +364,10 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
      **/
 
     /**
+     *
+     * TODO: Could improve this and make content insertion more abstract, but
+     * how to do so without getting too deep into String manipulation?
+     *
      * data: {
      *   title: String,
      *   content: String

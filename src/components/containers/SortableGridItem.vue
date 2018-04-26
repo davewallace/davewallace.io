@@ -69,7 +69,7 @@
     transition: 120ms ease-out;
 
     /**
-     * Modifiers
+     * States & modifiers
      **/
     .sortable-grid__grid--primary & {
       min-height: 200px;
@@ -176,6 +176,9 @@
           font-size: $font__size--smallest;
           font-style: italic;
 
+          /**
+           * States & modifiers
+           **/
           // TODO: refactor this ancestor selector and following --current modifier mess
           .sortable-grid__grid--primary & {
             color: darken($color__base--green, 50);
@@ -186,9 +189,6 @@
             background: darken($color__base--blue, 10)
           }
 
-          /**
-           * States
-           **/
           &--current[class] {
             // slightly higher specificity than the ancestor selectors above
             color: $color__base;
@@ -215,6 +215,9 @@
         color: $color__text-base;
         background: $color__base;
 
+        /**
+         * States & modifiers
+         **/
         .sortable-grid__grid--primary & {
           border: 1px solid rgba($color__base--green, 0.8);
         }

@@ -19,6 +19,8 @@
     color: $color__text-base;
   }
 
+  // Centre our main layout on large viewports
+  // TODO: do something much more interesting for large viewports!
   .layout-root {
     max-width: 960px;
     margin: 0 auto;

@@ -61,6 +61,9 @@
   }
   &-item-link {
 
+    /**
+     * States & modifiers
+     **/
     &:link,
     &:hover,
     &:visited,

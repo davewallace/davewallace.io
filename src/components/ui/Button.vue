@@ -37,6 +37,9 @@
   text-decoration: none;
   color: $color__base;
 
+  /**
+   * States & modifiers
+   **/
   &--primary {
     background-color: $color__base--green;
     @include state-transition--unhover(scale(1) rotate(-6deg));

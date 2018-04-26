@@ -58,13 +58,19 @@
 @import "../../style/reset.scss";
 @import "../../style/utility.scss";
 
-// applied to body element in response to modal component's visible state
-.modal_body-scroll-prevent {
+/**
+ * States and modifiers
+ **/
+// Applied to body element in response to modal component's visible state
+.modal_body--scroll-prevent {
   height: 100vh;
   max-height: 100vh;
   overflow: hidden;
 }
 
+/**
+ * Component
+ **/
 .modal {
 
   &_content {
@@ -142,7 +148,7 @@
   }
 
   /**
-   * States
+   * States and modifiers
    **/
   &--visible {
     position: fixed;
@@ -157,6 +163,7 @@
         rgba($color__base, 0.92)
       );
   }
+
   &--invisible {
     @include visually-hidden()
   }
@@ -204,7 +211,8 @@ export default {
      * Event handlers
      **/
 
-    // Notify any subscribers about button actions, the parent will then manipulate the state
+    // Notify any subscribers about button actions, the parent will then
+    // manipulate the state
     handle__click_close: function (button) {
       this.$emit('modalClose')
     },
@@ -215,7 +223,6 @@ export default {
     /**
      * Public methods
      **/
-
     open: function () {
       this.visible = true
     },
