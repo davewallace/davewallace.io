@@ -382,9 +382,18 @@ Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis c
      *
      **/
     formatHTML: function (markdownString) {
+
       let converter = new Showdown.Converter({
         noHeaderId: true
       })
+
+      // Set flavour of markdown to Github's because the intended workflow is
+      // editing case studies via Github & importing the wiki data into this app
+      converter.setFlavor('github')
+
+      // TODO: Potential XSS attack vector using Showdown, but there's no user
+      // input going on at least. Have a read of:
+      // https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)
       return converter.makeHtml(markdownString)
     }
   },
