@@ -3,64 +3,74 @@
  **/
 
 const fs = require('fs')
-const Showdown = require('showdown')
-
-const dir = 'wiki'
+const dir = 'wiki/'
 const fileIgnoreList = ['.git', 'template.md']
+
+// Iterate all .md files in the wiki repo and format the markdown data into an
+// Array of Objects to be imported into the main app.
 let wiki_page_data_objects = []
 
-fs.readdir(dir, {}, (err, files) => {
+function readContent (callback) {
 
-	files.forEach((file) => {
+	fs.readdir(dir, {}, (err, files) => {
 
-		if (fileIgnoreList.indexOf(file) !== -1) return
+		let inc = 0
 
-		const f = dir + '/' + file
+		files.forEach((file) => {
 
-		fs.readFile(f, 'utf8', (err, data) => {
-			wiki_page_data_objects.push(parseData(data))
+			if (fileIgnoreList.indexOf(file) !== -1) return
+
+			const f = dir + file
+
+			fs.readFile(f, 'utf8', (err, data) => {
+				wiki_page_data_objects.push(parseData(data))
+
+				inc++
+				if (inc === files.length-1) callback()
+			})
 		})
 	})
+}
+
+readContent((err, content) => {
+  // Perform fs write operation into importable data module for main app
+  console.log('wiki_page_data_objects: ' + wiki_page_data_objects)
 })
 
 /**
  *
  **/
-function formatHTML (markdownString) {
-
-  let converter = new Showdown.Converter({
-    noHeaderId: true
-  })
-
-  // Set flavour of markdown to Github's because the intended workflow is
-  // editing case studies via Github & importing the wiki data into this app
-  converter.setFlavor('github')
-
-  // TODO: Potential XSS attack vector using Showdown, but there's no user
-  // input going on at least. Have a read of:
-  // https://github.com/showdownjs/showdown/wiki/Markdown's-XSS-Vulnerability-(and-how-to-mitigate-it)
-  return converter.makeHtml(markdownString)
-}
-
 function parseData (data) {
 
-//	let htmlData = formatHTML(data)
+	let result
 
+	// String data is assembled from a cascading reduction of initial input data
+	result = extractStringAndReduceData(data, /#(.*)/m)
+	let title = result[0]
+	result = extractStringAndReduceData(result[1], /##(.*)/m)
+	let blurb = result[0]
+	result = extractStringAndReduceData(result[1], /```[\r\n]+date:(.*)[\r\n]+```/)
+	let date = result[0]
 
+	// Tags assembled into an Array of Objects with each tag's data
+	result = extractStringAndReduceData(result[1], /```[\r\n]+tags:(.*)[\r\n]+```/)
+	let tagData = result[0]
+	let tags = []
+	tagData = tagData.split(',')
+	tagData.forEach((item) => {
+		tags.push({
+			tag: item
+		})
+	})
 
-	let title = getStringFromMarkdownData(data, new RegExp('#(.*)', 'm')) // multi-line
-	let blurb = getStringFromMarkdownData(data, new RegExp('##(.*)', 'm')) // multi-line
-	let tags = getStringFromMarkdownData(data, new RegExp('```[\s\S]tags:(.*?)[\s\S]```')) // single-line
-	let date = getStringFromMarkdownData(data, new RegExp('```[\s\S]date:(.*?)[\s\S]```')) // single-line
+	// The reduced data from above is the remaining body data
+	let body = result[1]
 
 	console.log('title: ' + title)
 	console.log('blurb: ' + blurb)
 	console.log('tags: ' + tags)
 	console.log('date: ' + date)
-
-	//console.log(htmlData)
-	//return htmlData;
-	return data
+	console.log('body: ' + body)
 
 	return {
 		title: title,
@@ -74,75 +84,22 @@ function parseData (data) {
 /**
  *
  **/
-function getStringFromMarkdownData (data, regexMatch) {
+function extractStringAndReduceData (data, regexMatch) {
 
-	console.log('===')
-	console.log(data)
-	console.log('---')
-	console.log(regexMatch)
+	let reducedData
 	let matchedStr = data.match(regexMatch)
 
 	if (matchedStr !== null) {
 
-		console.log('matchedStr[1]: ' + matchedStr[1])
+		// Remove the matched String from data, data will be returned in reduced
+		// form for further processing and reduction
+		reducedData = data.replace(matchedStr[0], '').trim()
 
-		//
-		matchedStr = matchedStr[1]
-
-		//
-		// matchedStr = matchedStr.replace(regexPrefix, '')
-		// matchedStr = matchedStr.trim()
-
-		// //
-		// matchedStr = matchedStr.replace(regexSuffix, '')
-		// matchedStr = matchedStr.trim()
+		// Set the String as the RegExp capture result and trim whitespace
+		matchedStr = matchedStr[1].trim()
 
 	} else {
-		//throw Error('getStringFromMarkdownData() did not find a match for ' + str + ' from supplied data.')
-		matchedStr = 'No match!'
+		throw Error('extractStringAndReduceData() did not find a match within supplied data using RegExp ' + regexMatch + '.')
 	}
-	return matchedStr
+	return [matchedStr, reducedData]
 }
-
-/*
-function getTitleFromData (data) {
-	if (str !== null) {
-		str = str[0].replace('##', '')
-		str = str.trim()
-	} else {
-		throw Error('getTitleFromData() did not find a match from supplied data.')
-	}
-	return str
-}
-
-let value
-function getBlurbFromData (data) {
-	return value
-}
-
-function getBodyFromData (data) {
-	return value
-}
-
-function getTagsFromData (data) {
-	return value
-}
-
-function getDateFromData (data) {
-	return value
-}
-*/
-/*
-        {
-          title: '1. Lorem ipsum dolor sit amet, consectetur',
-          blurb: 'Quisque orci nisi, bibendum et ex eget...',
-          body: `
-Quisque orci nisi, bibendum et ex eget, sodales tincidunt leo. Vivamus vitae congue tellus.
-          `,
-          tags: [
-            {tag: 'user-experience', name: 'User Experience'}
-          ],
-          date: 2018,
-          selected: false
-        },
-*/
