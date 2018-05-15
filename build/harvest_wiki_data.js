@@ -3,6 +3,7 @@
  **/
 
 const fs = require('fs')
+const replace = require('replace-in-file')
 const dir = 'wiki/'
 const fileIgnoreList = ['.git', 'template.md']
 
@@ -35,6 +36,19 @@ function readContent (callback) {
 readContent((err, content) => {
   // Perform fs write operation into importable data module for main app
   console.log('wiki_page_data_objects: ' + wiki_page_data_objects)
+
+	const options = {
+	  files: 'data/grid-data.js',
+	  from: 'const imported = []',
+	  to: 'const imported = ' + wiki_page_data_objects,
+	}
+	replace(options)
+	  .then(changedFiles => {
+	    console.log('Modified files:', changedFiles.join(', '));
+	  })
+	  .catch(error => {
+	    console.error('Error occurred:', error);
+	  });
 })
 
 /**
@@ -66,11 +80,11 @@ function parseData (data) {
 	// The reduced data from above is the remaining body data
 	let body = result[1]
 
-	console.log('title: ' + title)
-	console.log('blurb: ' + blurb)
-	console.log('tags: ' + tags)
-	console.log('date: ' + date)
-	console.log('body: ' + body)
+	// console.log('title: ' + title)
+	// console.log('blurb: ' + blurb)
+	// console.log('tags: ' + tags)
+	// console.log('date: ' + date)
+	// console.log('body: ' + body)
 
 	return {
 		title: title,
