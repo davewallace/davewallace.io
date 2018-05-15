@@ -110,6 +110,7 @@ const DEFAULT = [
   }
 ]
 
-const imported = [] // replaced by output from `npm run harvest_wiki_data`
+// Value is replaced by output from `npm run harvest_wiki_data`
+const imported = [{"title":"H1 title (title)","blurb":"H2 title (blurb)","body":"This is all body.","tags":[{"tag":"front-end-development","name":"Front End Development"},{"tag":"user-experience","name":"User Experience"},{"tag":"user-interface-design","name":"User Interface Design"}],"date":"2018"},{"title":"H1 title (title)","blurb":"H2 title (blurb)","body":"Does World ever say \"Hello\" back?","tags":[{"tag":"front-end-development","name":"Front End Development"},{"tag":"user-experience","name":"User Experience"},{"tag":"user-interface-design","name":"User Interface Design"}],"date":"2017"}]
 
 export default (imported.length) ? imported : DEFAULT

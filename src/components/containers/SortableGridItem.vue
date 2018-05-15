@@ -2,7 +2,6 @@
   <div class="sortable-grid__grid-item__content">
     <slot>
 
-      <!-- TODO: abstract layout into <Layout /> or similar component -->
       <div class="sortable-grid__grid-item__header">
 
         <h4 class="sortable-grid__grid-item__title">{{ title }}</h4>
@@ -40,7 +39,6 @@
 </template>
 
 <style lang="scss">
-
 @import "../../style/reset.scss";
 @import "../../style/variables.scss";
 @import "../../style/utility.scss";
@@ -269,9 +267,9 @@ export default {
       }
     },
     date: {
-      type: Number,
+      type: String,
       default: function () {
-        return 2018
+        return '2018'
       }
     },
     tags: {

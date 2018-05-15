@@ -36,11 +36,12 @@ function readContent (callback) {
 readContent((err, content) => {
   // Perform fs write operation into importable data module for main app
   console.log('wiki_page_data_objects: ' + wiki_page_data_objects)
+  console.log('JSON.stringify: ' + JSON.stringify)
 
 	const options = {
-	  files: 'data/grid-data.js',
-	  from: 'const imported = []',
-	  to: 'const imported = ' + wiki_page_data_objects,
+	  files: 'src/data/grid-data.js',
+	  from: /const imported = (.*)/gm,
+	  to: 'const imported = ' + JSON.stringify(wiki_page_data_objects),
 	}
 	replace(options)
 	  .then(changedFiles => {
@@ -73,7 +74,8 @@ function parseData (data) {
 	tagData = tagData.split(',')
 	tagData.forEach((item) => {
 		tags.push({
-			tag: item
+			tag: item.toLowerCase().split(' ').join('-'),
+			name: item
 		})
 	})
 
