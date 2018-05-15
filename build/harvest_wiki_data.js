@@ -8,7 +8,7 @@ const chalk = require('chalk');
 
 const log = console.log
 const dir = 'wiki/'
-const fileIgnoreList = ['.git', '.DS_Store', 'Template.md']
+const fileIgnoreList = ['.git', '.gitignore', '.DS_Store', 'Template.md', 'Home.md']
 
 // Iterate all .md files in the wiki repo and format the markdown data into an
 // Array of Objects to be imported into the main app.
