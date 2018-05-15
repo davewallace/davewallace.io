@@ -4,8 +4,11 @@
 
 const fs = require('fs')
 const replace = require('replace-in-file')
+const chalk = require('chalk');
+
+const log = console.log
 const dir = 'wiki/'
-const fileIgnoreList = ['.git', 'template.md']
+const fileIgnoreList = ['.git', '.DS_Store', 'Template.md']
 
 // Iterate all .md files in the wiki repo and format the markdown data into an
 // Array of Objects to be imported into the main app.
@@ -13,43 +16,79 @@ let wiki_page_data_objects = []
 
 function readContent (callback) {
 
+	log(chalk.green('-----------'))
+	log(chalk.bold.white('>>>') + ' Starting harvest...\n')
+
 	fs.readdir(dir, {}, (err, files) => {
 
-		let inc = 0
+		log('There are ' + chalk.bold.blue(files.length + ' unfiltered files') + ' to process.')
 
+		// Remove intentionally excluded entries, leaving only desired markdown files
+		files = files.filter(function(item) {
+		  return fileIgnoreList.indexOf(item) === -1;
+		});
+
+		log('There are ' + chalk.bold.cyan(files.length + ' filtered files') + ' to process.\n')
+
+		// Parse markdown data from each file into an Object representation
 		files.forEach((file) => {
 
-			if (fileIgnoreList.indexOf(file) !== -1) return
-
 			const f = dir + file
+			log(chalk.bold.white(' >>') + ' Importing... ')
 
 			fs.readFile(f, 'utf8', (err, data) => {
+
+				if (err) {
+					throw Error(err)
+				}
+
+				log(chalk.bold.yellow('  >') + ' Parsing ' + chalk.bold.cyan(f) + '...')
+
 				wiki_page_data_objects.push(parseData(data))
 
-				inc++
-				if (inc === files.length-1) callback()
+				if (wiki_page_data_objects.length === files.length) {
+
+					log(chalk.bold.yellow('  >') + ' Last data parsed.')
+					log(chalk.bold.yellow('  >') + ' Completing...')
+					callback()
+				} else {
+					log(chalk.bold.yellow('  >') + ' Data parsed.')
+				}
+
 			})
 		})
 	})
 }
 
 readContent((err, content) => {
-  // Perform fs write operation into importable data module for main app
-  console.log('wiki_page_data_objects: ' + wiki_page_data_objects)
-  console.log('JSON.stringify: ' + JSON.stringify)
 
+	const src = './src/data/grid-data.js'
+
+	log(chalk.bold.green('    ...completed reading and parsing file content.\n'))
+	log(chalk.bold.white('>>') + ' Replacing contents of ' + chalk.bold.blue(src) + ' with ' + chalk.bold.cyan(wiki_page_data_objects.length + ' Object' + ((wiki_page_data_objects.length === 1) ? '' : 's')) + '...')
+
+  // Perform fs write operation into importable data module for main app
 	const options = {
-	  files: 'src/data/grid-data.js',
+	  files: src,
 	  from: /const imported = (.*)/gm,
 	  to: 'const imported = ' + JSON.stringify(wiki_page_data_objects),
 	}
 	replace(options)
 	  .then(changedFiles => {
-	    console.log('Modified files:', changedFiles.join(', '));
+	  	if (changedFiles.length) {
+		    log(chalk.bold.yellow('  >') + ' Modified file:', chalk.bold.green(changedFiles.join(', ')));
+		  } else {
+		    log(chalk.bold.yellow('  >') + ' No files modified.');
+		  }
+		  log('\n' + chalk.bold.white('>>>') + ' Harvest complete!')
+		  log(chalk.green('-------------------'))
 	  })
 	  .catch(error => {
-	    console.error('Error occurred:', error);
-	  });
+		  log(chalk.green('-------------------'))
+	    console.error(chalk.bold.red('  > Error occurred: '), error);
+		  log(chalk.bold.white('\n>>> Harvest incomplete!'))
+		  log(chalk.green('-------------------'))
+	  })
 })
 
 /**
@@ -82,11 +121,11 @@ function parseData (data) {
 	// The reduced data from above is the remaining body data
 	let body = result[1]
 
-	// console.log('title: ' + title)
-	// console.log('blurb: ' + blurb)
-	// console.log('tags: ' + tags)
-	// console.log('date: ' + date)
-	// console.log('body: ' + body)
+	// log('title: ' + title)
+	// log('blurb: ' + blurb)
+	// log('tags: ' + tags)
+	// log('date: ' + date)
+	// log('body: ' + body)
 
 	return {
 		title: title,

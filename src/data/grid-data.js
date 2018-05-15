@@ -6,7 +6,7 @@ const DEFAULT = [
     tags: [
       {tag: 'user-experience', name: 'User Experience'}
     ],
-    date: 2018,
+    date: "2018",
     selected: false
   },
   {
@@ -16,7 +16,7 @@ const DEFAULT = [
     tags: [
       {tag: 'accessibility', name: 'Accessibility'}
     ],
-    date: 2017,
+    date: "2017",
     selected: false
   },
   {
@@ -26,7 +26,7 @@ const DEFAULT = [
     tags: [
       {tag: 'user-experience', name: 'User Experience'}
     ],
-    date: 2017,
+    date: "2017",
     selected: false
   },
   {
@@ -40,7 +40,7 @@ const DEFAULT = [
       {tag: 'production-management', name: 'Production Management'},
       {tag: 'technical-consultation', name: 'Technical Consultation'}
     ],
-    date: 2017,
+    date: "2017",
     selected: false
   },
   {
@@ -51,7 +51,7 @@ const DEFAULT = [
       {tag: 'user-interface-design', name: 'User Interface Design'},
       {tag: 'front-end-development', name: 'Front End Development'}
     ],
-    date: 2016,
+    date: "2016",
     selected: false
   },
   {
@@ -61,7 +61,7 @@ const DEFAULT = [
     tags: [
       {tag: 'front-end-development', name: 'Front End Development'}
     ],
-    date: 2015,
+    date: "2015",
     selected: false
   },
   {
@@ -71,7 +71,7 @@ const DEFAULT = [
     tags: [
       {tag: 'production-management', name: 'Production Management'}
     ],
-    date: 2014,
+    date: "2014",
     selected: false
   },
   {
@@ -83,7 +83,7 @@ const DEFAULT = [
       {tag: 'user-interface-design', name: 'User Interface Design'},
       {tag: 'production-management', name: 'Production Management'}
     ],
-    date: 2013,
+    date: "2013",
     selected: false
   },
   {
@@ -94,7 +94,7 @@ const DEFAULT = [
       {tag: 'user-experience', name: 'User Experience'},
       {tag: 'front-end-development', name: 'Front End Development'}
     ],
-    date: 2018,
+    date: "2018",
     selected: false
   },
   {
@@ -105,12 +105,12 @@ const DEFAULT = [
       {tag: 'team-leadership', name: 'Team Leadership'},
       {tag: 'production-management', name: 'Production Management'}
     ],
-    date: 2015,
+    date: "2015",
     selected: false
   }
 ]
 
 // Value is replaced by output from `npm run harvest_wiki_data`
-const imported = [{"title":"H1 title (title)","blurb":"H2 title (blurb)","body":"This is all body.","tags":[{"tag":"front-end-development","name":"Front End Development"},{"tag":"user-experience","name":"User Experience"},{"tag":"user-interface-design","name":"User Interface Design"}],"date":"2018"},{"title":"H1 title (title)","blurb":"H2 title (blurb)","body":"Does World ever say \"Hello\" back?","tags":[{"tag":"front-end-development","name":"Front End Development"},{"tag":"user-experience","name":"User Experience"},{"tag":"user-interface-design","name":"User Interface Design"}],"date":"2017"}]
+const imported = [{"title":"Ministry of Foreign Affairs and Trade","blurb":"Creating easy to use learning interfaces and tools to improve investment decisions.","body":"Does World ever say \"Hello\" back? Maybe it does!","tags":[{"tag":"front-end-development","name":"Front End Development"},{"tag":"user-experience","name":"User Experience"},{"tag":"user-interface-design","name":"User Interface Design"},{"tag":"production-management","name":"Production Management"},{"tag":"art-direction","name":"Art Direction"}],"date":"2018"}]
 
 export default (imported.length) ? imported : DEFAULT
