@@ -7,10 +7,7 @@
 <style lang="scss">
   @import "style/variables.scss";
   @import "style/reset.scss";
-
-  body {
-    background: $color__base;
-  }
+  @import "style/core.scss";
 
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
