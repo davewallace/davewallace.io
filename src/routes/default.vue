@@ -67,6 +67,7 @@
 import DefaultGreeting from '@/components/DefaultGreeting'
 import SortableGrid from '@/components/containers/SortableGrid'
 import Modal from '@/components/ui/Modal'
+import ImageViewer from '@/components/ui/ImageViewer'
 import Layout from '@/components/containers/Layout'
 import Notification from '@/components/ui/Notification'
 import Button from '@/components/ui/Button'
@@ -83,7 +84,8 @@ export default {
     Modal,
     Layout,
     Notification,
-    Button
+    Button,
+    ImageViewer
   },
   data () {
     return {

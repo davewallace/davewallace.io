@@ -6,6 +6,20 @@ const DEFAULT = [
     tags: [
       {tag: 'user-experience', name: 'User Experience'}
     ],
+    gallery: [
+      {
+        'url': 'bnz-low-budget-angled-design-ie8compat_0.png',
+        'alt': 'BNZ image 0'
+      },
+      {
+        'url': 'bnz-low-budget-angled-design-ie8compat_1.png',
+        'alt': 'BNZ image 1'
+      },
+      {
+        'url': 'bnz-low-budget-angled-design-ie8compat_2.png',
+        'alt': 'BNZ image 2'
+      }
+    ],
     date: "2018",
     selected: false
   },

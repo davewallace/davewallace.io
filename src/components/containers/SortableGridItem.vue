@@ -176,30 +176,21 @@
           padding: 1px 4px;
           font-size: $font__size--smallest;
           font-style: italic;
+          color: $color__base;
+          background: $color__base--yellow;
 
           /**
            * States & modifiers
            **/
-          // TODO: refactor this ancestor selector and following --current modifier mess
           .sortable-grid__grid--primary & {
-            color: darken($color__base--green, 50);
-            background: darken($color__base--green, 10)
+            background: darken($color__base--green, 10);
           }
           .sortable-grid__grid--secondary & {
-            color: darken($color__base--blue, 50);
-            background: darken($color__base--blue, 10)
+            background: darken($color__base--blue, 10);
           }
-
           &--current[class] {
             // slightly higher specificity than the ancestor selectors above
-            color: $color__base;
-
-            .sortable-grid__grid--primary & {
-              background: darken($color__base--green, 20)
-            }
-            .sortable-grid__grid--secondary & {
-              background: darken($color__base--blue, 15)
-            }
+            background: darken($color__base--yellow, 20);
           }
         }
 
