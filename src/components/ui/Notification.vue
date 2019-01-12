@@ -30,7 +30,7 @@
    * Action controls provided to this component
    **/
   &_controls {
-    margin-top: -10px;
+    margin-top: -5px;
     text-align: center;
   }
     &_control-seperator {

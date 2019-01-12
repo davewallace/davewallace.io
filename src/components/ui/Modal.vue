@@ -18,6 +18,12 @@
         </slot>
       </h3>
 
+      <h4 class="modal_blurb">
+        <slot name="modal_blurb">
+          Slot blurb
+        </slot>
+      </h4>
+
       <div class="modal_body">
         <slot name="modal_body">
           <p>Slot content.</p>
@@ -62,7 +68,7 @@
  * States and modifiers
  **/
 // Applied to body element in response to modal component's visible state
-.modal_body--scroll-prevent {
+.modal_body-scroll--prevent {
   height: 100vh;
   max-height: 100vh;
   overflow: hidden;
@@ -77,6 +83,7 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    max-height: 100vh;
     padding: 60px 60px 0px 60px;
 
     @media (min-width: 600px) {
@@ -90,16 +97,19 @@
   }
 
   &_title,
+  &_blurb,
   &_body,
   &_navigation {
-    flex: 0 0 auto;
-
-    border: 1px dotted red;
+    border: 1px dotted pink;
   }
 
   // title content
   &_title {
-    flex-basis: $font__line-height--h3 * 2.5;
+  }
+
+  // blurb content
+  &_blurb {
+    color: pink;
   }
 
   // navigation controls for collections of modal content
@@ -137,7 +147,9 @@
 
   // main content
   &_body {
-    flex-grow: 1;
+    flex: 1;
+    overflow-y: auto;
+    border: 2px dashed red;
   }
 
   // modal close control
@@ -198,7 +210,7 @@ export default {
       // Exception to rules: manipulate the DOM's body element since there are
       // currently caveats around mounting the body element with a Vue instance.
       let method = (newValue === true) ? 'add' : 'remove'
-      window.document.getElementsByTagName('body')[0].classList[method]('modal_body-scroll-prevent')
+      window.document.getElementsByTagName('body')[0].classList[method]('modal_body-scroll--prevent')
     }
   },
   data () {

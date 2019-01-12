@@ -18,24 +18,31 @@
         {{ this.modal_title }}
       </template>
 
+      <template slot="modal_blurb">
+        {{ this.modal_blurb }}
+      </template>
+
       <template slot="modal_body">
         <Layout v-bind:data="this.modal_body" />
+
+        <ImageViewer  v-if="this.grid_selectedItem && this.grid_selectedItem.gallery"
+                      v-bind:data="this.grid_selectedItem.gallery" />
       </template>
 
       <template slot="modal_notification">
         <Notification type="info" v-if="modal_notification_visible">
 
           <template slot="notification_body">
-            <p>You've reached the end of this selection, you can continue or would you like to...</p>
+            <p>You've reached the end of your selection. Would you like to...</p>
           </template>
 
           <template slot="notification_controls">
             <Button class="button--primary">
-              <template slot="button_label">X</template>
+              <template slot="button_label">Start again</template>
             </Button>
             <span class="notification_control-seperator">or...</span>
             <Button class="button--secondary">
-              <template slot="button_label">Y</template>
+              <template slot="button_label">Close this box</template>
             </Button>
           </template>
 
@@ -82,6 +89,7 @@ export default {
 
       // Modal state
       modal_title: null,
+      modal_blurb: null,
       modal_body: null,
       modal_visible: false,
       modal_notification_visible: false,
@@ -261,7 +269,8 @@ export default {
       // Update our modal with new grid_data props
       this.updateModal({
         title: this.grid_selectedItem.title,
-        content: this.formatHTML(this.grid_selectedItem.body)
+        content: this.formatHTML(this.grid_selectedItem.body),
+        blurb: this.grid_selectedItem.blurb
       })
     },
 
@@ -271,7 +280,8 @@ export default {
      *  grid_dataSource,
      *  grid_selectedItem: {
      *    content: {}
-     *    title: {}
+     *    title: {},
+     *    blurb: {}
      *  }
      * }
      **/
@@ -287,7 +297,8 @@ export default {
       let modalContent = this.formatHTML(args.grid_selectedItem.body)
       this.updateModal({
         title: args.grid_selectedItem.title,
-        content: modalContent
+        content: modalContent,
+        blurb: this.grid_selectedItem.blurb
       })
 
       // Show the modal
@@ -310,12 +321,14 @@ export default {
      *
      * data: {
      *   title: String,
-     *   content: String
+     *   content: String,
+     *   blurb: String
      * }
      **/
     updateModal: function (data) {
       this.modal_title = data.title
       this.modal_body = data.content
+      this.modal_blurb = data.blurb
     },
 
     /**
