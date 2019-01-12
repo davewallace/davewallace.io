@@ -53,6 +53,7 @@
 
     <SortableGrid v-on:gridItemSelected="handle__gridItemSelected"
                   v-on:gridDataSorted="handle__gridDataSorted"
+                  v-on:sortOptionClick="handle__sortOptionClick"
                   :grid_data="this.grid_data"
                   :grid_sortedDataPrimary="this.grid_sortedDataPrimary"
                   :grid_sortedDataSecondary="this.grid_sortedDataSecondary"
