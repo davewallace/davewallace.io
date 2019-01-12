@@ -5,7 +5,8 @@
       the associated method -->
     <SortableGridMenu
       v-on:handle__sortOptionClick="this.handle__sortOptionClick"
-      :grid_allSortOptions="this.grid_allSortOptions" />
+      :grid_allSortOptions="this.grid_allSortOptions"
+      :grid_selectedSortOptions="this.grid_selectedSortOptions" />
 
     <!-- Grid contents sorted by user prefs & date. Conditionally rendered. -->
     <div v-if="grid_sortedDataPrimary.length">
@@ -164,6 +165,12 @@ export default {
         return []
       }
     },
+    grid_selectedSortOptions: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
     grid_selectedItem: {
       type: Object,
       default: function () {
@@ -195,6 +202,7 @@ export default {
    **/
   watch: {
     grid_selectedItem: function (newValue, oldValue) {
+
       this.updateGridSelectedState()
     }
   },
@@ -206,10 +214,6 @@ export default {
 
     /**
      * Event handlers
-     **/
-
-    /**
-     *
      **/
     handle__gridItemSelected: function (event, grid_selectedItem, grid_dataSource) {
 
@@ -228,11 +232,28 @@ export default {
      **/
     handle__sortOptionClick: function (data) {
 
+      // Remove or add selected sort option from Array of all selected sort options
+      if (data.currentTarget.selected) {
+        this.grid_selectedSortOptions.push(data.currentTarget)
+      } else {
+        let index = this.grid_selectedSortOptions.indexOf(data.currentTarget)
+        if (index > -1) {
+          this.grid_selectedSortOptions.splice(data.currentTarget, index)
+        }
+      }
+
       // Sort our grid data based on the received user selections
       this.sortGridData(data.uniqueSelectedSortOptions)
 
       // Update the most recently selected menu item
       this.grid_currentMenuItem = data.currentTarget
+
+      console.log('Grid handled sortOptionClick()')
+
+      // Propagate event up to parent
+      this.$emit('sortOptionClick', {
+        grid_selectedSortOptions: this.grid_selectedSortOptions
+      })
     },
 
     /**

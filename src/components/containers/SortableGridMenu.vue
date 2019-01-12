@@ -132,7 +132,7 @@ export default {
       // previously selected options
       currentTarget.selected = !currentTarget.selected
 
-      // Harvest an Array of currently selected sort options (1 or many)
+      // Harvest an Array of currently selected sort option Objects (0 or many)
       let selectedSortOptions = this.grid_allSortOptions.filter(function (currentValue, idx) {
         if (currentValue.selected) {
           return currentValue.tag
@@ -144,7 +144,7 @@ export default {
       // down sorting by adding more tags, where this solution widens sorting by accumulating more
       // results, while also placing the most recently selected option first.
       if (currentTarget.selected) {
-        selectedSortOptions.unshift(currentTarget)
+        //selectedSortOptions.unshift(currentTarget)
       }
       let uniqueSelectedSortOptions = [...(new Set(selectedSortOptions))]
       this.selectedSortOptions = uniqueSelectedSortOptions

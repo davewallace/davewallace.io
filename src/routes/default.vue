@@ -90,6 +90,7 @@ export default {
       grid_selectedItem: null,
       grid_sortedDataPrimary: [],
       grid_sortedDataSecondary: [],
+      grid_selectedSortOptions: [],
       grid_mostRecentlyInteractedGridData: null,
       // Feeds our main display of default content, to note the 'content'
       // property of a grid_data item is written in markdown, for conversion
@@ -145,6 +146,14 @@ export default {
     }
   },
   watch: {
+
+    grid_selectedSortOptions: function (newValue, oldValue) {
+      console.log('I should win the race! I should have ' + newValue.length + ' sort options selected.')
+    },
+
+    /**
+     *
+     **/
     grid_selectedItem: function (newValue, oldValue) {
 
       // Toggle the modal notification to provide user feedback if we've hiy
@@ -155,13 +164,71 @@ export default {
       } else {
         this.modal_notification_visible = false
       }
+    },
+
+    /**
+     *
+     **/
+    grid_sortedDataPrimary: function (newValue, oldValue) {
+
+      console.log('grid_sortedDataPrimary changed, performing UI updates based on selectedSortOptions (' + this.grid_selectedSortOptions.length + ').')
+
+      /*
+      let gridItems = this.grid_sortedDataPrimary
+      let self = this
+
+      if (gridItems.length) {
+
+        const selectedSortOptions = self.grid_selectedSortOptions
+        console.log('checking ' + gridItems.length + ' grid items')
+
+        gridItems.forEach(item => {
+
+          const tags = item.tags
+
+          // iterate all currently selected sort options
+          console.log('\t >> checking ' + tags.length + ' gridItem tags to see if they are in the selected menu tags state...\ntags:', item.tags)
+          for (let x = 0; x < tags.length; x++) {
+
+            tags[x].selected = false
+            console.log('\t \t >>> there are ' + selectedSortOptions.length + ' selectedSortOptions...', selectedSortOptions)
+
+            for (let y = 0; y < selectedSortOptions.length; y++) {
+
+              console.log('success comparison: tag=' + tags[x].tag + ' and selectedSortOptions=' + selectedSortOptions[y].tag)
+
+              if (tags[x].tag === selectedSortOptions[y].tag) {
+                console.log('match found')
+                tags[x].selected = true
+              }
+
+            }
+          }
+        })
+
+      } // eoc
+      */
     }
+
   },
   methods: {
 
     /**
      * Event handlers
      **/
+
+    /**
+     *
+     **/
+    handle__sortOptionClick: function (data) {
+
+      console.log('default handled sortOptionClick()')
+      this.grid_selectedSortOptions = data.grid_selectedSortOptions
+
+      // Update grid item tag highlighting
+      //this.updateGridItemTags()
+
+    },
 
     /**
      * Using the currently selected grid item, traverse the most recently

@@ -17,10 +17,9 @@
 
       </div>
       <div class="sortable-grid__grid-item__footer">
-
         <ul class="sortable-grid__grid-item__tags">
           <li class="sortable-grid__grid-item__tag"
-              :class="(grid_currentMenuItem && grid_currentMenuItem.tag === tag.tag) ? 'sortable-grid__grid-item__tag--current' : ''"
+              :class="(tag.selected ? 'sortable-grid__grid-item__tag--selected' : '')"
               v-bind:key="tag.name"
               v-for="tag in tags">
             {{ tag.name }}
@@ -46,6 +45,10 @@
 // Base className for BEM prefixing - do not add styles at the base level,
 // they belong in <SortableGrid />
 .sortable-grid {
+
+  &__grid-item__tag--selected {
+    background: yellow !important;
+  }
 
   /**
    * Main contents
@@ -291,12 +294,12 @@ export default {
       }
     }
   },
+
   methods: {
 
     /**
      * Event handlers
      **/
-
     handle__click: function (event) {
       this.$emit('handle__gridItemSelected', event)
     }
