@@ -43,6 +43,7 @@
 .sortable-grid {
 
   &__grid-item__tag--selected {
+    // TODO: refactor this dumpster fire
     background: yellow !important;
   }
 
