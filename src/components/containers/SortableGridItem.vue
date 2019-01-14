@@ -192,7 +192,7 @@
         height: 100%;
         width: 100%;
 
-        @include visually-hidden-text()
+        @include visually-hidden-text();
       }
 
     /**
@@ -205,11 +205,11 @@
 
 // tags
 .sortable-grid__tags {
-  @include reset-list()
+  @include reset-list();
   line-height: 1.1em;
 }
   .sortable-grid__tags-item {
-    @include reset-list()
+    @include reset-list();
     display: inline-block;
     vertical-align: top;
     line-height: 1.3em;

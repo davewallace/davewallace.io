@@ -37,8 +37,8 @@
 // Component
 .sortable-grid__menu {
 
-  @include reset-list()
-  @include clearfix()
+  @include reset-list();
+  @include clearfix();
 
   // adjust main sort menu alignment as the viewport decreases in width
   margin: 0 40px 40px auto;

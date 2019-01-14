@@ -177,18 +177,18 @@
   }
 
   &--invisible {
-    @include visually-hidden()
+    @include visually-hidden();
   }
 
   /**
    * Nested Tags
    **/
   &__tags {
-    @include reset-list()
+    @include reset-list();
     line-height: 1.1em;
   }
     &__tags-item {
-      @include reset-list()
+      @include reset-list();
       display: inline-block;
       vertical-align: top;
       line-height: 1.3em;
