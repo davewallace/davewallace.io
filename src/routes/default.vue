@@ -25,6 +25,11 @@
       <template slot="modal_body">
         <Layout v-bind:data="this.modal_body" />
 
+        <h5>Core skills</h5>
+        <List v-if="this.grid_selectedItem"
+              v-bind:data="this.grid_selectedItem.tags"
+              v-bind:className="'modal__tags'" />
+
         <ImageViewer  v-if="this.grid_selectedItem && this.grid_selectedItem.gallery"
                       v-bind:data="this.grid_selectedItem.gallery" />
       </template>
@@ -71,6 +76,7 @@ import ImageViewer from '@/components/ui/ImageViewer'
 import Layout from '@/components/containers/Layout'
 import Notification from '@/components/ui/Notification'
 import Button from '@/components/ui/Button'
+import List from '@/components/ui/List'
 import StaticGridDataImport from '../data/grid-data'
 
 // markdown to HTML converter, for handling predictable user-facing text content
@@ -85,6 +91,7 @@ export default {
     Layout,
     Notification,
     Button,
+    List,
     ImageViewer
   },
   data () {
