@@ -119,45 +119,45 @@ export default {
       // menu data
       grid_allSortOptions: [
         {
-          name: 'Technical Consultation',
+          value: 'Technical Consultation',
           icon: '',
-          tag: 'technical-consultation',
+          id: 'technical-consultation',
           selected: false
         },
         {
-          name: 'Team Leadership',
+          value: 'Team Leadership',
           icon: '',
-          tag: 'team-leadership',
+          id: 'team-leadership',
           selected: false
         },
         {
-          name: 'Production Management',
+          value: 'Production Management',
           icon: '',
-          tag: 'production-management',
+          id: 'production-management',
           selected: false
         },
         {
-          name: 'Accessibility',
+          value: 'Accessibility',
           icon: '',
-          tag: 'accessibility',
+          id: 'accessibility',
           selected: false
         },
         {
-          name: 'User Experience',
+          value: 'User Experience',
           icon: '',
-          tag: 'user-experience',
+          id: 'user-experience',
           selected: false
         },
         {
-          name: 'User Interface Design',
+          value: 'User Interface Design',
           icon: '',
-          tag: 'user-interface-design',
+          id: 'user-interface-design',
           selected: false
         },
         {
-          name: 'Front-end Development',
+          value: 'Front-end Development',
           icon: '',
-          tag: 'front-end-development',
+          id: 'front-end-development',
           selected: false
         }
       ]

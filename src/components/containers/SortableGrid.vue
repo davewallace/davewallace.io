@@ -18,7 +18,7 @@
         <li class="sortable-grid__grid-item"
             :class="grid_sortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
             v-for="grid_sortedDataPrimaryItem in grid_sortedDataPrimary"
-            v-bind:key="grid_sortedDataPrimaryItem.name">
+            v-bind:key="grid_sortedDataPrimaryItem.value">
 
           <SortableGridItem
             :grid_currentMenuItem="grid_currentMenuItem"
@@ -38,7 +38,7 @@
       <li class="sortable-grid__grid-item"
           :class="grid_sortedDataSecondaryItem.selected ? 'sortable-grid__grid-item--selected' : ''"
           v-for="grid_sortedDataSecondaryItem in grid_sortedDataSecondary"
-          v-bind:key="grid_sortedDataSecondaryItem.name">
+          v-bind:key="grid_sortedDataSecondaryItem.value">
 
         <SortableGridItem
           :grid_currentMenuItem="grid_currentMenuItem"
@@ -295,7 +295,7 @@ export default {
 
             // If a given item has tags which match a selected tag, add it to
             // the new Array.
-            if (option.tag === tagObj.tag) {
+            if (option.id === tagObj.id) {
 
               // Create a new data structure for the current user-selected tag,
               // if one does not already exist.

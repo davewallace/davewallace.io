@@ -2,15 +2,15 @@
   <ul class="sortable-grid__menu" ref="sortable-grid__menu">
 
     <li v-for="(sortOption,i) of grid_allSortOptions"
-        v-bind:key="sortOption.name"
-        :class="'sortable-grid__menu-item sortable-grid__menu-item--' + sortOption.tag">
+        v-bind:key="sortOption.value"
+        :class="'sortable-grid__menu-item sortable-grid__menu-item--' + sortOption.id">
 
       <Button
         :icon="sortOption.icon"
         :class="[sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link']"
         @click="handle__sortOptionClick(grid_allSortOptions[i], grid_allSortOptions)">
 
-        <template slot="button_label">{{ sortOption.name }}</template>
+        <template slot="button_label">{{ sortOption.value }}</template>
       </Button>
     </li>
   </ul>
@@ -135,7 +135,7 @@ export default {
       // Harvest an Array of currently selected sort option Objects (0 or many)
       let selectedSortOptions = this.grid_allSortOptions.filter(function (currentValue, idx) {
         if (currentValue.selected) {
-          return currentValue.tag
+          return currentValue.id
         }
       })
 
