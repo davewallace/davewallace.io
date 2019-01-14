@@ -11,20 +11,6 @@ img {
 	max-width: 100%;
 }
 
-blockquote {
-	margin: 0;
-	padding: 10px 10px 1px 20px; // margin-collapsing when bottom-pad set to 0px
-	border-left: 3px solid $color__base--green;
-	color: $color__base--green;
-	font-size: $font__size--large;
-}
-blockquote + blockquote { // limited by markdown output, I'm using a 2nd blockquote as the quotee
-	padding-top: 0px;
-	text-align: right;
-	font-style: italic;
-	color: $color__base--reverse;
-}
-
 @font-face {
   font-family: 'aliceregular';
   src: url('./assets/font/alice-regular-webfont.eot');
