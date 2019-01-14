@@ -298,6 +298,7 @@ export default {
 
       // Update modal contents
       let modalContent = this.formatHTML(args.grid_selectedItem.body)
+
       this.updateModal({
         title: args.grid_selectedItem.title,
         content: modalContent,

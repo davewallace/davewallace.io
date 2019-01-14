@@ -113,8 +113,8 @@ function parseData (data) {
 	tagData = tagData.split(',')
 	tagData.forEach((item) => {
 		tags.push({
-			tag: item.toLowerCase().split(' ').join('-'),
-			name: item
+			id: item.toLowerCase().split(' ').join('-'),
+			value: item
 		})
 	})
 

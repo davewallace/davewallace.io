@@ -4,7 +4,7 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Aliquam luctus posuere facilisis. Nunc auctor condimentum ex, sed laoreet tortor facilisis eu.',
     tags: [
-      {tag: 'user-experience', name: 'User Experience'}
+      {id: 'user-experience', value: 'User Experience'}
     ],
     gallery: [
       {
@@ -28,7 +28,7 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Aliquam luctus posuere facilisis. Nunc auctor condimentum ex, sed laoreet tortor facilisis eu.',
     tags: [
-      {tag: 'accessibility', name: 'Accessibility'}
+      {id: 'accessibility', value: 'Accessibility'}
     ],
     date: "2017",
     selected: false
@@ -38,7 +38,7 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Aliquam luctus posuere facilisis. Nunc auctor condimentum ex, sed laoreet tortor facilisis eu.',
     tags: [
-      {tag: 'user-experience', name: 'User Experience'}
+      {id: 'user-experience', value: 'User Experience'}
     ],
     date: "2017",
     selected: false
@@ -48,11 +48,11 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Aliquam luctus posuere facilisis. Nunc auctor condimentum ex, sed laoreet tortor facilisis eu.',
     tags: [
-      {tag: 'user-experience', name: 'User Experience'},
-      {tag: 'user-interface-design', name: 'User Interface Design'},
-      {tag: 'front-end-development', name: 'Front End Development'},
-      {tag: 'production-management', name: 'Production Management'},
-      {tag: 'technical-consultation', name: 'Technical Consultation'}
+      {id: 'user-experience', value: 'User Experience'},
+      {id: 'user-interface-design', value: 'User Interface Design'},
+      {id: 'front-end-development', value: 'Front End Development'},
+      {id: 'production-management', value: 'Production Management'},
+      {id: 'technical-consultation', value: 'Technical Consultation'}
     ],
     date: "2017",
     selected: false
@@ -62,8 +62,8 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
     tags: [
-      {tag: 'user-interface-design', name: 'User Interface Design'},
-      {tag: 'front-end-development', name: 'Front End Development'}
+      {id: 'user-interface-design', value: 'User Interface Design'},
+      {id: 'front-end-development', value: 'Front End Development'}
     ],
     date: "2016",
     selected: false
@@ -73,7 +73,7 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
     tags: [
-      {tag: 'front-end-development', name: 'Front End Development'}
+      {id: 'front-end-development', value: 'Front End Development'}
     ],
     date: "2015",
     selected: false
@@ -83,7 +83,7 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
     tags: [
-      {tag: 'production-management', name: 'Production Management'}
+      {id: 'production-management', value: 'Production Management'}
     ],
     date: "2014",
     selected: false
@@ -93,9 +93,9 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
     tags: [
-      {tag: 'technical-consultation', name: 'Technical Consultation'},
-      {tag: 'user-interface-design', name: 'User Interface Design'},
-      {tag: 'production-management', name: 'Production Management'}
+      {id: 'technical-consultation', value: 'Technical Consultation'},
+      {id: 'user-interface-design', value: 'User Interface Design'},
+      {id: 'production-management', value: 'Production Management'}
     ],
     date: "2013",
     selected: false
@@ -105,8 +105,8 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
     tags: [
-      {tag: 'user-experience', name: 'User Experience'},
-      {tag: 'front-end-development', name: 'Front End Development'}
+      {id: 'user-experience', value: 'User Experience'},
+      {id: 'front-end-development', value: 'Front End Development'}
     ],
     date: "2018",
     selected: false
@@ -116,8 +116,8 @@ const DEFAULT = [
     blurb: 'Quisque orci nisi, bibendum et ex eget...',
     body: 'Curabitur at sodales lectus, sit amet sodales ex. Praesent elit mauris, mattis commodo faucibus non, pretium non purus.',
     tags: [
-      {tag: 'team-leadership', name: 'Team Leadership'},
-      {tag: 'production-management', name: 'Production Management'}
+      {id: 'team-leadership', value: 'Team Leadership'},
+      {id: 'production-management', value: 'Production Management'}
     ],
     date: "2015",
     selected: false

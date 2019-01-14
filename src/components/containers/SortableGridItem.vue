@@ -17,14 +17,10 @@
 
       </div>
       <div class="sortable-grid__grid-item__footer">
-        <ul class="sortable-grid__grid-item__tags">
-          <li class="sortable-grid__grid-item__tag"
-              :class="(tag.selected ? 'sortable-grid__grid-item__tag--selected' : '')"
-              v-bind:key="tag.name"
-              v-for="tag in tags">
-            {{ tag.name }}
-          </li>
-        </ul>
+
+        <List v-bind:data="tags"
+              v-bind:className="'sortable-grid__tags'" />
+
         <a  href=""
             class="sortable-grid__grid-item__link"
             @click.prevent
@@ -163,36 +159,6 @@
       }
       &__grid-item__body-text {
       }
-      &__grid-item__tags {
-        @include reset-list()
-        line-height: 1.1em;
-      }
-        &__grid-item__tag {
-          @include reset-list()
-          display: inline-block;
-          vertical-align: top;
-          line-height: 1.3em;
-          margin: 0 2px 2px 0;
-          padding: 1px 4px;
-          font-size: $font__size--smallest;
-          font-style: italic;
-          color: $color__base;
-          background: $color__base--yellow;
-
-          /**
-           * States & modifiers
-           **/
-          .sortable-grid__grid--primary & {
-            background: darken($color__base--green, 10);
-          }
-          .sortable-grid__grid--secondary & {
-            background: darken($color__base--blue, 10);
-          }
-          &--current[class] {
-            // slightly higher specificity than the ancestor selectors above
-            background: darken($color__base--yellow, 20);
-          }
-        }
 
       &__grid-item__date {
         transform: rotate(2deg);
@@ -235,11 +201,49 @@
       padding-right: 25px;
     }
 }
+
+// tags
+.sortable-grid__tags {
+  @include reset-list()
+  line-height: 1.1em;
+}
+  .sortable-grid__tags-item {
+    @include reset-list()
+    display: inline-block;
+    vertical-align: top;
+    line-height: 1.3em;
+    margin: 0 2px 2px 0;
+    padding: 1px 4px;
+    font-size: $font__size--smallest;
+    font-style: italic;
+    color: $color__base;
+    background: $color__base--yellow;
+
+    /**
+     * States & modifiers
+     **/
+    .sortable-grid__grid--primary & {
+      background: darken($color__base--green, 10);
+    }
+    .sortable-grid__grid--secondary & {
+      background: darken($color__base--blue, 10);
+    }
+    &--current[class] {
+      // slightly higher specificity than the ancestor selectors above
+      background: darken($color__base--yellow, 20);
+    }
+  }
 </style>
 <script>
 
+import List from '@/components/ui/List'
+
 export default {
   name: 'SortableGridItem',
+  components: {
+    List
+  },
+
   // TODO: obviously abstract this to simply content
   props: {
     title: {
