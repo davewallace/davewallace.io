@@ -40,23 +40,17 @@
   @include reset-list();
   @include clearfix();
 
-  // adjust main sort menu alignment as the viewport decreases in width
-  margin: 0 40px 40px auto;
-
-  // reverse the child element right-floated DOM reversal, child elements reverse this again
-  transform: scaleY(-1);
+  margin-bottom: 40px;
 
   &-item {
 
-    // DOM order reversed for the right inline-block alignment effect
-    float: right;
-    // So we need to reverse it again
-    transform: scaleY(-1);
+    // A float - iknowright!
+    float: left;
 
     &--user-interface-design,
     &--accessibility,
     &--team-leadership {
-      clear: right;
+      clear: left;
     }
   }
   &-item-link {
