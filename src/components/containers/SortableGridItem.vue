@@ -157,6 +157,12 @@
     }
       &__grid-item__blurb-text {
         margin-top: 15px;
+
+        // primary blurb text should be prominent, its helpful in describing the
+        // role I was in
+        .sortable-grid__grid--primary & {
+          font-size: $font__size--largest;
+        }
       }
       &__grid-item__body-text {
       }
