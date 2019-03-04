@@ -1,6 +1,6 @@
 # codefinger.io
 
-> Kicking the tyres on a Vue.js project.
+> Kicking the tyres on a Vue.js project, not doing too badly.
 
 ## Build Setup
 
