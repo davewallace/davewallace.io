@@ -30,23 +30,22 @@ $font__size--h3: 1.6em;
 $font__size--h4: 1.4em;
 $font__size--h5: 1.2em;
 $font__size--h6: 1.0em;
-$font__size--smallest: 0.6em;
-$font__size--small: 0.7em;
-$font__size--medium: 0.9em;
-$font__size--large: 1.1em;
-$font__size--largest: 1.4em;
-
-$font__line-height--smallest: $font__size--smallest + 0.4em;
-$font__line-height--small: $font__size--small + 0.4em;
-$font__line-height--medium: $font__size--medium + 0.4em;
-$font__line-height--large: $font__size--large + 0.4em;
-
 $font__line-height--h1: $font__size--h1 - 0.4em;
 $font__line-height--h2: $font__size--h2 - 0.4em;
 $font__line-height--h3: $font__size--h3 - 0.4em;
 $font__line-height--h4: $font__size--h4 - 0.4em;
 $font__line-height--h5: $font__size--h5 - 0.4em;
 $font__line-height--h6: $font__size--h6 - 0.4em;
+
+$font__size--smallest: 0.6em;
+$font__size--small: 0.7em;
+$font__size--medium: 0.9em;
+$font__size--large: 1.1em;
+$font__size--largest: 1.4em;
+$font__line-height--smallest: $font__size--smallest + 0.1em;
+$font__line-height--small: $font__size--small + 0.1em;
+$font__line-height--medium: $font__size--medium + 0.1em;
+$font__line-height--large: $font__size--large + 0.1em;
 
 /**
  * z-index management
