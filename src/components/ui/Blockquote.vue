@@ -27,13 +27,9 @@ blockquote + blockquote { // limited by markdown output, I'm using a 2nd blockqu
 
 <script>
 export default {
-  name: 'Blockquote',
-  data () {
-    return {
-    }
-  },
-  props: [
-    'type'
-  ]
+  name: 'Blockquote'
+  // ,props: {
+  //   type
+  // }
 }
 </script>

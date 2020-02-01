@@ -3,7 +3,7 @@
        :class="visible ? 'modal--visible' : 'modal--invisible' ">
 
     <Button class="modal_button-close button--warning"
-            visually-hidden-text="true"
+            :visually-hidden-text="true"
             @click="handle__click_close">
       <template slot="button_label">Close</template>
       <template slot="button_icon">
@@ -32,7 +32,7 @@
 
       <div class="modal_navigation">
         <Button class="modal_button-backward button--tertiary"
-                visually-hidden-text="true"
+                :visually-hidden-text="true"
                 @click="handle__click_navigate('backward')">
 
           <template slot="button_label">Backward</template>
@@ -41,7 +41,7 @@
           </template>
         </Button>
         <Button class="modal_button-forward button--primary"
-                visually-hidden-text="true"
+                :visually-hidden-text="true"
                 @click="handle__click_navigate('forward')">
 
           <template slot="button_label">Forward</template>

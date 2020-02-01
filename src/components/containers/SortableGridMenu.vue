@@ -1,14 +1,14 @@
 <template>
-  <ul class="sortable-grid__menu" ref="sortable-grid__menu">
+  <ul ref="sortable-grid__menu" class="sortable-grid__menu">
 
-    <li v-for="(sortOption,i) of grid_allSortOptions"
-        v-bind:key="sortOption.value"
+    <li v-for="(sortOption,i) of gridAllSortOptions"
+        :key="sortOption.value"
         :class="'sortable-grid__menu-item sortable-grid__menu-item--' + sortOption.id">
 
       <Button
         :icon="sortOption.icon"
         :class="[sortOption.selected ? 'sortable-grid__menu-item-link--selected' : 'sortable-grid__menu-item-link']"
-        @click="handle__sortOptionClick(grid_allSortOptions[i], grid_allSortOptions)">
+        @click="handle__sortOptionClick(gridAllSortOptions[i], gridAllSortOptions)">
 
         <template slot="button_label">{{ sortOption.value }}</template>
       </Button>
@@ -24,10 +24,20 @@ export default {
   components: {
     Button
   },
-  props: [
-    'grid_allSortOptions',
-    'currentMenuItem'
-  ],
+  props: {
+    gridAllSortOptions: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+    // ,currentMenuItem: {
+    //   type: Object,
+    //   default: function () {
+    //     return {}
+    //   }
+    // }
+  },
   data () {
     return {
       selectedSortOptions: []
@@ -50,7 +60,7 @@ export default {
       currentTarget.selected = !currentTarget.selected
 
       // Harvest an Array of currently selected sort option Objects (0 or many)
-      let selectedSortOptions = this.grid_allSortOptions.filter(function (currentValue, idx) {
+      let selectedSortOptions = this.gridAllSortOptions.filter(function (currentValue, idx) {
         if (currentValue.selected) {
           return currentValue.id
         }
@@ -63,6 +73,7 @@ export default {
       if (currentTarget.selected) {
         //selectedSortOptions.unshift(currentTarget)
       }
+      // TODO: Array spread will not work in IE11
       let uniqueSelectedSortOptions = [...(new Set(selectedSortOptions))]
       this.selectedSortOptions = uniqueSelectedSortOptions
 
@@ -73,12 +84,6 @@ export default {
         currentTarget: currentTarget
       })
     }
-  },
-
-  /**
-   * Lifecycle methods
-   **/
-  created: function () {
   }
 }
 </script>

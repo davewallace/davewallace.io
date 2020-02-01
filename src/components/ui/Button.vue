@@ -1,8 +1,8 @@
 <template>
-  <a  @click.prevent
-      @click="handle__click()"
-      href=""
-      class="button button--generic">
+  <a href=""
+     class="button button--generic"
+     @click.prevent
+     @click="handle__click()">
 
     <!-- if we have an iconprop defined, render an icon and wrap text in a span -->
     <template v-if="icon">
@@ -22,14 +22,16 @@
 <script>
 export default {
   name: 'Button',
-  data () {
-    return {
+  props: {
+    visuallyHiddenText: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
+      type: String,
+      default: ''
     }
   },
-  props: [
-    'visuallyHiddenText',
-    'icon'
-  ],
   methods: {
 
     /**

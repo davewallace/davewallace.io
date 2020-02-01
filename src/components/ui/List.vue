@@ -1,40 +1,20 @@
 <template>
   <ul class="list"
       :class="className">
-    <li :class="[
+    <li v-for="dataObject in data"
+        :key="dataObject.id"
+        :class="[
           className ? className + '-item' : 'list__item',
           dataObject.selected ? (className ? className + '-item--selected' : 'list__item--selected') : ''
-        ]"
-        v-bind:key="dataObject.id"
-        v-for="dataObject in data">
-
-        {{ dataObject.value }}
-
+        ]">
+      {{ dataObject.value }}
     </li>
   </ul>
 </template>
 
-<style lang="scss">
-.list {
-
-  &__item {
-  }
-} // /.list
-
-</style>
-
 <script>
-
 export default {
   name: 'List',
-
-  /**
-   *
-   **/
-  data () {
-    return {
-    }
-  },
 
   /**
    *
@@ -47,37 +27,18 @@ export default {
       }
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     }
-  },
-
-  /**
-   * Props requiring processing or non-trivial logic that we don't want cached
-   */
-  methods: {
-
-    /**
-     * Event handlers
-     **/
-    /*
-    handle__x: function (event, args) {
-
-      this.$emit('eventName', {
-        event,
-        args
-      })
-    },
-    */
-
-    /**
-     * Public methods
-     **/
-  },
-
-  /**
-   * Lifecycle methods
-   **/
-  mounted: function () {
   }
 }
 </script>
+
+<style lang="scss">
+.list {
+
+  &__item {
+  }
+} // /.list
+
+</style>

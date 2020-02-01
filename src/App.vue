@@ -7,33 +7,33 @@
     -->
     <DefaultGreeting />
 
-    <Modal :visible="modal_visible"
-           :grid_mostRecentlyInteractedGridData="grid_mostRecentlyInteractedGridData"
-           @:modalClose="modal_visible = false"
+    <Modal :visible="modalVisible"
+           :grid-most-recently-interacted-grid-data="gridMostRecentlyInteractedGridData"
+           @:modalClose="modalVisible = false"
            @:modalNavigate="handle__modalNavigate">
 
-      <template slot="modal_title">
-        {{ modal_title }}
+      <template slot="modalTitle">
+        {{ modalTitle }}
       </template>
 
-      <template slot="modal_blurb">
-        {{ modal_blurb }}
+      <template slot="modalBlurb">
+        {{ modalBlurb }}
       </template>
 
-      <template slot="modal_body">
-        <Layout :data="modal_body" />
+      <template slot="modalBody">
+        <Layout :data="modalBody" />
 
         <h5>Core skills</h5>
-        <List v-if="grid_selectedItem"
-              :data="grid_selectedItem.tags"
-              :className="'modal__tags'" />
+        <List v-if="gridSelectedItem"
+              :data="gridSelectedItem.tags"
+              :class-name="'modal__tags'" />
 
-        <ImageViewer v-if="grid_selectedItem && grid_selectedItem.gallery"
-                     :data="grid_selectedItem.gallery" />
+        <ImageViewer v-if="gridSelectedItem && gridSelectedItem.gallery"
+                     :data="gridSelectedItem.gallery" />
       </template>
 
       <template slot="modal_notification">
-        <Notification v-if="modal_notification_visible" type="info">
+        <Notification v-if="modalNotificationVisible" type="info">
 
           <template slot="notification_body">
             <p>You've reached the end of your selection. Would you like to...</p>
@@ -54,11 +54,11 @@
 
     </Modal>
 
-    <SortableGrid :grid_data="grid_data"
-                  :grid_sortedDataPrimary="grid_sortedDataPrimary"
-                  :grid_sortedDataSecondary="grid_sortedDataSecondary"
-                  :grid_selectedItem="grid_selectedItem"
-                  :grid_allSortOptions="grid_allSortOptions"
+    <SortableGrid :grid-data="gridData"
+                  :grid-sorted-data-primary="gridSortedDataPrimary"
+                  :grid-sorted-data-secondary="gridSortedDataSecondary"
+                  :grid-selected-item="gridSelectedItem"
+                  :grid-all-sort-options="gridAllSortOptions"
                   @:gridItemSelected="handle__gridItemSelected"
                   @:gridDataSorted="handle__gridDataSorted"
                   @:sortOptionClick="handle__sortOptionClick" />
@@ -97,26 +97,26 @@ export default {
     return {
 
       // Modal state
-      modal_title: null,
-      modal_blurb: null,
-      modal_body: null,
-      modal_visible: false,
-      modal_notification_visible: false,
+      modalTitle: null,
+      modalBlurb: null,
+      modalBody: null,
+      modalVisible: false,
+      modalNotificationVisible: false,
 
       // Sortable grid state
-      grid_selectedItem: null,
-      grid_sortedDataPrimary: [],
-      grid_sortedDataSecondary: [],
-      grid_selectedSortOptions: [],
-      grid_mostRecentlyInteractedGridData: null,
+      gridSelectedItem: null,
+      gridSortedDataPrimary: [],
+      gridSortedDataSecondary: [],
+      gridSelectedSortOptions: [],
+      gridMostRecentlyInteractedGridData: null,
       // Feeds our main display of default content, to note the 'content'
-      // property of a grid_data item is written in markdown, for conversion
+      // property of a gridData item is written in markdown, for conversion
       // into HTML. My assumption here is that the content is pretty simple
       // markup.
-      grid_data: StaticGridDataImport,
+      gridData: StaticGridDataImport,
 
       // menu data
-      grid_allSortOptions: [
+      gridAllSortOptions: [
         {
           value: 'Technical Consultation',
           id: 'technical-consultation',
@@ -158,39 +158,39 @@ export default {
   },
   watch: {
 
-    grid_selectedSortOptions: function (newValue, oldValue) {
+    gridSelectedSortOptions: function (newValue, oldValue) {
       console.log('I should win the race! I should have ' + newValue.length + ' sort options selected.')
     },
 
     /**
      *
      **/
-    grid_selectedItem: function (newValue, oldValue) {
+    gridSelectedItem: function (newValue, oldValue) {
 
       // Toggle the modal notification to provide user feedback if we've hiy
       // the end of a content queue
-      let gridData = this.grid_mostRecentlyInteractedGridData
-      if (gridData.indexOf(this.grid_selectedItem) === gridData.length - 1) {
-        this.modal_notification_visible = true
+      let gridData = this.gridMostRecentlyInteractedGridData
+      if (gridData.indexOf(this.gridSelectedItem) === gridData.length - 1) {
+        this.modalNotificationVisible = true
       } else {
-        this.modal_notification_visible = false
+        this.modalNotificationVisible = false
       }
     },
 
     /**
      *
      **/
-    grid_sortedDataPrimary: function (newValue, oldValue) {
+    gridSortedDataPrimary: function (newValue, oldValue) {
 
-      console.log('grid_sortedDataPrimary changed, performing UI updates based on selectedSortOptions (' + this.grid_selectedSortOptions.length + ').')
+      console.log('gridSortedDataPrimary changed, performing UI updates based on selectedSortOptions (' + this.gridSelectedSortOptions.length + ').')
 
       /*
-      let gridItems = this.grid_sortedDataPrimary
+      let gridItems = this.gridSortedDataPrimary
       let self = this
 
       if (gridItems.length) {
 
-        const selectedSortOptions = self.grid_selectedSortOptions
+        const selectedSortOptions = self.gridSelectedSortOptions
         console.log('checking ' + gridItems.length + ' grid items')
 
         gridItems.forEach(item => {
@@ -234,7 +234,7 @@ export default {
     handle__sortOptionClick: function (data) {
 
       console.log('default handled sortOptionClick()')
-      this.grid_selectedSortOptions = data.grid_selectedSortOptions
+      this.gridSelectedSortOptions = data.gridSelectedSortOptions
 
       // Update grid item tag highlighting
       //this.updateGridItemTags()
@@ -251,8 +251,8 @@ export default {
      **/
     handle__modalNavigate: function (direction) {
 
-      let gridData = this.grid_mostRecentlyInteractedGridData
-      let currentIndex = gridData.indexOf(this.grid_selectedItem)
+      let gridData = this.gridMostRecentlyInteractedGridData
+      let currentIndex = gridData.indexOf(this.gridSelectedItem)
       let newIndex
 
       // Determine the next viable modal data index
@@ -266,22 +266,22 @@ export default {
 
       console.log(newIndex + '/' + (gridData.length - 1))
 
-      // Update our selected grid_data state
-      this.grid_selectedItem = gridData[newIndex]
+      // Update our selected gridData state
+      this.gridSelectedItem = gridData[newIndex]
 
-      // Update our modal with new grid_data props
+      // Update our modal with new gridData props
       this.updateModal({
-        title: this.grid_selectedItem.title,
-        content: this.formatHTML(this.grid_selectedItem.body),
-        blurb: this.grid_selectedItem.blurb
+        title: this.gridSelectedItem.title,
+        content: this.formatHTML(this.gridSelectedItem.body),
+        blurb: this.gridSelectedItem.blurb
       })
     },
 
     /**
      * args: {
      *  event,
-     *  grid_dataSource,
-     *  grid_selectedItem: {
+     *  gridDataSource,
+     *  gridSelectedItem: {
      *    content: {}
      *    title: {},
      *    blurb: {}
@@ -290,28 +290,29 @@ export default {
      **/
     handle__gridItemSelected: function (args) {
 
-      // Update the currently selected grid_data item
-      this.grid_selectedItem = args.grid_selectedItem
+      // Update the currently selected gridData item
+      this.gridSelectedItem = args.gridSelectedItem
 
       // Update the most recently interacted grid
-      this.grid_mostRecentlyInteractedGridData = args.grid_dataSource
+      this.gridMostRecentlyInteractedGridData = args.gridDataSource
 
       // Update modal contents
-      let modalContent = this.formatHTML(args.grid_selectedItem.body)
+      let modalContent = this.formatHTML(args.gridSelectedItem.body)
 
       this.updateModal({
-        title: args.grid_selectedItem.title,
+        title: args.gridSelectedItem.title,
         content: modalContent,
-        blurb: this.grid_selectedItem.blurb
+        blurb: this.gridSelectedItem.blurb
       })
 
       // Show the modal
-      this.modal_visible = true
+      this.modalVisible = true
     },
 
     handle__gridDataSorted: function (data) {
-      this.grid_sortedDataPrimary = data.grid_sortedDataPrimary
-      this.grid_sortedDataSecondary = data.grid_sortedDataSecondary
+      console.log(data.gridSortedDataPrimary)
+      this.gridSortedDataPrimary = data.gridSortedDataPrimary
+      this.gridSortedDataSecondary = data.gridSortedDataSecondary
     },
 
     /**
@@ -330,9 +331,9 @@ export default {
      * }
      **/
     updateModal: function (data) {
-      this.modal_title = data.title
-      this.modal_body = data.content
-      this.modal_blurb = data.blurb
+      this.modalTitle = data.title
+      this.modalBody = data.content
+      this.modalBlurb = data.blurb
     },
 
     /**

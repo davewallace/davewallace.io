@@ -3,9 +3,7 @@
     <slot>
 
       <div class="sortable-grid__grid-item__header">
-
         <h4 class="sortable-grid__grid-item__title">{{ title }}</h4>
-
       </div>
       <div class="sortable-grid__grid-item__body">
 
@@ -18,13 +16,13 @@
       </div>
       <div class="sortable-grid__grid-item__footer">
 
-        <List v-bind:data="tags"
-              v-bind:className="'sortable-grid__tags'" />
+        <List :data="tags"
+              :class-name="'sortable-grid__tags'" />
 
-        <a  href=""
-            class="sortable-grid__grid-item__link"
-            @click.prevent
-            @click="handle__click">
+        <a href=""
+           class="sortable-grid__grid-item__link"
+           @click.prevent
+           @click="handle__click">
           More...
         </a>
 
@@ -81,7 +79,7 @@ export default {
         return false
       }
     },
-    grid_currentMenuItem: {
+    gridCurrentMenuItem: {
       type: Object,
       default: function () {
         return {}
@@ -97,21 +95,11 @@ export default {
     handle__click: function (event) {
       this.$emit('handle__gridItemSelected', event)
     }
-  },
-
-  /**
-   * Lifecycle methods
-   **/
-  created: function () {
   }
 }
 </script>
 
 <style lang="scss">
-// @import "../../style/reset.scss";
-// @import "../../style/variables.scss";
-// @import "../../style/utility.scss";
-
 // Base className for BEM prefixing - do not add styles at the base level,
 // they belong in <SortableGrid />
 .sortable-grid {

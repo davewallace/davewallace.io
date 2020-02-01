@@ -16,6 +16,12 @@ i {
 
 export default {
   name: 'Icon',
+  props: {
+    type: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
       types: {
@@ -25,9 +31,6 @@ export default {
         'forward': '>'
       }
     }
-  },
-  props: [
-    'type'
-  ]
+  }
 }
 </script>
