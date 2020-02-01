@@ -8,11 +8,6 @@
 </template>
 
 <style scoped lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-// @import "../../style/utility.scss";
-
 .layout-item {
 }
 </style>

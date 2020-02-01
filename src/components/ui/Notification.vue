@@ -1,6 +1,6 @@
 <template>
   <div  class="notification"
-        :class="this.type ? 'notification--' + this.type : ''">
+        :class="type ? 'notification--' + type : ''">
 
       <slot name="notification_body">Notification body</slot>
 
@@ -11,10 +11,6 @@
 </template>
 
 <style scoped lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-
 .notification {
   padding: $pad__box--desktop;
   text-align: left;

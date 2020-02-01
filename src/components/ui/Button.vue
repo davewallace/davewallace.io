@@ -7,7 +7,7 @@
     <!-- if we have an iconprop defined, render an icon and wrap text in a span -->
     <template v-if="icon">
       <slot name="button_icon" />
-      <span :class="this.visuallyHiddenText ? 'visually-hidden' : ''">
+      <span :class="visuallyHiddenText ? 'visually-hidden' : ''">
         <slot name="button_label">Button</slot>
       </span>
     </template>
@@ -19,12 +19,39 @@
   </a>
 </template>
 
+<script>
+export default {
+  name: 'Button',
+  data () {
+    return {
+    }
+  },
+  props: [
+    'visuallyHiddenText',
+    'icon'
+  ],
+  methods: {
+
+    /**
+     * Event handlers
+     **/
+
+    handle__click: function () {
+
+      if (this.selectable) {
+        this.selected = !this.selected
+      }
+
+      // Allow listening by parent-defined listeners. note that adding a `v-on="$listeners"`
+      // in the above templated <a> element removes the need to remember to call this, but
+      // this behaviour appears to be non-standard.
+      this.$emit('click')
+    }
+  }
+}
+</script>
+
 <style scoped lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-// @import "../../style/utility.scss";
-
 // State mixins
 @mixin state-transition--hover($transform) {
   transform: $transform;
@@ -93,36 +120,3 @@
 
 } // /.button
 </style>
-
-<script>
-
-export default {
-  name: 'Button',
-  data () {
-    return {
-    }
-  },
-  props: [
-    'visuallyHiddenText',
-    'icon'
-  ],
-  methods: {
-
-    /**
-     * Event handlers
-     **/
-
-    handle__click: function () {
-
-      if (this.selectable) {
-        this.selected = !this.selected
-      }
-
-      // Allow listening by parent-defined listeners. note that adding a `v-on="$listeners"`
-      // in the above templated <a> element removes the need to remember to call this, but
-      // this behaviour appears to be non-standard.
-      this.$emit('click')
-    }
-  }
-}
-</script>

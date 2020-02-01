@@ -4,9 +4,9 @@
     <!-- Grid sorting - listens to the specified event and responds to it with
       the associated method -->
     <SortableGridMenu
-      v-on:handle__sortOptionClick="this.handle__sortOptionClick"
-      :grid_allSortOptions="this.grid_allSortOptions"
-      :grid_selectedSortOptions="this.grid_selectedSortOptions" />
+      v-on:handle__sortOptionClick="handle__sortOptionClick"
+      :grid_allSortOptions="grid_allSortOptions"
+      :grid_selectedSortOptions="grid_selectedSortOptions" />
 
     <!-- Grid contents sorted by user prefs & date. Conditionally rendered. -->
     <div v-if="grid_sortedDataPrimary.length">
@@ -282,10 +282,6 @@ export default {
 </script>
 
 <style lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-
 .sortable-grid {
 
   // We'll implement grid here because its cool. but we'll start with defaults

@@ -15,10 +15,6 @@
 </template>
 
 <style lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-
 .list {
 
   &__item {

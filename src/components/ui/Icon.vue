@@ -1,12 +1,8 @@
 <template>
-  <i>{{ this.types[this.type || this.types.default] }}</i>
+  <i>{{ types[type || types.default] }}</i>
 </template>
 
 <style scoped lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-
 i {
   display: inline-block;
   width: 16px;

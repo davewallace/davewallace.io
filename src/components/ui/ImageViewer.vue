@@ -1,7 +1,7 @@
 <template>
   <div class="image-viewer">
 
-    <Button v-if="this.expanded"
+    <Button v-if="expanded"
             class="image-viewer_button-close button--warning"
             @click="handle__click_close"
             visuallyHiddenText="true">
@@ -17,10 +17,10 @@
           @click.prevent
           @click="handle__click_expand"
           class="image-viewer_button-expand"
-          :class="this.expanded ? 'image-viewer--expanded' : '' "
-          :style="'background-image: ' + require('../../assets/img/' + this.data[0].url) + ';'">
+          :class="expanded ? 'image-viewer--expanded' : '' "
+          :style="'background-image: ' + require('../../assets/img/' + data[0].url) + ';'">
 
-        <label>{{ this.data[0].alt }}</label>
+        <label>{{ data[0].alt }}</label>
       </a>
     </div>
 
@@ -28,11 +28,6 @@
 </template>
 
 <style lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-// @import "../../style/utility.scss";
-
 /**
  * Component
  **/

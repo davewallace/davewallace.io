@@ -3,8 +3,8 @@
        :class="visible ? 'modal--visible' : 'modal--invisible' ">
 
     <Button class="modal_button-close button--warning"
-            @click="handle__click_close"
-            visuallyHiddenText="true">
+            visually-hidden-text="true"
+            @click="handle__click_close">
       <template slot="button_label">Close</template>
       <template slot="button_icon">
         <Icon type="close" />
@@ -13,27 +13,27 @@
 
     <div class="modal_content">
       <h3 class="modal_title">
-        <slot name="modal_title">
+        <slot name="modalTitle">
           Slot header
         </slot>
       </h3>
 
       <h4 class="modal_blurb">
-        <slot name="modal_blurb">
+        <slot name="modalBlurb">
           Slot blurb
         </slot>
       </h4>
 
       <div class="modal_body">
-        <slot name="modal_body">
+        <slot name="modalBody">
           <p>Slot content.</p>
         </slot>
       </div>
 
       <div class="modal_navigation">
         <Button class="modal_button-backward button--tertiary"
-                @click="handle__click_navigate('backward')"
-                visuallyHiddenText="true">
+                visually-hidden-text="true"
+                @click="handle__click_navigate('backward')">
 
           <template slot="button_label">Backward</template>
           <template slot="button_icon">
@@ -41,8 +41,8 @@
           </template>
         </Button>
         <Button class="modal_button-forward button--primary"
-                @click="handle__click_navigate('forward')"
-                visuallyHiddenText="true">
+                visually-hidden-text="true"
+                @click="handle__click_navigate('forward')">
 
           <template slot="button_label">Forward</template>
           <template slot="button_icon">
@@ -58,12 +58,74 @@
   </div>
 </template>
 
+<script>
+import Button from '@/components/ui/Button'
+import Icon from '@/components/ui/Icon'
+
+export default {
+  name: 'Modal',
+  components: {
+    Button,
+    Icon
+  },
+  props: {
+    'visible': {
+        default: false,
+        type: Boolean
+    },
+    'modalBody': {
+        default: '',
+        type: String
+    },
+    'modalTitle': {
+        default: '',
+        type: String
+    }
+},
+  watch: {
+    visible: function (newValue, oldValue) {
+      // Notify any parent components wanting to update this component's state
+      this.$emit('changeVisible', {
+        oldValue: oldValue,
+        newValue: newValue
+      })
+
+      // Toggle body element state to provide viewport scroll helpers.
+      // Exception to rules: manipulate the DOM's body element since there are
+      // currently caveats around mounting the body element with a Vue instance.
+      let method = (newValue === true) ? 'add' : 'remove'
+      window.document.getElementsByTagName('body')[0].classList[method]('modal_body-scroll--prevent')
+    }
+  },
+  methods: {
+
+    /**
+     * Event handlers
+     **/
+
+    // Notify any subscribers about button actions, the parent will then
+    // manipulate the state
+    handle__click_close: function (button) {
+      this.$emit('modalClose')
+    },
+    handle__click_navigate: function (direction) {
+      this.$emit('modalNavigate', direction)
+    },
+
+    /**
+     * Public methods
+     **/
+    open: function () {
+      this.visible = true
+    },
+    close: function () {
+      this.visible = false
+    }
+  }
+}
+</script>
+
 <style lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-// @import "../../style/utility.scss";
-
 /**
  * States and modifiers
  **/
@@ -201,66 +263,3 @@
     }
 }
 </style>
-
-<script>
-
-import Button from '@/components/ui/Button'
-import Icon from '@/components/ui/Icon'
-
-export default {
-  name: 'Modal',
-  components: {
-    Button,
-    Icon
-  },
-  props: [
-    'visible',
-    'modal_body',
-    'modal_title'
-  ],
-  watch: {
-    visible: function (newValue, oldValue) {
-      // Notify any parent components wanting to update this component's state
-      this.$emit('changeVisible', {
-        oldValue: oldValue,
-        newValue: newValue
-      })
-
-      // Toggle body element state to provide viewport scroll helpers.
-      // Exception to rules: manipulate the DOM's body element since there are
-      // currently caveats around mounting the body element with a Vue instance.
-      let method = (newValue === true) ? 'add' : 'remove'
-      window.document.getElementsByTagName('body')[0].classList[method]('modal_body-scroll--prevent')
-    }
-  },
-  data () {
-    return {
-    }
-  },
-  methods: {
-
-    /**
-     * Event handlers
-     **/
-
-    // Notify any subscribers about button actions, the parent will then
-    // manipulate the state
-    handle__click_close: function (button) {
-      this.$emit('modalClose')
-    },
-    handle__click_navigate: function (direction) {
-      this.$emit('modalNavigate', direction)
-    },
-
-    /**
-     * Public methods
-     **/
-    open: function () {
-      this.visible = true
-    },
-    close: function () {
-      this.visible = false
-    }
-  }
-}
-</script>

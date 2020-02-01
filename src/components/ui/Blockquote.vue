@@ -10,10 +10,6 @@
 </template>
 
 <style scoped lang="scss">
-
-// @import "../../style/variables.scss";
-// @import "../../style/reset.scss";
-
 blockquote {
   margin: 0;
   padding: 10px 10px 1px 20px; // margin-collapsing when bottom-pad set to 0px
@@ -30,7 +26,6 @@ blockquote + blockquote { // limited by markdown output, I'm using a 2nd blockqu
 </style>
 
 <script>
-
 export default {
   name: 'Blockquote',
   data () {
