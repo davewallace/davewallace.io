@@ -17,6 +17,7 @@ selenium-debug.log
 *.sln
 *.sublime-project
 *.sublime-workspace
+*.code-workspace
 
 # Github wiki repo
 wiki/
