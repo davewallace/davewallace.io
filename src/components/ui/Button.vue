@@ -4,11 +4,18 @@
       href=""
       class="button button--generic">
 
-    <slot name="button_icon" />
+    <!-- if we have an iconprop defined, render an icon and wrap text in a span -->
+    <template v-if="icon">
+      <slot name="button_icon" />
+      <span :class="this.visuallyHiddenText ? 'visually-hidden' : ''">
+        <slot name="button_label">Button</slot>
+      </span>
+    </template>
 
-    <span :class="this.visuallyHiddenText ? 'visually-hidden' : ''">
+    <!-- otherwise just keep it simple -->
+    <template v-else>
       <slot name="button_label">Button</slot>
-    </span>
+    </template>
   </a>
 </template>
 
@@ -96,7 +103,8 @@ export default {
     }
   },
   props: [
-    'visuallyHiddenText'
+    'visuallyHiddenText',
+    'icon'
   ],
   methods: {
 

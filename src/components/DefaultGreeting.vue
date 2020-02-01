@@ -46,8 +46,8 @@ export default {
   name: 'DefaultGreeting',
   data () {
     return {
-      greeting_primary: 'Hello,',
-      greeting_secondary: 'and welcome.',
+      greeting_primary: 'Hello',
+      greeting_secondary: ', and welcome.',
       greeting_tertiary: 'You\'ve opened my portfolio, thanks. Select the work you\'d like to see...'
     }
   },

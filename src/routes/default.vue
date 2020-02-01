@@ -120,43 +120,37 @@ export default {
       grid_allSortOptions: [
         {
           value: 'Technical Consultation',
-          icon: '',
           id: 'technical-consultation',
-          selected: false
+          selected: false,
+          icon: 'helloworld'
         },
         {
           value: 'Team Leadership',
-          icon: '',
           id: 'team-leadership',
           selected: false
         },
         {
           value: 'Production Management',
-          icon: '',
           id: 'production-management',
           selected: false
         },
         {
           value: 'Accessibility',
-          icon: '',
           id: 'accessibility',
           selected: false
         },
         {
           value: 'User Experience',
-          icon: '',
           id: 'user-experience',
           selected: false
         },
         {
           value: 'User Interface Design',
-          icon: '',
           id: 'user-interface-design',
           selected: false
         },
         {
           value: 'Front-end Development',
-          icon: '',
           id: 'front-end-development',
           selected: false
         }
