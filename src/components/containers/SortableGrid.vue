@@ -53,86 +53,6 @@
   </div> <!-- /.sortable-grid__root -->
 </template>
 
-<style lang="scss">
-
-@import "../../style/variables.scss";
-@import "../../style/reset.scss";
-
-.sortable-grid {
-
-  // We'll implement grid here because its cool. but we'll start with defaults
-  // for IE11 and older evergreen browsers
-  &__grid {
-    @include reset-list();
-
-    // default flex, IE11 & older evergreen browsers
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    // yaay, we got grid
-    display: grid;
-    grid-gap: $pad__grid-gap--desktop;
-
-    // lets optimise for older, narrow width devices when content starts looking
-    // unreadable
-    @media (max-width: 320px) {
-      display: block;
-      max-width: initial;
-      margin-bottom: $pad__grid-gap--device;
-      padding: 0 1%;
-    }
-
-    /**
-     * States & modifiers
-     **/
-    // Our top grid will contain larger, more prominent children
-    &--primary {
-      grid-template-columns: 1fr 1fr 1fr;
-      margin-bottom: 40px;
-
-      @media (max-width: 760px) {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    // Our bottom grid will contain smaller, less prominent children
-    &--secondary {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-
-      @media (max-width: 760px) {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-      @media (max-width: 480px) {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  } // &__grid
-
-    // Again with child grid items, we'll default to older layouts and use
-    // @supports to then wipe out those defaults in grid-supporting browsers
-    &__grid-item {
-      @include reset-list();
-
-      position: relative;
-      @media (max-width: 320px) {
-        margin-bottom: 30px;
-      }
-
-      // yaay, we got grid, clear out non-grid defaults
-      @supports (display: grid) {
-      }
-    } // /&__grid-item
-
-    .sortable-grid__selection-notice {
-      font-size: 0.8em;
-      margin-bottom: 10px;
-      color: #b1afaf;
-    }
-
-} // /.sortable-grid
-</style>
-
 <script>
 import SortableGridMenu from './SortableGridMenu'
 import SortableGridItem from './SortableGridItem'
@@ -360,3 +280,83 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+
+// @import "../../style/variables.scss";
+// @import "../../style/reset.scss";
+
+.sortable-grid {
+
+  // We'll implement grid here because its cool. but we'll start with defaults
+  // for IE11 and older evergreen browsers
+  &__grid {
+    @include reset-list();
+
+    // default flex, IE11 & older evergreen browsers
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    // yaay, we got grid
+    display: grid;
+    grid-gap: $pad__grid-gap--desktop;
+
+    // lets optimise for older, narrow width devices when content starts looking
+    // unreadable
+    @media (max-width: 320px) {
+      display: block;
+      max-width: initial;
+      margin-bottom: $pad__grid-gap--device;
+      padding: 0 1%;
+    }
+
+    /**
+     * States & modifiers
+     **/
+    // Our top grid will contain larger, more prominent children
+    &--primary {
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-bottom: 40px;
+
+      @media (max-width: 760px) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    // Our bottom grid will contain smaller, less prominent children
+    &--secondary {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
+      @media (max-width: 760px) {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      @media (max-width: 480px) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  } // &__grid
+
+    // Again with child grid items, we'll default to older layouts and use
+    // @supports to then wipe out those defaults in grid-supporting browsers
+    &__grid-item {
+      @include reset-list();
+
+      position: relative;
+      @media (max-width: 320px) {
+        margin-bottom: 30px;
+      }
+
+      // yaay, we got grid, clear out non-grid defaults
+      @supports (display: grid) {
+      }
+    } // /&__grid-item
+
+    .sortable-grid__selection-notice {
+      font-size: 0.8em;
+      margin-bottom: 10px;
+      color: #b1afaf;
+    }
+
+} // /.sortable-grid
+</style>

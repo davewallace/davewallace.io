@@ -4,8 +4,8 @@
 
 <style scoped lang="scss">
 
-@import "../../style/variables.scss";
-@import "../../style/reset.scss";
+// @import "../../style/variables.scss";
+// @import "../../style/reset.scss";
 
 i {
   display: inline-block;

@@ -11,8 +11,8 @@
 
 <style scoped lang="scss">
 
-@import "../../style/variables.scss";
-@import "../../style/reset.scss";
+// @import "../../style/variables.scss";
+// @import "../../style/reset.scss";
 
 blockquote {
   margin: 0;

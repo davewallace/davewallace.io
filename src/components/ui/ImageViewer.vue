@@ -29,9 +29,9 @@
 
 <style lang="scss">
 
-@import "../../style/variables.scss";
-@import "../../style/reset.scss";
-@import "../../style/utility.scss";
+// @import "../../style/variables.scss";
+// @import "../../style/reset.scss";
+// @import "../../style/utility.scss";
 
 /**
  * Component

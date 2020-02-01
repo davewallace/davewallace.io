@@ -25,7 +25,8 @@ exports.cssLoaders = function (options) {
   const combinecssLoader = {
     loader: 'sass-loader',
     options: {
-      sourceMap: options.sourceMap
+      sourceMap: options.sourceMap,
+      prependData: `@import "../../style/variables.scss";`
     }
   }
    

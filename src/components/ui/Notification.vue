@@ -12,8 +12,8 @@
 
 <style scoped lang="scss">
 
-@import "../../style/variables.scss";
-@import "../../style/reset.scss";
+// @import "../../style/variables.scss";
+// @import "../../style/reset.scss";
 
 .notification {
   padding: $pad__box--desktop;

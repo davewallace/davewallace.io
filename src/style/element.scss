@@ -1,4 +1,4 @@
-@import "variables.scss";
+// @import "variables.scss";
 
 /**
  * Note that this reset handles only the very basic HTML elements
@@ -13,6 +13,9 @@ html, body, iframe {
 }
 html * {
 	box-sizing: border-box;
+}
+body {
+  background: $color__base;
 }
 
 // I follow a bottom-only margin policy where possible
@@ -31,8 +34,7 @@ a {
   }
 }
 
-@mixin reset-list() {
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
+img {
+	display: inline-block;
+	max-width: 100%;
 }

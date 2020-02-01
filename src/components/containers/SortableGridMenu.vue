@@ -16,11 +16,78 @@
   </ul>
 </template>
 
+<script>
+import Button from '@/components/ui/Button'
+
+export default {
+  name: 'SortableGridMenu',
+  components: {
+    Button
+  },
+  props: [
+    'grid_allSortOptions',
+    'currentMenuItem'
+  ],
+  data () {
+    return {
+      selectedSortOptions: []
+    }
+  },
+  methods: {
+
+    /**
+     * Event handlers
+     **/
+
+    /**
+     *
+     * @param currentTarget (Object) currently selected sort option's Object representation
+     **/
+    handle__sortOptionClick: function (currentTarget, allTargets) {
+
+      // The selection status on the current target is a toggle, allowing deselection of
+      // previously selected options
+      currentTarget.selected = !currentTarget.selected
+
+      // Harvest an Array of currently selected sort option Objects (0 or many)
+      let selectedSortOptions = this.grid_allSortOptions.filter(function (currentValue, idx) {
+        if (currentValue.selected) {
+          return currentValue.id
+        }
+      })
+
+      // Force the selected option to the start of the Array, we will assume this is the currently
+      // most desired option. this may incorrectly assume that users aren't trying to narrow
+      // down sorting by adding more tags, where this solution widens sorting by accumulating more
+      // results, while also placing the most recently selected option first.
+      if (currentTarget.selected) {
+        //selectedSortOptions.unshift(currentTarget)
+      }
+      let uniqueSelectedSortOptions = [...(new Set(selectedSortOptions))]
+      this.selectedSortOptions = uniqueSelectedSortOptions
+
+      // Emit the event for parent component to observe, ensuring a unique Array of selected options
+      // is supplied
+      this.$emit('handle__sortOptionClick', {
+        uniqueSelectedSortOptions: uniqueSelectedSortOptions,
+        currentTarget: currentTarget
+      })
+    }
+  },
+
+  /**
+   * Lifecycle methods
+   **/
+  created: function () {
+  }
+}
+</script>
+
 <style lang="scss">
 
-@import "../../style/reset.scss";
-@import "../../style/utility.scss";
-@import "../../style/variables.scss";
+// @import "../../style/reset.scss";
+// @import "../../style/utility.scss";
+// @import "../../style/variables.scss";
 
 // State mixins
 @mixin state-transition--hover($transform) {
@@ -92,70 +159,3 @@
 
 } // /.sortable-grid__menu
 </style>
-
-<script>
-import Button from '@/components/ui/Button'
-
-export default {
-  name: 'SortableGridMenu',
-  components: {
-    Button
-  },
-  props: [
-    'grid_allSortOptions',
-    'currentMenuItem'
-  ],
-  data () {
-    return {
-      selectedSortOptions: []
-    }
-  },
-  methods: {
-
-    /**
-     * Event handlers
-     **/
-
-    /**
-     *
-     * @param currentTarget (Object) currently selected sort option's Object representation
-     **/
-    handle__sortOptionClick: function (currentTarget, allTargets) {
-
-      // The selection status on the current target is a toggle, allowing deselection of
-      // previously selected options
-      currentTarget.selected = !currentTarget.selected
-
-      // Harvest an Array of currently selected sort option Objects (0 or many)
-      let selectedSortOptions = this.grid_allSortOptions.filter(function (currentValue, idx) {
-        if (currentValue.selected) {
-          return currentValue.id
-        }
-      })
-
-      // Force the selected option to the start of the Array, we will assume this is the currently
-      // most desired option. this may incorrectly assume that users aren't trying to narrow
-      // down sorting by adding more tags, where this solution widens sorting by accumulating more
-      // results, while also placing the most recently selected option first.
-      if (currentTarget.selected) {
-        //selectedSortOptions.unshift(currentTarget)
-      }
-      let uniqueSelectedSortOptions = [...(new Set(selectedSortOptions))]
-      this.selectedSortOptions = uniqueSelectedSortOptions
-
-      // Emit the event for parent component to observe, ensuring a unique Array of selected options
-      // is supplied
-      this.$emit('handle__sortOptionClick', {
-        uniqueSelectedSortOptions: uniqueSelectedSortOptions,
-        currentTarget: currentTarget
-      })
-    }
-  },
-
-  /**
-   * Lifecycle methods
-   **/
-  created: function () {
-  }
-}
-</script>

@@ -33,10 +33,84 @@
   </div>
 </template>
 
+<script>
+
+import List from '@/components/ui/List'
+
+export default {
+  name: 'SortableGridItem',
+  components: {
+    List
+  },
+
+  // TODO: obviously abstract this to simply content
+  props: {
+    title: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    blurb: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    body: {
+      type: String,
+      default: function () {
+        return ''
+      }
+    },
+    date: {
+      type: String,
+      default: function () {
+        return '2018'
+      }
+    },
+    tags: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    isOpen: {
+      type: Boolean,
+      default: function () {
+        return false
+      }
+    },
+    grid_currentMenuItem: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
+  },
+
+  methods: {
+
+    /**
+     * Event handlers
+     **/
+    handle__click: function (event) {
+      this.$emit('handle__gridItemSelected', event)
+    }
+  },
+
+  /**
+   * Lifecycle methods
+   **/
+  created: function () {
+  }
+}
+</script>
+
 <style lang="scss">
-@import "../../style/reset.scss";
-@import "../../style/variables.scss";
-@import "../../style/utility.scss";
+// @import "../../style/reset.scss";
+// @import "../../style/variables.scss";
+// @import "../../style/utility.scss";
 
 // Base className for BEM prefixing - do not add styles at the base level,
 // they belong in <SortableGrid />
@@ -241,76 +315,3 @@
     }
   }
 </style>
-<script>
-
-import List from '@/components/ui/List'
-
-export default {
-  name: 'SortableGridItem',
-  components: {
-    List
-  },
-
-  // TODO: obviously abstract this to simply content
-  props: {
-    title: {
-      type: String,
-      default: function () {
-        return ''
-      }
-    },
-    blurb: {
-      type: String,
-      default: function () {
-        return ''
-      }
-    },
-    body: {
-      type: String,
-      default: function () {
-        return ''
-      }
-    },
-    date: {
-      type: String,
-      default: function () {
-        return '2018'
-      }
-    },
-    tags: {
-      type: Array,
-      default: function () {
-        return []
-      }
-    },
-    isOpen: {
-      type: Boolean,
-      default: function () {
-        return false
-      }
-    },
-    grid_currentMenuItem: {
-      type: Object,
-      default: function () {
-        return {}
-      }
-    }
-  },
-
-  methods: {
-
-    /**
-     * Event handlers
-     **/
-    handle__click: function (event) {
-      this.$emit('handle__gridItemSelected', event)
-    }
-  },
-
-  /**
-   * Lifecycle methods
-   **/
-  created: function () {
-  }
-}
-</script>
