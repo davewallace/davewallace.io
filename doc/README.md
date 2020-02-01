@@ -33,6 +33,10 @@ npm run harvest_wiki_data
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
+## Updating project dependencies
+Before picking up this project after some time, check node version is a latest version. This project was also originally created with `vue-cli`, the [repository for that scaffolding project is here](https://cli.vuejs.org/), so try to stay within that tool for version updates.
+
+
 ## Persona stories
 
 Ordered by desired relevance:
