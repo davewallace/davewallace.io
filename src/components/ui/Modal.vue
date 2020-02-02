@@ -258,7 +258,7 @@ export default {
       line-height: 1.3em;
       margin: 0 2px 2px 0;
       padding: 1px 4px;
-      font-size: $font__size--smallest;
+      font-size: $font__size--small;
       font-style: italic;
       color: $color__base;
       background: $color__base--yellow;
