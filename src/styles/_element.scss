@@ -15,23 +15,24 @@ html * {
 	box-sizing: border-box;
 }
 body {
-  background: $color__base;
+	background: $color__base;
 }
 
 // I follow a bottom-only margin policy where possible
 h1, h2, h3, h4, h5, h6, p {
 	margin: 0 0 15px 0;
 }
-p {
-  line-height: $font__line-height--medium;
+p, li {
+	font-size: $font__size--medium;
+	line-height: $font__line-height--medium;
 }
 
 // Vue's @click.prevent removes the default pointer
 a {
-  cursor: pointer;
-  &[disabled=true] {
-    cursor: not-allowed;
-  }
+	cursor: pointer;
+	&[disabled=true] {
+		cursor: not-allowed;
+	}
 }
 
 img {

@@ -146,15 +146,17 @@ export default {
     flex-direction: column;
     height: 100%;
     max-height: 100vh;
-    padding: 60px 60px 0px 60px;
+    padding: $pad__modal;
 
     @media (min-width: 600px) {
       margin: 0 auto;
-      max-width: 80vw;
+      width: 90vw;
+      max-width: 700px;
     }
     @media (min-width: 1200px) {
       margin: 0 auto;
-      max-width: 60vw;
+      width: 70vw;
+      max-width: $page__max-width;
     }
   }
 
