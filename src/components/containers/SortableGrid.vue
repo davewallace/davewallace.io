@@ -6,10 +6,7 @@
     <SortableGridMenu
       :grid-all-sort-options="gridAllSortOptions"
       :grid-selected-sort-options="gridSelectedSortOptions"
-      @handle__sortOptionClick="handle__sortOptionClick" />
-
-{{gridData}}
-{{gridSortedDataPrimary}}
+      @sort-option-click="handle__sortOptionClick" />
 
     <!-- Grid contents sorted by user prefs & date. Conditionally rendered. -->
     <div v-if="gridSortedDataPrimary.length">
@@ -30,7 +27,7 @@
             :tags="gridSortedDataPrimaryItem.tags"
             :date="gridSortedDataPrimaryItem.date"
             :is-open="gridSortedDataPrimaryItem.selected ? true : false"
-            @handle__gridItemSelected="handle__gridItemSelected($event, gridSortedDataPrimaryItem, gridSortedDataPrimary)" />
+            @grid-item-selected="handle__gridItemSelected($event, gridSortedDataPrimaryItem, gridSortedDataPrimary)" />
         </li>
       </ul>
     </div>
@@ -49,7 +46,7 @@
           :tags="gridSortedDataSecondaryItem.tags"
           :date="gridSortedDataSecondaryItem.date"
           :is-open="gridSortedDataSecondaryItem.selected ? true : false"
-          @handle__gridItemSelected="handle__gridItemSelected($event, gridSortedDataSecondaryItem, gridSortedDataSecondary)" />
+          @grid-item-selected="handle__gridItemSelected($event, gridSortedDataSecondaryItem, gridSortedDataSecondary)" />
       </li>
     </ul>
 
@@ -133,7 +130,9 @@ export default {
   /**
    * Lifecycle methods
    **/
-  mounted: function () {
+  created: function () {
+
+    console.log('SortableGrid.vue created.')
 
     // Start with a date-sorted list of data
     this.sortGridData()
@@ -149,7 +148,7 @@ export default {
      **/
     handle__gridItemSelected: function (event, gridSelectedItem, gridDataSource) {
 
-      this.$emit('gridItemSelected', {
+      this.$emit('grid-item-selected', {
         event,
         gridSelectedItem,
         gridDataSource
@@ -183,7 +182,7 @@ export default {
       console.log('Grid handled sortOptionClick()')
 
       // Propagate event up to parent
-      this.$emit('sortOptionClick', {
+      this.$emit('sort-option-click', {
         gridSelectedSortOptions: this.gridSelectedSortOptions
       })
     },
@@ -255,10 +254,11 @@ export default {
       let secondarySortData = [...(new Set(this.gridData))].sort(function (b, a) {
         return parseFloat(a.date) - parseFloat(b.date)
       })
-//console.log(self.gridData)
-console.log(primarySortStructures)
+
+      console.log('emitting:gridDataSorted')
+
       // emit data back to parent which will mutate this components' state props
-      this.$emit('gridDataSorted', {
+      this.$emit('grid-data-sorted', {
         // TODO: Array spread will not work in IE11
         gridSortedDataPrimary: [...(new Set(primarySortData))],
         gridSortedDataSecondary: secondarySortData

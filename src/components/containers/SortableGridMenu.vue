@@ -79,7 +79,7 @@ export default {
 
       // Emit the event for parent component to observe, ensuring a unique Array of selected options
       // is supplied
-      this.$emit('handle__sortOptionClick', {
+      this.$emit('sort-option-click', {
         uniqueSelectedSortOptions: uniqueSelectedSortOptions,
         currentTarget: currentTarget
       })

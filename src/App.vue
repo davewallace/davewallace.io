@@ -9,8 +9,8 @@
 
     <Modal :visible="modalVisible"
            :grid-most-recently-interacted-grid-data="gridMostRecentlyInteractedGridData"
-           @:modalClose="modalVisible = false"
-           @:modalNavigate="handle__modalNavigate">
+           @modal-close="modalVisible = false"
+           @modal-navigate="handle__modalNavigate">
 
       <template slot="modalTitle">
         {{ modalTitle }}
@@ -59,9 +59,9 @@
                   :grid-sorted-data-secondary="gridSortedDataSecondary"
                   :grid-selected-item="gridSelectedItem"
                   :grid-all-sort-options="gridAllSortOptions"
-                  @:gridItemSelected="handle__gridItemSelected"
-                  @:gridDataSorted="handle__gridDataSorted"
-                  @:sortOptionClick="handle__sortOptionClick" />
+                  @grid-item-selected="handle__gridItemSelected"
+                  @grid-data-sorted="handle__gridDataSorted"
+                  @sort-option-click="handle__sortOptionClick" />
 
   </div>
 </template>
@@ -222,6 +222,14 @@ export default {
     }
 
   },
+
+  /**
+   * Lifecycle methods
+   **/
+  created: function () {
+    console.log('App.vue created.')
+  },
+
   methods: {
 
     /**
@@ -310,7 +318,6 @@ export default {
     },
 
     handle__gridDataSorted: function (data) {
-      console.log(data.gridSortedDataPrimary)
       this.gridSortedDataPrimary = data.gridSortedDataPrimary
       this.gridSortedDataSecondary = data.gridSortedDataSecondary
     },

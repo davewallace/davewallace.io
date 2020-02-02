@@ -93,7 +93,7 @@ export default {
      * Event handlers
      **/
     handle__click: function (event) {
-      this.$emit('handle__gridItemSelected', event)
+      this.$emit('grid-item-selected', event)
     }
   }
 }

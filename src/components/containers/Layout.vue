@@ -20,10 +20,8 @@ export default {
   name: 'Layout',
   props: {
     data: {
-      type: Object,
-      default: function () {
-        return {}
-      }
+      type: String,
+      default: ''
     }
   }
 }

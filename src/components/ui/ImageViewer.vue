@@ -64,13 +64,13 @@ export default {
     // manipulate the state
     handle__click_close: function (button) {
       this.expanded = false
-      this.$emit('imageViewerClose')
+      this.$emit('image-viewer-close')
     },
 
     //
     handle__click_expand: function (button) {
       this.expanded = true
-      this.$emit('imageViewerExpand')
+      this.$emit('image-viewer-expand')
     },
 
     /**

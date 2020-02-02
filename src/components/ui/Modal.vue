@@ -85,7 +85,7 @@ export default {
   watch: {
     visible: function (newValue, oldValue) {
       // Notify any parent components wanting to update this component's state
-      this.$emit('changeVisible', {
+      this.$emit('change-visible', {
         oldValue: oldValue,
         newValue: newValue
       })
@@ -106,10 +106,10 @@ export default {
     // Notify any subscribers about button actions, the parent will then
     // manipulate the state
     handle__click_close: function (button) {
-      this.$emit('modalClose')
+      this.$emit('modal-close')
     },
     handle__click_navigate: function (direction) {
-      this.$emit('modalNavigate', direction)
+      this.$emit('modal-navigate', direction)
     },
 
     /**
