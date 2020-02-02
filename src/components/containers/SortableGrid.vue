@@ -13,8 +13,6 @@
 
       <h3 class="sortable-grid__selection-notice">My work, sorted by your selections and by date...</h3>
       <ul class="sortable-grid__grid sortable-grid__grid--primary">
-        <!-- TODO: abstract this element into <SortableGridItem /> so it renders
-            an <li> or other element as its root node -->
         <li v-for="gridSortedDataPrimaryItem in gridSortedDataPrimary"
             :key="gridSortedDataPrimaryItem.value"
             class="sortable-grid__grid-item"
@@ -131,9 +129,6 @@ export default {
    * Lifecycle methods
    **/
   created: function () {
-
-    console.log('SortableGrid.vue created.')
-
     // Start with a date-sorted list of data
     this.sortGridData()
   },
@@ -178,8 +173,6 @@ export default {
 
       // Update the most recently selected menu item
       this.gridCurrentMenuItem = data.currentTarget
-
-      console.log('Grid handled sortOptionClick()')
 
       // Propagate event up to parent
       this.$emit('sort-option-click', {
@@ -254,8 +247,6 @@ export default {
       let secondarySortData = [...(new Set(this.gridData))].sort(function (b, a) {
         return parseFloat(a.date) - parseFloat(b.date)
       })
-
-      console.log('emitting:gridDataSorted')
 
       // emit data back to parent which will mutate this components' state props
       this.$emit('grid-data-sorted', {

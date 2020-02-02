@@ -12,7 +12,7 @@
 // Centre our main layout on large viewports
 // TODO: do something much more interesting for large viewports!
 .layout-root {
-  max-width: 960px;
+  max-width: $page__max-width;
   margin: 0 auto;
   padding: $pad__body--desktop;
 }
