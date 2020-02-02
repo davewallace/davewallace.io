@@ -19,6 +19,9 @@ $pad__grid-gap--desktop: 30px;
 $pad__grid-gap--device: 15px;
 $pad__box--desktop: 15px;
 $pad__box--device: 10px;
+:root {
+    --grid-gutter: 20px;
+}
 
 /**
  * z-index
