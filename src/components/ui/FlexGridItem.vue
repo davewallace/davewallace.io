@@ -1,11 +1,11 @@
 <template>
   <li
-    class="grid-item"
+    class="flex-grid-item"
     :class="[
-      grows ? 'grid-item--grow' : '',
-      shrinks ? '' : 'grid-item--no-shrink',
-      overflows ? 'grid-item--overflow' : '',
-      hyphens ? '' : 'grid-item--no-hyphens',
+      grows ? 'flex-grid-item--grow' : '',
+      shrinks ? '' : 'flex-grid-item--no-shrink',
+      overflows ? 'flex-grid-item--overflow' : '',
+      hyphens ? '' : 'flex-grid-item--no-hyphens',
     ]"
     :style="{ flexBasis: getSize, order: order }"
   >
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'GridItem',
+  name: 'FlexGridItem',
   props: {
     /**
      * The number of units a GridItem should use in the Grid

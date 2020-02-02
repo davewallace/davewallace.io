@@ -1,11 +1,12 @@
 <!-- No <template /> element, we will use this component's `render()` method to
-     assemble GridItem contents, as we need to use some logic -->
+     assemble FlexGridItem contents, as we need to use some logic -->
 
 <script>
 export default {
+  name: 'FlexGrid',
   props: {
     /**
-     * `horizontal` and `vertical` are the two expected values, the Grid works
+     * `horizontal` and `vertical` are the two expected values, the FlexGrid works
      * in both situations. Vertical grids will need more attention paid to their
      * individual implementations because of limitations when an explicit CSS
      * `height` property is not applied.
@@ -22,7 +23,7 @@ export default {
     gutterSize: {
       type: String,
       default: function () {
-        return 'var(--grid-gutter)';
+        return 'var(--flex-grid__gutter)';
       }
     },
     /**
@@ -46,10 +47,10 @@ export default {
       }
     },
     /**
-     * This property is used to calculate GridItem widths. It can be exceeded
-     * both by the number of GridItem children and also by the total number of
-     * units that each GridItem takes up. While not ideal, if the value is
-     * exceeded, excess GridItems will wrap.
+     * This property is used to calculate FlexGridItem widths. It can be exceeded
+     * both by the number of FlexGridItem children and also by the total number of
+     * units that each FlexGridItem takes up. While not ideal, if the value is
+     * exceeded, excess FlexGridItems will wrap.
      **/
     maxUnits: {
       type: Number,
@@ -60,21 +61,21 @@ export default {
   methods: {
 
     /**
-     * Returns default Grid classNames, combined with supplied additional
+     * Returns default FlexGrid classNames, combined with supplied additional
      * classNames
      *
      * @param {Array} additionalClasses
      * @return {Array}
      */
     gridClasses: function(additionalClasses) {
-      let classes = ['grid', 'grid--' + this.direction];
+      let classes = ['flex-grid', 'flex-grid--' + this.direction];
 
       if (
         this.direction === 'horizontal' &&
         this.useHorizontalGap &&
         !this.isStacked
       ) {
-        classes.push('grid--horizontal-gap');
+        classes.push('flex-grid--horizontal-gap');
       }
 
       if (
@@ -82,7 +83,7 @@ export default {
         this.useVerticalGap &&
         !this.isStacked
       ) {
-        classes.push('grid--vertical-gap');
+        classes.push('flex-grid--vertical-gap');
       }
 
       if (additionalClasses && additionalClasses.length) {
@@ -96,27 +97,26 @@ export default {
   render(h) {
     let totalSuppliedUnits = 0;
 
-    // generate a clean set of intentionally coupled GridItem children, keeping
+    // generate a clean set of intentionally coupled FlexGridItem children, keeping
     // track of the number of supplied units as we go, it may not equal `maxUnits`
     let gridItems = this.$scopedSlots.default().filter(vnode => {
       if (
         vnode.componentOptions &&
-        vnode.componentOptions.Ctor.options.name === 'GridItem'
+        vnode.componentOptions.Ctor.options.name === 'FlexGridItem'
       ) {
         if (typeof vnode.componentOptions.propsData.units !== 'undefined') {
           totalSuppliedUnits += vnode.componentOptions.propsData.units;
         } else {
-          totalSuppliedUnits += 1; // default 'units' per Grid item
+          totalSuppliedUnits += 1; // default 'units' per FlexGrid item
         }
 
         return vnode;
       }
     });
 
-    // determine the gutter size for grid items, which could be zero if props
+    // determine the gutter size for FlexGridItem nodes which could be zero if props
     // have been supplied to disable visual gaps
     let gutterSize = this.gutterSize;
-    ////
     if (
       (this.direction === 'horizontal' && !this.useHorizontalGap) ||
       (this.direction === 'vertical' && !this.useVerticalGap)
@@ -172,7 +172,7 @@ export default {
 
         // we're going to wrap, at least once, on this item
         if (currentUnwrappedUnits + addUnits > this.maxUnits) {
-          vnode.data.class.push('grid-item--first');
+          vnode.data.class.push('flex-grid-item--first');
           currentUnwrappedUnits = addUnits; // restart the count
           itemHasWrapped = true;
         } else {
@@ -180,24 +180,24 @@ export default {
         }
 
         if (itemHasWrapped) {
-          vnode.data.class.push('grid-item--wrapped');
+          vnode.data.class.push('flex-grid-item--wrapped');
         }
       }
 
       return vnode;
     });
 
-    // give the first (visual, not DOM order) grid item a first modifier
-    firstGridItem.data.class.push('grid-item--first');
+    // give the first (visual, not DOM order) FlexGridItem a first modifier
+    firstGridItem.data.class.push('flex-grid-item--first');
 
     // apply default classNames to Grid node, plus any conditionally required
     // ones
     let additionalClasses = [];
     if (totalSuppliedUnits > this.maxUnits) {
       if (this.useVerticalGap) {
-        additionalClasses.push('grid--wrapped', 'grid--wrapped-gap');
+        additionalClasses.push('flex-grid--wrapped', 'flex-grid--wrapped-gap');
       } else {
-        additionalClasses.push('grid--wrapped');
+        additionalClasses.push('flex-grid--wrapped');
       }
     }
 
@@ -213,11 +213,11 @@ export default {
 </script>
 
 <style lang="scss">
-@mixin grid-item-generate-gutters(
+@mixin flex-grid-item-generate-gutters(
   $_borderType: left,
-  $_gutterSize: var(--grid-gutter)
+  $_gutterSize: var(--flex-grid__gutter)
 ) {
-  > .grid-item {
+  > .flex-grid-item {
     // because we use transparent borders for gutters but don't want that
     // counting as visible item width
     box-sizing: content-box;
@@ -233,13 +233,13 @@ export default {
   // className instead. this works in most cases with the exception of:
   //  - when the browser ignores the order property due to siblings not having
   //    an order property also
-  > .grid-item--first {
+  > .flex-grid-item--first {
     border-width: 0;
   }
 }
 
 // Grid styles
-.grid {
+.flex-grid {
   display: flex;
   flex-grow: 1; // in case nested inside a parent grid cell
   margin: 0;
@@ -257,10 +257,10 @@ export default {
     min-width: 0; // allows flex items to shrink below their minimum content size
     margin: 0;
     padding: 0;
-    hyphens: auto; // default prevents text from causing grid mis-alignments
+    hyphens: auto; // default prevents text from causing FlexGrid mis-alignments
     list-style-type: none;
 
-    // Grid item modifiers based on supplied prop values
+    // FlexGrid item modifiers based on supplied prop values
     &--grow {
       flex-grow: 1;
     }
@@ -275,34 +275,34 @@ export default {
     }
   }
 
-  // horizontal grid
+  // horizontal FlexGrid
   &--horizontal {
     flex-direction: row;
 
     &-gap {
-      @include grid-item-generate-gutters(left, var(--grid-gutter));
+      @include flex-grid-item-generate-gutters(left, var(--flex-grid__gutter));
     }
   }
 
-  // vertical grid
+  // vertical FlexGrid
   &--vertical {
     flex-direction: column;
 
     &-gap {
-      @include grid-item-generate-gutters(top, var(--grid-gutter));
+      @include flex-grid-item-generate-gutters(top, var(--flex-grid__gutter));
     }
   }
 
-  &--wrapped-gap .grid-item--wrapped {
-    // margin better to use here instead of borders, as natural grid gap is
-    // assumed to be unidirectional, whereas this additional type of grid gap
-    // only applies when grid items wrap, and if the gap is confgured as
-    // desirable for a given grid
-    margin-top: var(--grid-gutter);
+  &--wrapped-gap .flex-grid-item--wrapped {
+    // margin better to use here instead of borders, as natural FlexGrid gap is
+    // assumed to be unidirectional, whereas this additional type of FlexGrid gap
+    // only applies when FlexGridItems wrap, and if the gap is confgured as
+    // desirable for a given FlexGrid
+    margin-top: var(--flex-grid__gutter);
   }
 }
 
-.grid {
+.flex-grid {
   background-color: rgba(255, 0, 0, 0.2);
   * {
     background-color: rgba(0, 255, 0, 0.2);
@@ -320,7 +320,7 @@ export default {
     background-color: rgba(255, 255, 0, 0.2);
   }
 
-  .grid-item--first {
+  .flex-grid-item--first {
     background: cyan;
   }
 }
