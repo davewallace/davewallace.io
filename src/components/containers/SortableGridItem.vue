@@ -17,7 +17,7 @@
       <div class="sortable-grid__grid-item__footer">
 
         <List :data="tags"
-              :class-name="'sortable-grid__tags'" />
+              :class-name="'sortable-grid-tags'" />
 
         <a href=""
            class="sortable-grid__grid-item__link"
@@ -272,22 +272,24 @@ export default {
 }
 
 // tags
-.sortable-grid__tags {
-  @include reset-list();
-  line-height: 1.1em;
-}
-  .sortable-grid__tags-item {
-    @include reset-list();
-    display: inline-block;
-    vertical-align: top;
-    line-height: 1.3em;
-    margin: 0 2px 2px 0;
-    padding: 1px 4px;
+.sortable-grid-tags {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 3px;
+  padding-left: 3px;
+
+  &__item {
+    // display: inline-block;
+    // vertical-align: top;
+    // line-height: 1.3em;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    padding: 2px 3px;
     font-size: $font__size--smallest;
     font-style: italic;
     color: $color__base;
     background: $color__base--yellow;
-
+  }
     /**
      * States & modifiers
      **/

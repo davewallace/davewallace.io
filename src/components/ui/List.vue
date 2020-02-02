@@ -4,8 +4,8 @@
     <li v-for="dataObject in data"
         :key="dataObject.id"
         :class="[
-          className ? className + '-item' : 'list__item',
-          dataObject.selected ? (className ? className + '-item--selected' : 'list__item--selected') : ''
+          className ? className + '__item' : 'list__item',
+          dataObject.selected ? (className ? className + '__item--selected' : 'list__item--selected') : ''
         ]">
       {{ dataObject.value }}
     </li>
@@ -36,9 +36,9 @@ export default {
 
 <style lang="scss">
 .list {
-
+  @include reset-list();
   &__item {
+    @include reset-list();
   }
-} // /.list
-
+}
 </style>

@@ -12,23 +12,10 @@
     </Button>
 
     <div class="modal_content">
-      <h3 class="modal_title">
-        <slot name="modalTitle">
-          Slot header
-        </slot>
-      </h3>
 
-      <h4 class="modal_blurb">
-        <slot name="modalBlurb">
-          Slot blurb
-        </slot>
-      </h4>
-
-      <div class="modal_body">
-        <slot name="modalBody">
-          <p>Slot content.</p>
-        </slot>
-      </div>
+      <slot name="modalBody">
+        <p>Slot content.</p>
+      </slot>
 
       <div class="modal_navigation">
         <Button class="modal_button-backward button--tertiary"
@@ -50,7 +37,25 @@
           </template>
         </Button>
 
-        <slot name="modal_notification" />
+        <Notification v-if="modalNotificationVisible" type="info">
+
+          <template slot="notification_body">
+            <p>You've reached the end of your selection. Would you like to...</p>
+          </template>
+
+          <template slot="notification_controls">
+            <Button class="button--primary"
+                    @click="handle__click_resetLoop">
+              <template slot="button_label">Start again</template>
+            </Button>
+            <span class="notification_control-seperator">or...</span>
+            <Button class="button--secondary"
+                    @click="handle__click_close">
+              <template slot="button_label">Close this box</template>
+            </Button>
+          </template>
+
+        </Notification>
 
       </div>
     </div><!-- /.modal_content -->
@@ -61,27 +66,25 @@
 <script>
 import Button from '@/components/ui/Button'
 import Icon from '@/components/ui/Icon'
+import Notification from '@/components/ui/Notification'
 
 export default {
   name: 'Modal',
   components: {
     Button,
-    Icon
+    Icon,
+    Notification
   },
   props: {
-    'visible': {
-        default: false,
-        type: Boolean
+    visible: {
+      default: false,
+      type: Boolean
     },
-    'modalBody': {
-        default: '',
-        type: String
-    },
-    'modalTitle': {
-        default: '',
-        type: String
+    modalNotificationVisible: {
+      default: false,
+      type: Boolean
     }
-},
+  },
   watch: {
     visible: function (newValue, oldValue) {
       // Notify any parent components wanting to update this component's state
@@ -111,6 +114,9 @@ export default {
     handle__click_navigate: function (direction) {
       this.$emit('modal-navigate', direction)
     },
+    handle__click_resetLoop: function () {
+      this.$emit('modal-reset-loop')
+    },
 
     /**
      * Public methods
@@ -125,7 +131,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 /**
  * States and modifiers
  **/
@@ -160,20 +166,12 @@ export default {
     }
   }
 
-  &_title,
-  &_blurb,
-  &_body,
-  &_navigation {
-    border: 1px dotted pink;
-  }
-
   // title content
-  &_title {
+  h3 {
   }
 
   // blurb content
-  &_blurb {
-    color: pink;
+  h4 {
   }
 
   // navigation controls for collections of modal content
@@ -243,25 +241,5 @@ export default {
   &--invisible {
     @include visually-hidden();
   }
-
-  /**
-   * Nested Tags
-   **/
-  &__tags {
-    @include reset-list();
-    line-height: 1.1em;
-  }
-    &__tags-item {
-      @include reset-list();
-      display: inline-block;
-      vertical-align: top;
-      line-height: 1.3em;
-      margin: 0 2px 2px 0;
-      padding: 1px 4px;
-      font-size: $font__size--small;
-      font-style: italic;
-      color: $color__base;
-      background: $color__base--yellow;
-    }
 }
 </style>

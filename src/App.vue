@@ -9,49 +9,26 @@
 
     <Modal :visible="modalVisible"
            :grid-most-recently-interacted-grid-data="gridMostRecentlyInteractedGridData"
-           @modal-close="modalVisible = false"
-           @modal-navigate="handle__modalNavigate">
+           :modal-notification-visible="modalNotificationVisible"
+           @modal-close="handle__modalClose"
+           @modal-navigate="handle__modalNavigate"
+           @modal-reset-loop="handle__modalResetLoop">
 
-      <template slot="modalTitle">
-        {{ modalTitle }}
-      </template>
+      <template v-if="gridSelectedItem" slot="modalBody">
 
-      <template slot="modalBlurb">
-        {{ modalBlurb }}
-      </template>
+        <h3>{{ gridSelectedItem.title }}</h3>
+        <h4>{{ gridSelectedItem.blurb }}</h4>
 
-      <template slot="modalBody">
-        <Layout :data="modalBody" />
-
-        <h5>Core skills</h5>
         <List v-if="gridSelectedItem"
               :data="gridSelectedItem.tags"
-              :class-name="'modal__tags'" />
+              :class-name="'tag-list'" />
+
+        <Layout :data="gridSelectedItem.body" />
 
         <ImageViewer v-if="gridSelectedItem && gridSelectedItem.gallery"
                      :data="gridSelectedItem.gallery" />
+
       </template>
-
-      <template slot="modal_notification">
-        <Notification v-if="modalNotificationVisible" type="info">
-
-          <template slot="notification_body">
-            <p>You've reached the end of your selection. Would you like to...</p>
-          </template>
-
-          <template slot="notification_controls">
-            <Button class="button--primary">
-              <template slot="button_label">Start again</template>
-            </Button>
-            <span class="notification_control-seperator">or...</span>
-            <Button class="button--secondary">
-              <template slot="button_label">Close this box</template>
-            </Button>
-          </template>
-
-        </Notification>
-      </template>
-
     </Modal>
 
     <SortableGrid :grid-data="gridData"
@@ -72,10 +49,9 @@ import DefaultGreeting from '@/components/DefaultGreeting'
 import SortableGrid from '@/components/containers/SortableGrid'
 import Modal from '@/components/ui/Modal'
 import ImageViewer from '@/components/ui/ImageViewer'
-import Layout from '@/components/containers/Layout'
-import Notification from '@/components/ui/Notification'
-import Button from '@/components/ui/Button'
 import List from '@/components/ui/List'
+
+import Layout from '@/components/containers/Layout'
 //import StaticGridDataImport from '@/data/grid-data'
 import StaticGridDataImport from '@/data/grid-data-dummy'
 
@@ -88,19 +64,14 @@ export default {
     DefaultGreeting,
     SortableGrid,
     Modal,
-    Layout,
-    Notification,
-    Button,
     List,
+    Layout,
     ImageViewer
   },
   data () {
     return {
 
       // Modal state
-      modalTitle: null,
-      modalBlurb: null,
-      modalBody: null,
       modalVisible: false,
       modalNotificationVisible: false,
 
@@ -176,6 +147,8 @@ export default {
       } else {
         this.modalNotificationVisible = false
       }
+
+      console.log(`this.modalNotificationVisible: ${this.modalNotificationVisible}`)
     },
 
     /**
@@ -224,13 +197,6 @@ export default {
 
   },
 
-  /**
-   * Lifecycle methods
-   **/
-  created: function () {
-    console.log('App.vue created.')
-  },
-
   methods: {
 
     /**
@@ -277,13 +243,15 @@ export default {
 
       // Update our selected gridData state
       this.gridSelectedItem = gridData[newIndex]
+    },
 
-      // Update our modal with new gridData props
-      this.updateModal({
-        title: this.gridSelectedItem.title,
-        content: this.formatHTML(this.gridSelectedItem.body),
-        blurb: this.gridSelectedItem.blurb
-      })
+    handle__modalClose: function () {
+      this.modalVisible = false;
+    },
+
+    handle__modalResetLoop: function () {
+      // Reset modal data to first grid item
+      this.gridSelectedItem = this.gridData[0]
     },
 
     /**
@@ -308,12 +276,6 @@ export default {
       // Update modal contents
       let modalContent = this.formatHTML(args.gridSelectedItem.body)
 
-      this.updateModal({
-        title: args.gridSelectedItem.title,
-        content: modalContent,
-        blurb: this.gridSelectedItem.blurb
-      })
-
       // Show the modal
       this.modalVisible = true
     },
@@ -328,24 +290,7 @@ export default {
      **/
 
     /**
-     *
-     * TODO: Could improve this and make content insertion more abstract, but
-     * how to do so without getting too deep into String manipulation?
-     *
-     * data: {
-     *   title: String,
-     *   content: String,
-     *   blurb: String
-     * }
-     **/
-    updateModal: function (data) {
-      this.modalTitle = data.title
-      this.modalBody = data.content
-      this.modalBlurb = data.blurb
-    },
-
-    /**
-     *
+     * 
      **/
     formatHTML: function (markdownString) {
 
@@ -365,3 +310,39 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $color__text-base;
+}
+  /**
+   * Main layout region
+   **/
+  .layout-root {
+    max-width: $page__max-width;
+    margin: 0 auto;
+    padding: $pad__body--desktop;
+  }
+
+  /**
+    * Custom tags inside Modal
+    **/
+  .tag-list {
+    line-height: 1.1em;
+
+    &__item {
+      display: inline-block;
+      vertical-align: top;
+      line-height: 1.3em;
+      margin: 0 2px 2px 0;
+      padding: 1px 4px;
+      font-size: $font__size--small;
+      font-style: italic;
+      color: $color__base;
+      background: $color__base--yellow;
+    }
+  }
+</style>
