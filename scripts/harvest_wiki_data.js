@@ -4,7 +4,7 @@
 
 const fs = require('fs')
 const replace = require('replace-in-file')
-const chalk = require('chalk');
+const chalk = require('chalk')
 
 const log = console.log
 const dir = 'wiki/'
@@ -67,7 +67,7 @@ readContent((err, content) => {
 	log(chalk.bold.green('    ...completed reading and parsing file content.\n'))
 	log(chalk.bold.white('>>') + ' Replacing contents of ' + chalk.bold.blue(src) + ' with ' + chalk.bold.cyan(wiki_page_data_objects.length + ' Object' + ((wiki_page_data_objects.length === 1) ? '' : 's')) + '...')
 
-  // Perform fs write operation into importable data module for main app
+  	// Perform fs write operation into importable data module for main app
 	const options = {
 	  files: src,
 	  from: /const imported = (.*)/gm,

@@ -7,12 +7,6 @@
     -->
     <DefaultGreeting />
 
-    <Grid>
-      <GridItem :units="4">4u</GridItem>
-      <GridItem :units="4">4u</GridItem>
-      <GridItem :units="4">4u</GridItem>
-    </Grid>
-
     <Modal :visible="modalVisible"
            :grid-most-recently-interacted-grid-data="gridMostRecentlyInteractedGridData"
            @modal-close="modalVisible = false"
@@ -82,10 +76,8 @@ import Layout from '@/components/containers/Layout'
 import Notification from '@/components/ui/Notification'
 import Button from '@/components/ui/Button'
 import List from '@/components/ui/List'
-import StaticGridDataImport from '@/data/grid-data'
-
-import Grid from '@/components/ui/Grid'
-import GridItem from '@/components/ui/GridItem'
+//import StaticGridDataImport from '@/data/grid-data'
+import StaticGridDataImport from '@/data/grid-data-dummy'
 
 // markdown to HTML converter, for handling predictable user-facing text content
 import Showdown from 'showdown'
@@ -100,9 +92,7 @@ export default {
     Notification,
     Button,
     List,
-    ImageViewer,
-    Grid,
-    GridItem
+    ImageViewer
   },
   data () {
     return {
