@@ -7,7 +7,7 @@
           className ? className + '__item' : 'list__item',
           dataObject.selected ? (className ? className + '__item--selected' : 'list__item--selected') : ''
         ]">
-      {{ dataObject.value }}
+      {{ dataObject.value }} ({{ dataObject.selected }})
     </li>
   </ul>
 </template>
@@ -29,6 +29,12 @@ export default {
     className: {
       type: String,
       default: ''
+    }
+  },
+  watch: {
+    data: function (newValue, oldValue) {
+      console.log('List data updated...')
+      console.log(newValue)
     }
   }
 }

@@ -155,16 +155,47 @@ export default {
      *
      **/
     gridSortedDataPrimary: function (newValue, oldValue) {
+/*
+      console.log('===================================')
 
-      console.log('gridSortedDataPrimary changed, performing UI updates based on selectedSortOptions (' + this.gridSelectedSortOptions.length + ').')
+      const selectedSortOptions = this.gridSelectedSortOptions
+      //const gridItems = this.gridSortedDataPrimary
+      //console.log('checking ' + gridItems.length + ' grid items')
+      console.log(`gridSortedDataPrimary changed, performing UI updates based on ${selectedSortOptions.length} selectedSortOptions.`)
+
+      console.log(newValue)
+
+      newValue.map(item => {
+      
+        const tags = item.tags
+
+        // iterate all currently selected sort options
+        console.log('\t >> checking ' + tags.length + ' gridItem tags to see if they are in the selected menu tags state...\n\t    tags:', item.tags)
+        for (let x = 0; x < tags.length; x++) {
+
+          tags[x].selected = false
+          console.log('\t\t >>> there are ' + selectedSortOptions.length + ' selectedSortOptions...', selectedSortOptions)
+
+          for (let y = 0; y < selectedSortOptions.length; y++) {
+
+            console.log('\t\tsuccess comparison: tag=' + tags[x].id + ' and selectedSortOptions=' + selectedSortOptions[y].id)
+
+            if (tags[x].id === selectedSortOptions[y].id) {
+              console.log('\t\t --- match found ---')
+              tags[x].selected = true
+            }
+
+          }
+        }
+      })
+*/
 
       /*
       let gridItems = this.gridSortedDataPrimary
-      let self = this
 
       if (gridItems.length) {
 
-        const selectedSortOptions = self.gridSelectedSortOptions
+        const selectedSortOptions = this.gridSelectedSortOptions
         console.log('checking ' + gridItems.length + ' grid items')
 
         gridItems.forEach(item => {
@@ -194,7 +225,6 @@ export default {
       } // eoc
       */
     }
-
   },
 
   methods: {

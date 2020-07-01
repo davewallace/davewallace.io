@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import SortableGridMenu from './SortableGridMenu'
 import SortableGridItem from './SortableGridItem'
 
@@ -120,7 +121,6 @@ export default {
    **/
   watch: {
     gridSelectedItem: function (newValue, oldValue) {
-
       this.updateGridSelectedState()
     }
   },
@@ -209,13 +209,16 @@ export default {
       // structure. This way, the most recently selected sort option items are
       // most prominent - even if they are older than previously selected
       // options.
-      let primarySortData = []
-      let primarySortStructures = []
+      let primarySortData = [];
+      let primarySortStructures = [];
+
       selectedSortOptions.forEach(function (option, sortOptionsIndex) {
 
         self.gridData.forEach(function (dataItem, dataItemIndex) {
 
           dataItem.tags.forEach(function (tagObj) {
+
+            tagObj.selected = false;
 
             // If a given item has tags which match a selected tag, add it to
             // the new Array.
@@ -224,23 +227,57 @@ export default {
               // Create a new data structure for the current user-selected tag,
               // if one does not already exist.
               if (typeof primarySortStructures[sortOptionsIndex] === 'undefined') {
-                primarySortStructures[sortOptionsIndex] = []
+                primarySortStructures[sortOptionsIndex] = [];
               }
-              primarySortStructures[sortOptionsIndex].push(dataItem)
+              primarySortStructures[sortOptionsIndex].push(dataItem);
             }
 
           })
         })
-      })
+      });
 
       // Date sort and concatenate all structures back together, then set
       primarySortStructures.forEach(function (structure) {
 
         let sortedByDate = structure.sort(function (b, a) {
-          return parseFloat(a.date) - parseFloat(b.date)
-        })
-        primarySortData = primarySortData.concat(sortedByDate)
-      })
+          return parseFloat(a.date) - parseFloat(b.date);
+        });
+        primarySortData = primarySortData.concat(sortedByDate);
+      });
+
+
+
+
+
+
+      /*****
+       * THIS IS SUPER MESSED UP, I THINK THE SPLITTING OF DATA STRUCTURES IS LOSING THE REACTIVE DATA REFERENCE
+       * ********/
+      primarySortData.forEach(function (dataItem, index) {
+
+        selectedSortOptions.forEach(function (option, sortOptionsIndex) {
+
+          dataItem.tags.forEach(function (tagObj) {
+
+            if (option.id === tagObj.id) {
+              tagObj.selected = true
+            }
+
+          })
+        });
+
+        Vue.set(primarySortData, index, Object.assign({}, dataItem));
+      });
+
+      // let temp = function (oldObj) {
+      //   return Object.assign({}, oldObj);
+      // };
+      
+
+
+
+
+
 
       // Sort remaining data by date, then set
       // TODO: Array spread will not work in IE11

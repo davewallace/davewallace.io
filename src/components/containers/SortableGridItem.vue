@@ -104,11 +104,6 @@ export default {
 // they belong in <SortableGrid />
 .sortable-grid {
 
-  &__grid-item__tag--selected {
-    // TODO: refactor this dumpster fire
-    background: yellow !important;
-  }
-
   /**
    * Main contents
    **/
@@ -223,7 +218,7 @@ export default {
         // primary blurb text should be prominent, its helpful in describing the
         // role I was in
         .sortable-grid__grid--primary & {
-          font-size: $font__size--largest;
+          font-size: $font__size--large;
         }
       }
       &__grid-item__body-text {
@@ -273,28 +268,27 @@ export default {
 
 // tags
 .sortable-grid-tags {
-  display: flex;
-  flex-wrap: wrap;
   padding-top: 3px;
   padding-left: 3px;
 
   &__item {
-    // display: inline-block;
-    // vertical-align: top;
-    // line-height: 1.3em;
+    display: inline-block;
     margin-right: 3px;
     margin-bottom: 3px;
-    padding: 2px 3px;
-    font-size: $font__size--smallest;
+    padding: 2px 4px;
+    font-size: $font__size--small;
     font-style: italic;
     color: $color__base;
-    background: $color__base--yellow;
-  }
+
     /**
      * States & modifiers
      **/
     .sortable-grid__grid--primary & {
       background: darken($color__base--green, 10);
+
+      &--selected {
+        background: $color__base--yellow;
+      }
     }
     .sortable-grid__grid--secondary & {
       background: darken($color__base--blue, 10);
@@ -304,4 +298,5 @@ export default {
       background: darken($color__base--yellow, 20);
     }
   }
+}
 </style>
