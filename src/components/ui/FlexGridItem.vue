@@ -14,6 +14,9 @@
 </template>
 
 <script>
+// TODO: add `ie` to classList
+const isIE = document.body.classList.contains('ie');
+
 export default {
   name: 'FlexGridItem',
   props: {
@@ -96,11 +99,16 @@ export default {
     // props-based setting of a grid size, by using a single inline style for
     // flex-basis (and only this property!)
     getSize() {
+      // sub-pixel rendering with IE11 works differently to other browsers,
+      // when we don't allow flex-grow and we are also allowing flex-wrap it
+      // is possible that GridItem widths will be mis-calculated
+      let percentage = isIE ? '99.99%' : '100%';
       // one item taking up one unit is calculated by:
       //   - 100% of container minus all required gutters
       //   - divide by max number of units 'allowed' in the Grid
-      let defaultItemSize = `(100% - (${this.sizeData.gutterSize} * ${this
-        .sizeData.maxGridUnits - 1})) / ${this.sizeData.maxGridUnits}`;
+      let defaultItemSize = `(${percentage} - (${
+        this.sizeData.gutterSize
+      } * ${this.sizeData.maxGridUnits - 1})) / ${this.sizeData.maxGridUnits}`;
 
       if (this.units === 1) {
         return `calc( ${defaultItemSize} )`;
@@ -115,7 +123,7 @@ export default {
       } * ${this.units - 1})`;
 
       return `calc( ${multiUnitItemSize} )`;
-    }
+    },
   }
 };
 </script>
