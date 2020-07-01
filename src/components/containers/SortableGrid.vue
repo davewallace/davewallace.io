@@ -12,28 +12,34 @@
     <div v-if="gridSortedDataPrimary.length">
 
       <h3 class="sortable-grid__selection-notice">My work, sorted by your selections and by date...</h3>
-      <ul class="sortable-grid__grid sortable-grid__grid--primary">
-        <li v-for="gridSortedDataPrimaryItem in gridSortedDataPrimary"
-            :key="gridSortedDataPrimaryItem.value"
-            class="sortable-grid__grid-item"
-            :class="gridSortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''">
 
-          <SortableGridItem
-            :grid-current-menu-item="gridCurrentMenuItem"
-            :title="gridSortedDataPrimaryItem.title"
-            :blurb="gridSortedDataPrimaryItem.blurb"
-            :tags="gridSortedDataPrimaryItem.tags"
-            :date="gridSortedDataPrimaryItem.date"
-            :is-open="gridSortedDataPrimaryItem.selected ? true : false"
-            @grid-item-selected="handle__gridItemSelected($event, gridSortedDataPrimaryItem, gridSortedDataPrimary)" />
-        </li>
-      </ul>
+      <FlexGrid class="sortable-grid__grid sortable-grid__grid--primary">
+        <FlexGridItem :units="4"
+          v-for="gridSortedDataPrimaryItem in gridSortedDataPrimary"
+          :key="gridSortedDataPrimaryItem.value"
+          class="sortable-grid__grid-item"
+          :class="gridSortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''">
+
+            <SortableGridItem
+                :grid-current-menu-item="gridCurrentMenuItem"
+                :title="gridSortedDataPrimaryItem.title"
+                :blurb="gridSortedDataPrimaryItem.blurb"
+                :tags="gridSortedDataPrimaryItem.tags"
+                :date="gridSortedDataPrimaryItem.date"
+                :is-open="gridSortedDataPrimaryItem.selected ? true : false"
+                @grid-item-selected="handle__gridItemSelected($event, gridSortedDataPrimaryItem, gridSortedDataPrimary)" />
+
+        </FlexGridItem>
+      </FlexGrid>
+
     </div>
 
     <!-- grid contents, remaining less-preferred data, sorted by date -->
     <h3 class="sortable-grid__selection-notice">All of my work, sorted by date...</h3>
-    <ul class="sortable-grid__grid sortable-grid__grid--secondary">
-      <li v-for="gridSortedDataSecondaryItem in gridSortedDataSecondary"
+
+    <FlexGrid class="sortable-grid__grid sortable-grid__grid--secondary">
+      <FlexGridItem :units="4"
+         v-for="gridSortedDataSecondaryItem in gridSortedDataSecondary"
           :key="gridSortedDataSecondaryItem.value"
           class="sortable-grid__grid-item"
           :class="gridSortedDataSecondaryItem.selected ? 'sortable-grid__grid-item--selected' : ''">
@@ -45,8 +51,9 @@
           :date="gridSortedDataSecondaryItem.date"
           :is-open="gridSortedDataSecondaryItem.selected ? true : false"
           @grid-item-selected="handle__gridItemSelected($event, gridSortedDataSecondaryItem, gridSortedDataSecondary)" />
-      </li>
-    </ul>
+
+      </FlexGridItem>
+    </FlexGrid>
 
   </div> <!-- /.sortable-grid__root -->
 </template>
@@ -55,12 +62,16 @@
 import Vue from 'vue'
 import SortableGridMenu from './SortableGridMenu'
 import SortableGridItem from './SortableGridItem'
+import FlexGrid from '../ui/FlexGrid'
+import FlexGridItem from '../ui/FlexGridItem'
 
 export default {
   name: 'SortableGrid',
   components: {
     SortableGridMenu,
-    SortableGridItem
+    SortableGridItem,
+    FlexGrid,
+    FlexGridItem
   },
 
   /**
@@ -314,79 +325,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.sortable-grid {
-
-  // We'll implement grid here because its cool. but we'll start with defaults
-  // for IE11 and older evergreen browsers
-  &__grid {
-    @include reset-list();
-
-    // default flex, IE11 & older evergreen browsers
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    // yaay, we got grid
-    display: grid;
-    grid-gap: $pad__grid-gap--desktop;
-
-    // lets optimise for older, narrow width devices when content starts looking
-    // unreadable
-    @media (max-width: 320px) {
-      display: block;
-      max-width: initial;
-      margin-bottom: $pad__grid-gap--device;
-      padding: 0 1%;
-    }
-
-    /**
-     * States & modifiers
-     **/
-    // Our top grid will contain larger, more prominent children
-    &--primary {
-      grid-template-columns: 1fr 1fr 1fr;
-      margin-bottom: 40px;
-
-      @media (max-width: 760px) {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    // Our bottom grid will contain smaller, less prominent children
-    &--secondary {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-
-      @media (max-width: 760px) {
-        grid-template-columns: 1fr 1fr 1fr;
-      }
-      @media (max-width: 480px) {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  } // &__grid
-
-    // Again with child grid items, we'll default to older layouts and use
-    // @supports to then wipe out those defaults in grid-supporting browsers
-    &__grid-item {
-      @include reset-list();
-
-      position: relative;
-      @media (max-width: 320px) {
-        margin-bottom: 30px;
-      }
-
-      // yaay, we got grid, clear out non-grid defaults
-      @supports (display: grid) {
-      }
-    } // /&__grid-item
-
-    .sortable-grid__selection-notice {
-      font-size: 0.8em;
-      margin-bottom: 10px;
-      color: #b1afaf;
-    }
-
-} // /.sortable-grid
-</style>
