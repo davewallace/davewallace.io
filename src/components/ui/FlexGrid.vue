@@ -2,6 +2,8 @@
      assemble FlexGridItem contents, as we need to use some logic -->
 
 <script>
+import Vue from 'vue';
+
 export default {
   name: 'FlexGrid',
   props: {
@@ -96,6 +98,8 @@ export default {
 
   render(h) {
     let totalSuppliedUnits = 0;
+
+    console.log(this.$scopedSlots.default);
 
     // generate a clean set of intentionally coupled FlexGridItem children, keeping
     // track of the number of supplied units as we go, it may not equal `maxUnits`

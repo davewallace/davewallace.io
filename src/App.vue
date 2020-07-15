@@ -30,7 +30,7 @@
 
       </template>
     </Modal>
-
+<!-- 
     <SortableGrid :grid-data="gridData"
                   :grid-sorted-data-primary="gridSortedDataPrimary"
                   :grid-sorted-data-secondary="gridSortedDataSecondary"
@@ -38,7 +38,15 @@
                   :grid-all-sort-options="gridAllSortOptions"
                   @grid-item-selected="handle__gridItemSelected"
                   @grid-data-sorted="handle__gridDataSorted"
+                  @sort-option-click="handle__sortOptionClick" /> -->
+
+    <SortableGrid :grid-data="gridData"
+                  :grid-selected-item="gridSelectedItem"
+                  :grid-all-sort-options="gridAllSortOptions"
+                  @grid-item-selected="handle__gridItemSelected"
+                  @grid-data-sorted="handle__gridDataSorted"
                   @sort-option-click="handle__sortOptionClick" />
+
 
   </div>
 </template>
@@ -85,7 +93,41 @@ export default {
       // property of a gridData item is written in markdown, for conversion
       // into HTML. My assumption here is that the content is pretty simple
       // markup.
-      gridData: StaticGridDataImport,
+      //gridData: StaticGridDataImport,
+      gridData: [
+        {
+          title: '2. Convallis dictum faucibus sed',
+          blurb: 'Quisque orci nisi, bibendum et ex eget...',
+          body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis dui egestas, auctor erat at, aliquam massa. Integer libero ex, sollicitudin at leo euismod, semper fringilla purus. Ut tincidunt ex sit amet dictum pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim lorem ornare, fringilla arcu eget, commodo diam. Nunc mauris ante, condimentum et pellentesque ac, faucibus vitae magna. Ut laoreet aliquet massa a tristique. Quisque ullamcorper porttitor tortor, sit amet accumsan erat porta sit amet. Nam eu libero in diam laoreet luctus. Vestibulum vitae felis consectetur, imperdiet purus quis, cursus lorem. Praesent pharetra magna id quam tempus sagittis.
+
+    Phasellus ullamcorper, urna in gravida condimentum, erat nunc laoreet odio, non congue libero libero quis tortor. Vivamus eget porttitor mi, at lacinia lectus. Sed vehicula vulputate placerat. Etiam ut mauris non orci fringilla facilisis ac sit amet sem. Nullam id elit ac erat dignissim hendrerit. Aenean sollicitudin vel leo eu vestibulum. Pellentesque consequat ante id sapien elementum ullamcorper. Sed a laoreet dolor, vel rutrum nisl. Vestibulum tincidunt posuere nisi, non mollis ligula volutpat posuere. Sed a odio ex. Mauris tempor facilisis tempus.
+
+    Donec vel est ac orci convallis pharetra et sed ipsum. Maecenas suscipit volutpat ligula ac tempor. Cras efficitur, arcu quis euismod tristique, nulla lectus feugiat metus, vel ultrices tortor mauris non erat. Curabitur posuere at felis nec ultricies. Nulla eu dignissim diam, eu ultrices quam. Duis iaculis posuere erat, non maximus arcu congue eget. Donec egestas dictum augue id feugiat. Ut sed elit nec sapien euismod luctus. Pellentesque hendrerit sed metus ut suscipit. Nunc vitae scelerisque ante, vel varius ipsum. Etiam tempus enim id nulla ullamcorper, id finibus lacus tempor. Proin in justo magna. Aliquam ultricies lacus a diam rutrum convallis.
+
+    Vivamus gravida consectetur ipsum. Praesent porta ac diam quis accumsan. Quisque vel volutpat mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean imperdiet sapien in tincidunt faucibus. Quisque venenatis neque sed quam rhoncus bibendum. Etiam id nisi blandit ligula blandit hendrerit. Nunc faucibus metus non mauris posuere, ut pharetra augue fermentum.`,
+          tags: [
+            {id: 'accessibility', value: 'Accessibility'}
+          ],
+          date: "2017",
+          selected: false
+        },
+        {
+          title: '3. Duis libero mi, tempor nec tempor',
+          blurb: 'Quisque orci nisi, bibendum et ex eget...',
+          body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis dui egestas, auctor erat at, aliquam massa. Integer libero ex, sollicitudin at leo euismod, semper fringilla purus. Ut tincidunt ex sit amet dictum pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dignissim lorem ornare, fringilla arcu eget, commodo diam. Nunc mauris ante, condimentum et pellentesque ac, faucibus vitae magna. Ut laoreet aliquet massa a tristique. Quisque ullamcorper porttitor tortor, sit amet accumsan erat porta sit amet. Nam eu libero in diam laoreet luctus. Vestibulum vitae felis consectetur, imperdiet purus quis, cursus lorem. Praesent pharetra magna id quam tempus sagittis.
+
+    Phasellus ullamcorper, urna in gravida condimentum, erat nunc laoreet odio, non congue libero libero quis tortor. Vivamus eget porttitor mi, at lacinia lectus. Sed vehicula vulputate placerat. Etiam ut mauris non orci fringilla facilisis ac sit amet sem. Nullam id elit ac erat dignissim hendrerit. Aenean sollicitudin vel leo eu vestibulum. Pellentesque consequat ante id sapien elementum ullamcorper. Sed a laoreet dolor, vel rutrum nisl. Vestibulum tincidunt posuere nisi, non mollis ligula volutpat posuere. Sed a odio ex. Mauris tempor facilisis tempus.
+
+    Donec vel est ac orci convallis pharetra et sed ipsum. Maecenas suscipit volutpat ligula ac tempor. Cras efficitur, arcu quis euismod tristique, nulla lectus feugiat metus, vel ultrices tortor mauris non erat. Curabitur posuere at felis nec ultricies. Nulla eu dignissim diam, eu ultrices quam. Duis iaculis posuere erat, non maximus arcu congue eget. Donec egestas dictum augue id feugiat. Ut sed elit nec sapien euismod luctus. Pellentesque hendrerit sed metus ut suscipit. Nunc vitae scelerisque ante, vel varius ipsum. Etiam tempus enim id nulla ullamcorper, id finibus lacus tempor. Proin in justo magna. Aliquam ultricies lacus a diam rutrum convallis.
+
+    Vivamus gravida consectetur ipsum. Praesent porta ac diam quis accumsan. Quisque vel volutpat mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean imperdiet sapien in tincidunt faucibus. Quisque venenatis neque sed quam rhoncus bibendum. Etiam id nisi blandit ligula blandit hendrerit. Nunc faucibus metus non mauris posuere, ut pharetra augue fermentum.`,
+          tags: [
+            {id: 'user-experience', value: 'UX'}
+          ],
+          date: "2017",
+          selected: false
+        },
+      ],
 
       // menu data
       gridAllSortOptions: [
@@ -131,7 +173,7 @@ export default {
   watch: {
 
     gridSelectedSortOptions: function (newValue, oldValue) {
-      console.log('I should win the race! I should have ' + newValue.length + ' sort options selected.')
+      console.log('I should have ' + newValue.length + ' sort options selected.');
     },
 
     /**
@@ -139,16 +181,18 @@ export default {
      **/
     gridSelectedItem: function (newValue, oldValue) {
 
-      // Toggle the modal notification to provide user feedback if we've hiy
-      // the end of a content queue
-      let gridData = this.gridMostRecentlyInteractedGridData
-      if (gridData.indexOf(this.gridSelectedItem) === gridData.length - 1) {
-        this.modalNotificationVisible = true
-      } else {
-        this.modalNotificationVisible = false
-      }
+      // TODO: need simplified way of knowing what the old `gridMostRecentlyInteractedGridData` was
 
-      console.log(`this.modalNotificationVisible: ${this.modalNotificationVisible}`)
+      // // Toggle the modal notification to provide user feedback if we've hiy
+      // // the end of a content queue
+      // let gridData = this.gridMostRecentlyInteractedGridData
+      // if (gridData.indexOf(this.gridSelectedItem) === gridData.length - 1) {
+      //   this.modalNotificationVisible = true;
+      // } else {
+      //   this.modalNotificationVisible = false;
+      // }
+
+      console.log(`this.modalNotificationVisible: ${this.modalNotificationVisible}`);
     },
 
     /**
@@ -298,21 +342,21 @@ export default {
     handle__gridItemSelected: function (args) {
 
       // Update the currently selected gridData item
-      this.gridSelectedItem = args.gridSelectedItem
+      this.gridSelectedItem = this.gridData[args.index];
 
       // Update the most recently interacted grid
-      this.gridMostRecentlyInteractedGridData = args.gridDataSource
+      //this.gridMostRecentlyInteractedGridData = args.gridDataSource;
 
       // Update modal contents
-      let modalContent = this.formatHTML(args.gridSelectedItem.body)
+      let modalContent = this.formatHTML(this.gridSelectedItem);
 
       // Show the modal
-      this.modalVisible = true
+      this.modalVisible = true;
     },
 
     handle__gridDataSorted: function (data) {
-      this.gridSortedDataPrimary = data.gridSortedDataPrimary
-      this.gridSortedDataSecondary = data.gridSortedDataSecondary
+      // this.gridSortedDataPrimary = data.gridSortedDataPrimary;
+      // this.gridSortedDataSecondary = data.gridSortedDataSecondary;
     },
 
     /**

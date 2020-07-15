@@ -8,49 +8,80 @@
       :grid-selected-sort-options="gridSelectedSortOptions"
       @sort-option-click="handle__sortOptionClick" />
 
-    <!-- Grid contents sorted by user prefs & date. Conditionally rendered. -->
+    <!-- Grid contents sorted by user prefs & date. Conditionally rendered.
     <div v-if="gridSortedDataPrimary.length">
 
       <h3 class="sortable-grid__selection-notice">My work, sorted by your selections and by date...</h3>
 
       <FlexGrid class="sortable-grid__grid sortable-grid__grid--primary">
-        <FlexGridItem :units="4"
-          v-for="gridSortedDataPrimaryItem in gridSortedDataPrimary"
-          :key="gridSortedDataPrimaryItem.value"
-          class="sortable-grid__grid-item"
-          :class="gridSortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''">
+        <template>
+          <FlexGridItem :units="4"
+            v-for="gridSortedDataPrimaryItem in gridSortedDataPrimary"
+            :key="gridSortedDataPrimaryItem.value"
+            class="sortable-grid__grid-item"
+            :class="gridSortedDataPrimaryItem.selected ? 'sortable-grid__grid-item--selected' : ''">
 
-            <SortableGridItem
-                :grid-current-menu-item="gridCurrentMenuItem"
-                :title="gridSortedDataPrimaryItem.title"
-                :blurb="gridSortedDataPrimaryItem.blurb"
-                :tags="gridSortedDataPrimaryItem.tags"
-                :date="gridSortedDataPrimaryItem.date"
-                :is-open="gridSortedDataPrimaryItem.selected ? true : false"
-                @grid-item-selected="handle__gridItemSelected($event, gridSortedDataPrimaryItem, gridSortedDataPrimary)" />
+              <SortableGridItem
+                  :grid-current-menu-item="gridCurrentMenuItem"
+                  :title="gridSortedDataPrimaryItem.title"
+                  :blurb="gridSortedDataPrimaryItem.blurb"
+                  :tags="gridSortedDataPrimaryItem.tags"
+                  :date="gridSortedDataPrimaryItem.date"
+                  :is-open="gridSortedDataPrimaryItem.selected ? true : false"
+                  @grid-item-selected="handle__gridItemSelected($event, gridSortedDataPrimaryItem, gridSortedDataPrimary)" />
 
-        </FlexGridItem>
+          </FlexGridItem>
+        </template>
       </FlexGrid>
 
     </div>
+     -->
+    <div v-if="gridSelectedItem">
+
+      <h3 class="sortable-grid__selection-notice">My work, sorted by your selections and by date...</h3>
+
+      <FlexGrid class="sortable-grid__grid sortable-grid__grid--primary">
+        <template>
+          <FlexGridItem :units="4"
+            v-for="gridDataItem in gridData"
+            :key="gridDataItem.value"
+            class="sortable-grid__grid-item"
+            :class="gridDataItem.selected ? 'sortable-grid__grid-item--selected' : ''">
+
+              <SortableGridItem
+                  v-if="gridDataItem.selected"
+                  :grid-current-menu-item="gridCurrentMenuItem"
+                  :title="gridDataItem.title"
+                  :blurb="gridDataItem.blurb"
+                  :tags="gridDataItem.tags"
+                  :date="gridDataItem.date"
+                  :is-open="gridDataItem.selected ? true : false"
+                  @grid-item-selected="handle__gridItemSelected($event, gridDataItem, gridData)" />
+
+          </FlexGridItem>
+        </template>
+      </FlexGrid>
+
+    </div>
+
 
     <!-- grid contents, remaining less-preferred data, sorted by date -->
     <h3 class="sortable-grid__selection-notice">All of my work, sorted by date...</h3>
 
     <FlexGrid class="sortable-grid__grid sortable-grid__grid--secondary">
       <FlexGridItem :units="4"
-         v-for="gridSortedDataSecondaryItem in gridSortedDataSecondary"
-          :key="gridSortedDataSecondaryItem.value"
+         v-for="(gridDataItem, index) in gridData"
+          :key="gridDataItem.value"
           class="sortable-grid__grid-item"
-          :class="gridSortedDataSecondaryItem.selected ? 'sortable-grid__grid-item--selected' : ''">
+          :class="gridDataItem.selected ? 'sortable-grid__grid-item--selected' : ''">
 
         <SortableGridItem
           :grid-current-menu-item="gridCurrentMenuItem"
-          :title="gridSortedDataSecondaryItem.title"
-          :tags="gridSortedDataSecondaryItem.tags"
-          :date="gridSortedDataSecondaryItem.date"
-          :is-open="gridSortedDataSecondaryItem.selected ? true : false"
-          @grid-item-selected="handle__gridItemSelected($event, gridSortedDataSecondaryItem, gridSortedDataSecondary)" />
+          :title="gridDataItem.title"
+          :tags="gridDataItem.tags"
+          :date="gridDataItem.date"
+          :is-open="gridDataItem.selected ? true : false"
+          @grid-item-selected="handle__gridItemSelected($event, index)" />
 
       </FlexGridItem>
     </FlexGrid>
@@ -102,18 +133,18 @@ export default {
         return []
       }
     },
-    gridSortedDataPrimary: {
-      type: Array,
-      default: function () {
-        return []
-      }
-    },
-    gridSortedDataSecondary: {
-      type: Array,
-      default: function () {
-        return []
-      }
-    }
+    // gridSortedDataPrimary: {
+    //   type: Array,
+    //   default: function () {
+    //     return []
+    //   }
+    // },
+    // gridSortedDataSecondary: {
+    //   type: Array,
+    //   default: function () {
+    //     return []
+    //   }
+    // }
   },
 
   /**
@@ -152,12 +183,11 @@ export default {
     /**
      * Event handlers
      **/
-    handle__gridItemSelected: function (event, gridSelectedItem, gridDataSource) {
+    handle__gridItemSelected: function (event, index) {
 
       this.$emit('grid-item-selected', {
         event,
-        gridSelectedItem,
-        gridDataSource
+        index
       })
     },
 
@@ -211,8 +241,6 @@ export default {
      **/
     sortGridData: function (selectedSortOptions = []) {
 
-      const self = this
-
       // Iterate supplied sort options to apply tag-based matching to our data.
       // We will split out preferred data into subsets by tag so those subsets
       // can then again be individually sorted by date. Once all subsets are
@@ -223,11 +251,11 @@ export default {
       let primarySortData = [];
       let primarySortStructures = [];
 
-      selectedSortOptions.forEach(function (option, sortOptionsIndex) {
+      selectedSortOptions.forEach((option, sortOptionsIndex) => {
 
-        self.gridData.forEach(function (dataItem, dataItemIndex) {
+        this.gridData.forEach((dataItem, dataItemIndex) => {
 
-          dataItem.tags.forEach(function (tagObj) {
+          dataItem.tags.forEach((tagObj) => {
 
             tagObj.selected = false;
 
@@ -248,7 +276,7 @@ export default {
       });
 
       // Date sort and concatenate all structures back together, then set
-      primarySortStructures.forEach(function (structure) {
+      primarySortStructures.forEach((structure) => {
 
         let sortedByDate = structure.sort(function (b, a) {
           return parseFloat(a.date) - parseFloat(b.date);
@@ -264,20 +292,19 @@ export default {
       /*****
        * THIS IS SUPER MESSED UP, I THINK THE SPLITTING OF DATA STRUCTURES IS LOSING THE REACTIVE DATA REFERENCE
        * ********/
-      primarySortData.forEach(function (dataItem, index) {
+      primarySortData.forEach((dataItem, index) => {
 
-        selectedSortOptions.forEach(function (option, sortOptionsIndex) {
+        selectedSortOptions.forEach((option, sortOptionsIndex) => {
 
-          dataItem.tags.forEach(function (tagObj) {
+          dataItem.tags.forEach((tagObj) => {
 
             if (option.id === tagObj.id) {
-              tagObj.selected = true
+              tagObj.selected = true;
             }
 
-          })
+          });
         });
 
-        Vue.set(primarySortData, index, Object.assign({}, dataItem));
       });
 
       // let temp = function (oldObj) {
@@ -289,21 +316,20 @@ export default {
 
 
 
-
       // Sort remaining data by date, then set
       // TODO: Array spread will not work in IE11
       let secondarySortData = [...(new Set(this.gridData))].sort(function (b, a) {
-        return parseFloat(a.date) - parseFloat(b.date)
+        return parseFloat(a.date) - parseFloat(b.date);
       })
 
       // emit data back to parent which will mutate this components' state props
       this.$emit('grid-data-sorted', {
         // TODO: Array spread will not work in IE11
-        gridSortedDataPrimary: [...(new Set(primarySortData))],
+        //gridSortedDataPrimary: [...(new Set(primarySortData))],
         gridSortedDataSecondary: secondarySortData
-      })
+      });
 
-      return this
+      return this;
     },
 
     /**
@@ -313,14 +339,14 @@ export default {
 
       // Switch all previous dataItem to unselected state
       this.gridData.forEach(function (dataItem) {
-        dataItem.selected = false
+        dataItem.selected = false;
       })
 
       // Set the current dataItem to selected state (note: because we have two
       // subsets of gridData that gets sorted, we will potentially have two
       // dataItems. This isn't technically incorrect though it may exhibit
       // side-effects - so leaving this as the case for now).
-      this.gridSelectedItem.selected = true
+      this.gridSelectedItem.selected = true;
     }
   }
 }
